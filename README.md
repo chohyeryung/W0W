@@ -1,2 +1,2 @@
 # W0W
-# With zer0 Waste
+With zer0 Waste
