@@ -1,15 +1,36 @@
-const express = require('express')
-const app = express()
-const port = 5000
+const express = require("express");
+const app = express();
+const path = require("path");
+const cors = require('cors')
 
-const config = require('./config/key')
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
-const mongoose = require('mongoose')
-mongoose.connect(config.mongoURI, {
-    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
-}).then(() => console.log('MongoDB Connected...'))
-    .catch(err => console.log(err))
+const config = require("./config/key");
 
-app.get('/', (req, res) => res.send('Hello world!'))
+const mongoose = require("mongoose");
+const connect = mongoose.connect(config.mongoURI,
+  {
+    useNewUrlParser: true, useUnifiedTopology: true,
+    useCreateIndex: true, useFindAndModify: false
+  })
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
 
-app.listen(port, () => console.log(`W0W app is litening on ${port}`))
+app.use(cors())
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.use('/users', require('./routes/users'));
+
+
+app.use('/uploads', express.static('uploads'));
+
+
+const port = process.env.PORT || 5000
+
+app.listen(port, () => {
+  console.log(`Server Listening on ${port}`)
+});
