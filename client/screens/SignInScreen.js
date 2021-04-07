@@ -5,16 +5,16 @@ import {
     TouchableOpacity,
     StyleSheet,
     TextInput,
-    Checkbox
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const BGCOLOR_CODE = '#6CDDBF'
 
 const SignInScreen = () => {
-    const [isSelected, setSelection] = useState(false);
+    const [checked, setChecked] = useState(false);
 
-    const onChange = (e) => {
-        setSelection(e.target.checked)
+    const onChecked = (e) => {
+        setChecked(!checked);
     }
 
     return (
@@ -44,6 +44,20 @@ const SignInScreen = () => {
                         placeholderTextColor="#707070"
                         autoCapitalize="none" />
                     {/* checkbox */}
+                    <View style={{marginTop: 10}}>
+                        <TouchableOpacity onPressOut={onChecked} style={{flexDirection: 'row'}}>
+                            {checked ? (
+                                <View style={styles.check_icon}>
+                                    <Icon name="checkbox" size={20} color={BGCOLOR_CODE}></Icon>
+                                </View>
+                            ) : (
+                                <View style={styles.uncheck_icon}>
+                                    <Icon name="checkbox-outline" size={20} color="#707070" />
+                                </View>
+                            )}
+                            <Text style={{marginTop: 3, marginLeft: 6, color: '#707070'}}>로그인 상태 유지</Text>
+                        </TouchableOpacity>
+                    </View>
                     {/* sign in button */}
                     <TouchableOpacity style={[styles.login_btn]}>
                         <Text style={{color: '#fff', fontSize: 20, alignSelf: 'center', marginTop: 15}}>로그인</Text>
