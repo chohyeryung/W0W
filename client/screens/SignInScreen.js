@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 import {
     View,
     Text,
     TouchableOpacity,
     StyleSheet,
     TextInput,
+    Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -12,9 +13,27 @@ const BGCOLOR_CODE = '#6CDDBF'
 
 const SignInScreen = () => {
     const [checked, setChecked] = useState(false);
+    const [userEmail, setUserEmail] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const [errorText, setErrorText] = useState('');
+
+    const passwordInputRef = createRef();
 
     const onChecked = (e) => {
         setChecked(!checked);
+    }
+
+    const handleSubmitPress = () => {
+        setErrorText('');
+        if (!userEmail) {
+            setErrorText('아이디를 입력해주세요');
+            return;
+        }
+        if (!userPassword) {
+            setErrorText('비밀번호를 입력해주세요');
+            return;
+        }
+
     }
 
     return (
@@ -35,14 +54,32 @@ const SignInScreen = () => {
                         style={[styles.text_input, {marginTop: 10}]}
                         placeholder="이메일을 입력해주세요"
                         placeholderTextColor="#707070"
-                        autoCapitalize="none" />
+                        autoCapitalize="none"
+                        onChangeText={(userEmail) => setUserEmail(userEmail)}
+                        onSubmitEditing={() =>
+                            passwordInputRef.current && passwordInputRef.current.focus()
+                        }
+                        keyboardType="email-address"
+                        blurOnSubmit={false}
+                        />
                     <Text style={[styles.input_text, {
                         marginTop: 30}]}>Password</Text>
                     <TextInput
                         style={[styles.text_input, {marginTop: 10}]}
                         placeholder="비밀번호를 입력해주세요"
                         placeholderTextColor="#707070"
-                        autoCapitalize="none" />
+                        autoCapitalize="none"
+                        secureTextEntry={true}
+                        ref={passwordInputRef}
+                        keyboardType="default"
+                        returnKeyType="next"
+                        onChangeText={(userPassword) => setUserPassword(userPassword)}
+                        onSubmitEditing={Keyboard.dismiss}
+                        blurOnSubmit={false}
+                    />
+                    {errorText != '' ? (
+                        <Text style={{marginTop:10, color:'#ff4d4d'}}>{errorText}</Text>
+                    ) : null }
                     {/* checkbox */}
                     <View style={{marginTop: 10}}>
                         <TouchableOpacity onPressOut={onChecked} style={{flexDirection: 'row'}}>
@@ -59,7 +96,7 @@ const SignInScreen = () => {
                         </TouchableOpacity>
                     </View>
                     {/* sign in button */}
-                    <TouchableOpacity style={[styles.login_btn]}>
+                    <TouchableOpacity style={[styles.login_btn]} onPress={handleSubmitPress}>
                         <Text style={{color: '#fff', fontSize: 20, alignSelf: 'center', marginTop: 15}}>로그인</Text>
                     </TouchableOpacity>
                     {/* side menu */}
