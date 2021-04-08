@@ -50,7 +50,7 @@ const SignInScreen = () => {
                 if (response.payload.loginSuccess) {
                     alert('로그인 성공')
                 } else {
-                    alert('Error')
+                    setErrorText(response.payload.message)
                 }
             })
 
@@ -80,6 +80,7 @@ const SignInScreen = () => {
                             passwordInputRef.current && passwordInputRef.current.focus()
                         }
                         keyboardType="email-address"
+                        returnKeyType="next"
                         blurOnSubmit={false}
                         />
                     <Text style={[styles.input_text, {
