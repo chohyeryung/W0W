@@ -8,10 +8,15 @@ import {
     Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../redux/_actions/user_action';
 
 const BGCOLOR_CODE = '#6CDDBF'
 
 const SignInScreen = () => {
+    const dispatch = useDispatch();
+
     const [checked, setChecked] = useState(false);
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
@@ -24,6 +29,7 @@ const SignInScreen = () => {
     }
 
     const handleSubmitPress = () => {
+
         setErrorText('');
         if (!userEmail) {
             setErrorText('아이디를 입력해주세요');
@@ -33,6 +39,20 @@ const SignInScreen = () => {
             setErrorText('비밀번호를 입력해주세요');
             return;
         }
+
+        let body = {
+            email: userEmail,
+            password: userPassword
+        }
+
+        dispatch(loginUser(body))
+            .then(response => {
+                if (response.payload.loginSuccess) {
+                    alert('로그인 성공')
+                } else {
+                    alert('Error')
+                }
+            })
 
     }
 
