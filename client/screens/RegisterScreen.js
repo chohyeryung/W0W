@@ -13,19 +13,25 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../redux/_actions/user_action';
   
 const BGCOLOR_CODE = '#6CDDBF'
 
 const RegisterScreen = (props) => { 
 
+    const dispatch = useDispatch();
+
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [userPasswordchk, setUserPasswordchk] = useState('');
-    const [errortext, setErrortext] = useState('');
+    const [errorText, setErrorText] = useState('');
 
     const handleSubmitButton = () => {
-        setErrortext('');
+        setErrorText('');
 
         if(!userName) {
             alert('이름을 입력해주세요');
@@ -44,8 +50,20 @@ const RegisterScreen = (props) => {
             return;
         }
 
-        console.log('name', userName);        
-
+        const data = {
+            name : userName,
+            email : userEmail,
+            password : userPassword
+        }
+        
+        dispatch(registerUser(data))
+        .then(response => {
+            if(response.payload.registerSuccess){
+                alert('회원가입이 완료되었습니다.')
+            } else { 
+                setErrorText(response.payload.message);
+            }
+        })
     }
 
 
@@ -93,6 +111,10 @@ const RegisterScreen = (props) => {
                     </Text>
                     ) : null}
                 </View>
+
+                {errorText != '' ? (
+                        <Text style={{marginTop:10, color:'#ff4d4d'}}>{errorText}</Text>
+                    ) : null }
             </View>
         </View>
     )

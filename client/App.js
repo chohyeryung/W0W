@@ -33,32 +33,30 @@ const MyCustomHeaderBackImage = () => (
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Provider store={store}>
-      <Stack.Navigator>
-          <Stack.Screen
-              name="SignIn"
-              component={SignInScreen}
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+            <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+                options={{
+                  headerShown: false, 
+                  title: ''}}
+            />
+            <Stack.Screen
+              name="Register"
+              component={RegisterScreen}
               options={{
-                headerShown: false, 
-                title: ''}}
-          />
-          <Stack.Screen
-            name="Register"
-            component={RegisterScreen}
-            options={{
-              headerBackTitleVisible: false,
-              title: '',
-              headerTintColor: '#fff',
-              headerStyle: {
-                backgroundColor: BGCOLOR_CODE,
-              },
-              headerBackImage: MyCustomHeaderBackImage,}}/>
-        </Stack.Navigator>
-      </Provider>
-    </NavigationContainer>
- 
-    
+                headerBackTitleVisible: false,
+                title: '',
+                headerTintColor: '#fff',
+                headerStyle: {
+                  backgroundColor: BGCOLOR_CODE,
+                },
+                headerBackImage: MyCustomHeaderBackImage,}}/>
+          </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>   
   );
 }
 
