@@ -14,7 +14,6 @@ import {
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../redux/_actions/user_action';
   

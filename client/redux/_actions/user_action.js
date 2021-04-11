@@ -20,7 +20,6 @@ export function loginUser(dataToSubmit) {
     }
 }
 
-
 export function registerUser(dataToSubmit) {
     const request = axios({
         method: 'post',
