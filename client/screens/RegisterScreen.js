@@ -50,16 +50,17 @@ const RegisterScreen = (props) => {
             return;
         }
 
-        const data = {
+        let body = {
             name : userName,
             email : userEmail,
             password : userPassword
         }
         
-        dispatch(registerUser(data))
+        dispatch(registerUser(body))
         .then(response => {
             if(response.payload.registerSuccess){
                 alert('회원가입이 완료되었습니다.')
+                props.history.push("/");
             } else { 
                 setErrorText(response.payload.message);
             }
