@@ -59,7 +59,7 @@ const RegisterScreen = (props) => {
         .then(response => {
             if(response.payload.registerSuccess){
                 alert('회원가입이 완료되었습니다.')
-                props.history.push("/");
+                props.navigation.navigate('SignIn')
             } else { 
                 setErrorText(response.payload.message);
             }
