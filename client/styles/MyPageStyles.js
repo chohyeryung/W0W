@@ -10,24 +10,42 @@ const styles = StyleSheet.create({
         flex: 5,
         marginTop:45,
         paddingHorizontal:70,
-        flexDirection:"row",
-        justifyContent: "space-between",
+        flexDirection:'row',
+        justifyContent: 'space-between',
     },
     backIcon: {
         flex: 1,
-        color:"#000000",
+        color:'#000',
     },
     topTitle: {
-        flex:4,
+        flex:1,
         fontSize: 40,
-        textAlign: "center",
-        fontWeight: "bold",
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
-
+    cateContainer: {
+        flex:1,
+        flexDirection: 'column',
+    },
+    cateFirst: {
+        flex:1,
+        flexDirection: 'row',
+    },
+    cateSecond: {
+        flex:1,
+        flexDirection: 'row',
+    },
+    cate: {
+        margin:20,
+    },
     text_count: {
-        color:'#fff', 
+        color:'#fff',
+        backgroundColor: mainColor, 
         fontSize:36,
         fontWeight: 'bold',
+        textAlign: 'center',
+        width: 100,
+        height: 100,
     },
     text_title: {
         color:'#000',
