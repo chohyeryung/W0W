@@ -37,14 +37,15 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-            {/* <Stack.Screen
-                name="SignIn"
-                component={SignInScreen}
-                options={{
-                  headerShown: false, 
-                  title: ''}}
-            />
             <Stack.Screen
+              name="SignIn"
+              component={SignInScreen}
+              options={{
+                headerShown: false, 
+                title: '',}}
+            />
+
+             {/* <Stack.Screen
               name="Register"
               component={RegisterScreen}
               options={{
@@ -54,14 +55,15 @@ export default function App() {
                 headerStyle: {
                   backgroundColor: BGCOLOR_CODE,
                 },
-                headerBackImage: MyCustomHeaderBackImage,}}/> */}
+                headerBackImage: MyCustomHeaderBackImage,}}
+              /> */}
             <Stack.Screen
-                name="MyPage"
-                component={MyPageScreen}
-                options={{
-                  headerShown: false, 
-                  title: ''
-                }}
+              name="MyPage"
+              component={MyPageScreen}
+              options={{
+                headerShown: false, 
+                title: '',
+              }}
             />
           </Stack.Navigator>
       </NavigationContainer>
