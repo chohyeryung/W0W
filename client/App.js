@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import SignInScreen from './screens/SignInScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import MyPageScreen from './screens/MyPageScreen';
 import rootReducer from './redux/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
@@ -36,7 +37,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="SignIn"
                 component={SignInScreen}
                 options={{
@@ -53,7 +54,15 @@ export default function App() {
                 headerStyle: {
                   backgroundColor: BGCOLOR_CODE,
                 },
-                headerBackImage: MyCustomHeaderBackImage,}}/>
+                headerBackImage: MyCustomHeaderBackImage,}}/> */}
+            <Stack.Screen
+                name="MyPage"
+                component={MyPageScreen}
+                options={{
+                  headerShown: false, 
+                  title: ''
+                }}
+            />
           </Stack.Navigator>
       </NavigationContainer>
     </Provider>   
