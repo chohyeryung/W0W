@@ -20,7 +20,36 @@ const MyPageScreen = (props) => {
                 </TouchableOpacity>
                 <Text style={styles.topTitle}>MY ZERO</Text>
             </View>
-            
+            <View style={styles.cateContainer}>
+                <View style={styles.cateFirst}>
+                    <View style={styles.cate}>
+                        <Text style={styles.text_count}>27</Text>
+                        <Text style={styles.text_title}>용기내</Text>
+                    </View>
+                    <View style={styles.cate}>
+                        <Text style={styles.text_count}>30</Text>
+                        <Text style={styles.text_title}>대중교통</Text>
+                    </View>
+                    <View style={styles.cate}>
+                        <Text style={styles.text_count}>1</Text>
+                        <Text style={styles.text_title}>분리수거</Text>
+                    </View>
+                </View>
+                <View style={styles.cateSecond}>
+                <View style={styles.cate}>
+                        <Text style={styles.text_count}>27</Text>
+                        <Text style={styles.text_title}>쓰레기줍기</Text>
+                    </View>
+                    <View style={styles.cate}>
+                        <Text style={styles.text_count}>27</Text>
+                        <Text style={styles.text_title}>종이빨대</Text>
+                    </View>
+                    <View style={styles.cate}>
+                        <Text style={styles.text_count}>10</Text>
+                        <Text style={styles.text_title}>?</Text>
+                    </View>
+                </View>
+            </View>
         </View>
     )
 }

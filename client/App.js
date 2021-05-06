@@ -45,7 +45,7 @@ export default function App() {
                 title: '',}}
             />
 
-             <Stack.Screen
+             {/* <Stack.Screen
               name="Register"
               component={RegisterScreen}
               options={{
@@ -56,7 +56,7 @@ export default function App() {
                   backgroundColor: mainColor,
                 },
                 headerBackImage: MyCustomHeaderBackImage,}}
-              />
+              /> */}
             <Stack.Screen
               name="MyPage"
               component={MyPageScreen}

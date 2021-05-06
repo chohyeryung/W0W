@@ -23,6 +23,17 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
     },
+
+    text_count: {
+        color:'#fff', 
+        fontSize:36,
+        fontWeight: 'bold',
+    },
+    text_title: {
+        color:'#000',
+        fontSize: 32,
+        fontWeight: 'bold',
+    }
 });
 
 export default styles;
