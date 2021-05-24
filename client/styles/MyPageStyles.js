@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     },
     cate: {
         margin:20,
-        borderColor: '#000',
     },
     text_count: {
         color:'#fff',
