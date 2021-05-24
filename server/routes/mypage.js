@@ -13,7 +13,7 @@ router.get("/cate", (req, res) => {
         if(error){
             console.log(error);
         }else{
-            console.log(results);
+            res.send(results);
         }
     })
 });
