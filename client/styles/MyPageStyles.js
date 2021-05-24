@@ -1,6 +1,10 @@
-import { StyleSheet } from "react-native";
+import { 
+    StyleSheet,
+    Dimensions
+} from "react-native";
 
 const mainColor = "#E1F0FF";
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -25,8 +29,8 @@ const styles = StyleSheet.create({
     },
     cateContainer: {
         flexDirection: 'column',
-        width: 600,
         alignItems: 'center',
+        width: width,
         marginTop: 60,
         shadowColor: "#000",
         shadowOffset: {
@@ -39,11 +43,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     cateFirst: {
+        display: 'flex',
         flexDirection: 'row',
+        justifyContent: 'center',
         margin: 20,
     },
     cateSecond: {
+        display: 'flex',
         flexDirection: 'row',
+        justifyContent: 'center',
         margin: 20,
     },
     cate: {
@@ -61,7 +69,8 @@ const styles = StyleSheet.create({
     },
     text_title: {
         color:'#000',
-        fontSize: 32,
+        fontSize: 25,
+        textAlign: 'center',
         fontWeight: 'bold',
     }
 });
