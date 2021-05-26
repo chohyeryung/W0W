@@ -6,10 +6,10 @@ import {
   View,
   Image
 } from 'react-native';
-import SignInScreen from './screens/SignInScreen';
-import RegisterScreen from './screens/RegisterScreen';
-import MyPageScreen from './screens/MyPageScreen';
-import rootReducer from './redux/_reducers/index';
+import SignInScreen from './src/screens/SignInScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
+import MyPageScreen from './src/screens/MyPageScreen';
+import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
 import thunk from 'redux-thunk';

@@ -14,7 +14,7 @@ import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/_actions/user_action';
+import { loginUser } from '../_actions/user_action';
 
 const SignInScreen = (props) => {
     const dispatch = useDispatch();

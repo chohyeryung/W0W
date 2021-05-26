@@ -16,7 +16,7 @@ import {
 } from 'react-native-responsive-screen';
 
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../redux/_actions/user_action';
+import { registerUser } from '../_actions/user_action';
 
 const RegisterScreen = (props) => { 
 

@@ -17,7 +17,7 @@ const connect = mongoose.connect(config.mongoURI,
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
-app.use(cors())
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -27,7 +27,6 @@ app.use('/users', require('./routes/users'));
 app.use('/mypage', require('./routes/mypage'));
 
 app.use('/uploads', express.static('uploads'));
-
 
 const port = process.env.PORT || 5000
 

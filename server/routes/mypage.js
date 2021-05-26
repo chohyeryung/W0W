@@ -8,17 +8,24 @@ const { Category } = require("../models/Category");
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.get("/cate", (req, res) => {
-    Category.find(function(error, results){
-        if(error){
-            console.log(error);
-        }else{
-            res.send(results);
-        }
+router.get('/cate', (req, res) => {
+    console.log('cate');
+    // Category.find(function(error, results){
+    //     if(error){
+    //         console.log(error);
+    //     }else{
+    //         res.json(results);
+    //     }
+    // })
+    Category.aggregate([
+        { $group: { _id: { category: "$category" }, cnt : { $sum: 1 } } }
+    ]).exec(function (err, results) {
+        if(err) console.log(err);
+        console.log(results);
     })
 });
 
-router.post("/pointing", (req, res) => {
+router.post('/pointing', (req, res) => {
     const cate = new Category(req.body);
 
     cate.save((err, cateInfo) => {
