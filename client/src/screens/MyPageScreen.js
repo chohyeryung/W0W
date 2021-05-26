@@ -11,32 +11,14 @@ import cateData from "../data/cate_data.json";
 import styles from "../styles/MyPageStyles";
 
 const MyPageScreen = (props) => {
-
-
     const [cates, setCates] = useState([]);
 
-    const [nextCate, setNextCate] = useState('');
-    const [nextCnt, setNextCnt] = useState(0);
-
     useEffect(() => {
-        // setCates(cateData);
-
         axios.get('http://localhost:5000/mypage/cate')
             .then(response => {
-                // const nextValues = cates.concat({
-                //     cate: nextCate,
-                //     cnt: nextCnt
-                // });
-                // setNextCate()
-                
                 setCates(response.data);
             })
-
     }, [])
-
-    const handleClick = (e) => {
-        console.log(e.preventDefault())
-    }
 
     return(
         <View style={styles.container}>
