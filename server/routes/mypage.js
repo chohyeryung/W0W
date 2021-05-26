@@ -9,12 +9,14 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.get('/cate', (req, res) => {
-    Category.aggregate([
-        { $group: { _id: { category: "$category" }, cnt : { $sum: 1 } } }
-    ]).exec(function (err, results) {
-        if(err) console.log(err);
-        console.log(results);
-    })
+    Category.aggregate(
+        [
+            { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
+            { $sort: { category: -1 } }
+        ]).exec(function (err, results) {
+            if(err) console.log(err);
+            res.send(results);
+        })
 });
 
 router.post('/pointing', (req, res) => {

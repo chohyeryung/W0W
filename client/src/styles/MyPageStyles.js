@@ -27,51 +27,50 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
     },
-    cateContainer: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: width,
-        marginTop: 60,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.24,
-        shadowRadius: 10.32,
-        elevation: 16,
-        borderRadius: 10,
-    },
-    cateFirst: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        margin: 20,
-    },
-    cateSecond: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        margin: 20,
-    },
-    cate: {
-        margin:20,
-    },
-    text_count: {
-        color:'#fff',
-        backgroundColor: mainColor, 
-        fontSize:36,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        width: 100,
-        height: 100,
-    },
-    text_title: {
-        color:'#000',
-        fontSize: 25,
-        textAlign: 'center',
-        fontWeight: 'bold',
-    }
+    // cateContainer: {
+    //     flexDirection: 'column',
+    //     alignItems: 'center',
+    //     marginTop: 60,
+    //     shadowColor: "#000",
+    //     shadowOffset: {
+    //         width: 0,
+    //         height: 3,
+    //     },
+    //     shadowOpacity: 0.24,
+    //     shadowRadius: 10.32,
+    //     elevation: 16,
+    //     borderRadius: 10,
+    // },
+    // cateFirst: {
+    //     display: 'flex',
+    //     flexDirection: 'row',
+    //     justifyContent: 'center',
+    //     margin: 20,
+    // },
+    // cateSecond: {
+    //     display: 'flex',
+    //     flexDirection: 'row',
+    //     justifyContent: 'center',
+    //     margin: 20,
+    // },
+    // cateCon: {
+    //     margin:20,
+    // },
+    // text_count: {
+    //     color:'#fff',
+    //     backgroundColor: mainColor, 
+    //     fontSize:36,
+    //     fontWeight: 'bold',
+    //     textAlign: 'center',
+    //     width: 100,
+    //     height: 100,
+    // },
+    // text_title: {
+    //     color:'#000',
+    //     fontSize: 25,
+    //     textAlign: 'center',
+    //     fontWeight: 'bold',
+    // }
 });
 
 export default styles;
