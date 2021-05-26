@@ -9,14 +9,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.get('/cate', (req, res) => {
-    console.log('cate');
-    // Category.find(function(error, results){
-    //     if(error){
-    //         console.log(error);
-    //     }else{
-    //         res.json(results);
-    //     }
-    // })
     Category.aggregate([
         { $group: { _id: { category: "$category" }, cnt : { $sum: 1 } } }
     ]).exec(function (err, results) {
