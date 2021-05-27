@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import SignInScreen from './src/screens/SignInScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
-import MyPageScreen from './src/screens/MyPageScreen2';
+import MyPageScreen from './src/screens/MyPageScreen';
 import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
