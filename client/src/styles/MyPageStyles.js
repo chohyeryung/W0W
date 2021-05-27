@@ -27,6 +27,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
     },
+
+    cateCon: {
+        borderWidth: 2,
+        borderRadius: 5,
+        borderStyle: 'solid'
+    }
+
     // cateContainer: {
     //     flexDirection: 'column',
     //     alignItems: 'center',

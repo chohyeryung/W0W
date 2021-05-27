@@ -20,6 +20,12 @@ const MyPageScreen = (props) => {
             })
     }, [])
 
+    handleClick = () => {
+        console.log(this);
+    }
+
+
+
     return(
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -35,7 +41,7 @@ const MyPageScreen = (props) => {
                 {cates.map((cate, index) => {
                     return index < 3 ? (
                         <View style={styles.cateFirst}>
-                            <View style={styles.cateCon}>
+                            <View style={styles.cateCon} onClick={this.handleClick}>
                                 <Text style={styles.text_count}>{cate.cnt}</Text>
                                 <Text style={styles.text_title}>{cate.category}</Text>
                             </View>    
