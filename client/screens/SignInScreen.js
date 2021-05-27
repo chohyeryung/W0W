@@ -7,6 +7,9 @@ import {
     TextInput,
     Keyboard,
 } from 'react-native';
+
+import 'react-native-gesture-handler';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -14,7 +17,7 @@ import { loginUser } from '../redux/_actions/user_action';
 
 const BGCOLOR_CODE = '#6CDDBF'
 
-const SignInScreen = () => {
+const SignInScreen = (props) => {
     const dispatch = useDispatch();
 
     const [checked, setChecked] = useState(false);
@@ -122,7 +125,11 @@ const SignInScreen = () => {
                     </TouchableOpacity>
                     {/* side menu */}
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, paddingHorizontal: 5}}>
-                        <View><Text style={{color: '#707070'}}>회원가입</Text></View>
+                        <Text
+                            style={{color: '#707070'}}
+                            onPress={() => props.navigation.navigate('Register')}>
+                            회원가입
+                        </Text>
                         <View><Text style={{color: '#707070'}}>비밀번호 찾기</Text></View>
                     </View>
                 </View>

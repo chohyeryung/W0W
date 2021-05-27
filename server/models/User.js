@@ -18,9 +18,6 @@ const userSchema = mongoose.Schema({
         type: String,
         minglength: 5
     },
-    area: {
-        type:String,
-    },
     role : {
         type:Number,
         default: 0 
