@@ -11,9 +11,10 @@ import cateData from "../data/cate_data.json";
 import styles from "../styles/MyPageStyles";
 
 export class MyPageScreen extends Component {
-    state = {
-        cates: [],
-    };
+    constructor(props) {
+        super(props);
+        this.state = { cates: [] };
+    }
 
     componentDidMount() {
         axios.get('http://localhost:5000/mypage/cate')
@@ -23,8 +24,13 @@ export class MyPageScreen extends Component {
     }
 
     _fetchCate = (cate) => {
-        axios.post('http://localhost:5000/mypage/pointing', {ca : cate});
-        // console.log(cate);
+        axios.post('http://localhost:5000/mypage/pointing', {ca : cate})
+        .then(response => {
+            axios.get('http://localhost:5000/mypage/cate')
+            .then(response => {
+                this.setState({cates: response.data});
+            })
+        });
     }
 
 
@@ -48,15 +54,6 @@ export class MyPageScreen extends Component {
                             <TouchableOpacity
                                 key={cate.category}
                                 onPress={(e) => {this._fetchCate(cate.category)}}>
-                                    {/* // fetch("http://localhost:5000/mypage/pointing", {
-                                    //     method : "post",
-                                    //     headers: {
-                                    //         "content-type": "application/json",
-                                    //     },
-                                    //     body: { "cate" : cate.category}
-                                    // }); */}
-                                
-                              
                                 <View style={styles.cateCon} onClick={this.handleClick}>
                                     <Text style={styles.text_count}>{cate.cnt}</Text>
                                     <Text style={styles.text_title}>{cate.category}</Text>

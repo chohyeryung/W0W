@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
+const setting = require('./settings');
 
 const mongoose = require("mongoose");
 const connect = mongoose.connect(config.mongoURI,

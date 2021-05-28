@@ -22,19 +22,21 @@ router.get('/cate', (req, res) => {
 
 router.post('/pointing', (req, res) => {
     let category = req.body.ca;
-    let score = 3;
-    if(category == "qr"){
-        score = 2;
-    }
-    console.log(score);
-    // const cate = new Category(req.body);
 
-    // cate.save((err, cateInfo) => {
-    //     if (err) return res.json({ success : false, err })
-    //     return res.status(200).json({
-    //         success: true
-    //     })
-    // })
+    let data = {
+        "idx": 1,
+        "useridx": 2,
+        "category": category,
+        "score": 3,
+        "created": Date.now()
+    }
+
+    const cate = new Category(data);
+
+    cate.save((err, cateInfo) => {
+        if (err) return res.json({ success : false, err })
+        res.send(cateInfo);
+    })
 })
 
 module.exports = router;
