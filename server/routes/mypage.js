@@ -19,8 +19,6 @@ router.get('/cate', (req, res) => {
 
     let ndate = yyyy + '-' + month;
 
-    // console.log(ndate);
-
     Category.aggregate(
         [
             { $match: { 
@@ -32,7 +30,6 @@ router.get('/cate', (req, res) => {
             { $sort: { category: -1 } }
         ]).exec(function (err, results) {
             if(err) console.log(err);
-            console.log(results);
             res.send(results);
         })
 });
