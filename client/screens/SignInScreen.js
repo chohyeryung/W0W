@@ -15,52 +15,26 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../redux/_actions/user_action';
 
-const BGCOLOR_CODE = '#6CDDBF'
+const BGCOLOR_CODE = '#FFFFFF'
 
-const SignInScreen = (props) => {
-    const dispatch = useDispatch();
+class SignInScreen extends React.Component {
 
-    const [checked, setChecked] = useState(false);
-    const [userEmail, setUserEmail] = useState('');
-    const [userPassword, setUserPassword] = useState('');
-    const [errorText, setErrorText] = useState('');
-
-    const passwordInputRef = createRef();
-
-    const onChecked = (e) => {
-        setChecked(!checked);
+    constructor(props) {
+        super(props);
+        this.state = {
+            checked: false,
+            userEmail: '',
+            userPassword: '',
+            errorText: '',
+        };
     }
 
-    const handleSubmitPress = () => {
+    render() {
 
-        setErrorText('');
-        if (!userEmail) {
-            setErrorText('아이디를 입력해주세요');
-            return;
-        }
-        if (!userPassword) {
-            setErrorText('비밀번호를 입력해주세요');
-            return;
-        }
+        const { checked } = this.state;
 
-        let body = {
-            email: userEmail,
-            password: userPassword
-        }
-
-        dispatch(loginUser(body))
-            .then(response => {
-                if (response.payload.loginSuccess) {
-                    alert('로그인 성공')
-                } else {
-                    setErrorText(response.payload.message)
-                }
-            })
-
-    }
-
-    return (
-        <View style={styles.container}>
+        return (
+            <View style={styles.container}>
             {/* header */}
             <View style={styles.header}>
                 <Text style={styles.main_text}>W0W</Text>
@@ -71,7 +45,7 @@ const SignInScreen = (props) => {
                 <Text style={styles.sign_in_text}>로그인</Text>
                 {/* footer - input box */}
                 <View style={styles.input_box}>
-                    <Text style={[styles.input_text, {
+                    <Text style={[styles.text_title, {
                         marginTop: 60}]}>E-mail</Text>
                     <TextInput
                         style={[styles.text_input, {marginTop: 10}]}
@@ -86,7 +60,7 @@ const SignInScreen = (props) => {
                         returnKeyType="next"
                         blurOnSubmit={false}
                         />
-                    <Text style={[styles.input_text, {
+                    <Text style={[styles.text_title, {
                         marginTop: 30}]}>Password</Text>
                     <TextInput
                         style={[styles.text_input, {marginTop: 10}]}
@@ -135,7 +109,49 @@ const SignInScreen = (props) => {
                 </View>
             </View>
         </View>
-    )
+        )
+    }
+}
+
+const SignInScreen = (props) => {
+    const dispatch = useDispatch();
+
+    
+
+    const passwordInputRef = createRef();
+
+    const onChecked = (e) => {
+        setChecked(!checked);
+    }
+
+    const handleSubmitPress = () => {
+
+        setErrorText('');
+        if (!userEmail) {
+            setErrorText('아이디를 입력해주세요');
+            return;
+        }
+        if (!userPassword) {
+            setErrorText('비밀번호를 입력해주세요');
+            return;
+        }
+
+        let body = {
+            email: userEmail,
+            password: userPassword
+        }
+
+        dispatch(loginUser(body))
+            .then(response => {
+                if (response.payload.loginSuccess) {
+                    alert('로그인 성공')
+                } else {
+                    setErrorText(response.payload.message)
+                }
+            })
+
+    }
+
 }
 
 const styles = StyleSheet.create({
@@ -184,9 +200,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         fontSize: 25,
     },
+    text_title: {
+        fontWeight: 'bold',
+    },
     text_input: {
-        borderBottomColor: BGCOLOR_CODE,
-        borderBottomWidth: 1,
+        backgroundColor: '#e0dcdc',
+        padding: 20,
         paddingBottom: 5,
         opacity: 0.5,
     },
