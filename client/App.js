@@ -6,9 +6,10 @@ import {
   View,
   Image
 } from 'react-native';
-import SignInScreen from './screens/SignInScreen';
-import RegisterScreen from './screens/RegisterScreen';
-import rootReducer from './redux/_reducers/index';
+import SignInScreen from './src/screens/SignInScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
+import MyPageScreen from './src/screens/MyPageScreen';
+import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
 import thunk from 'redux-thunk';
@@ -22,7 +23,7 @@ const Stack = createStackNavigator();
 
 const store = createStore(rootReducer, applyMiddleware(promiseMiddleware, thunk));
 
-const BGCOLOR_CODE = '#6CDDBF'
+const mainColor = '#E1F0FF'
 
 const MyCustomHeaderBackImage = () => (
   <Image
@@ -37,13 +38,14 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen
-                name="SignIn"
-                component={SignInScreen}
-                options={{
-                  headerShown: false, 
-                  title: ''}}
+              name="SignIn"
+              component={SignInScreen}
+              options={{
+                headerShown: false, 
+                title: '',}}
             />
-            <Stack.Screen
+
+             {/* <Stack.Screen
               name="Register"
               component={RegisterScreen}
               options={{
@@ -51,9 +53,18 @@ export default function App() {
                 title: '',
                 headerTintColor: '#fff',
                 headerStyle: {
-                  backgroundColor: BGCOLOR_CODE,
+                  backgroundColor: mainColor,
                 },
-                headerBackImage: MyCustomHeaderBackImage,}}/>
+                headerBackImage: MyCustomHeaderBackImage,}}
+              /> */}
+            <Stack.Screen
+              name="MyPage"
+              component={MyPageScreen}
+              options={{
+                headerShown: false, 
+                title: '',
+              }}
+            />
           </Stack.Navigator>
       </NavigationContainer>
     </Provider>   

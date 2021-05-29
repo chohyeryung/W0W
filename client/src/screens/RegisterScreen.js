@@ -7,6 +7,7 @@ import {
     StyleSheet
 } from 'react-native';
 
+import styles from '../styles/RegisterStyles';
 import 'react-native-gesture-handler';
 
 import {
@@ -15,9 +16,7 @@ import {
 } from 'react-native-responsive-screen';
 
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../redux/_actions/user_action';
-  
-const BGCOLOR_CODE = '#6CDDBF'
+import { registerUser } from '../_actions/user_action';
 
 const RegisterScreen = (props) => { 
 
@@ -119,68 +118,5 @@ const RegisterScreen = (props) => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container : {
-        flex:1,
-        backgroundColor: BGCOLOR_CODE
-    },
-    header:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    main_text:{
-        fontSize:35,
-        fontWeight:'bold',
-        color:'white'
-    },
-    sub_text:{
-        fontSize:28,
-        color:'white'
-    },  
-    footer:{
-        flex: 3,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30,
-        marginHorizontal: 20,
-        borderColor: '#9DD4C5',
-        borderWidth: 2,
-        shadowColor: '#000000',
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-    },
-    register_text:{
-        fontSize:25,
-        marginTop:40,
-        alignSelf:'center',
-        fontWeight:'bold'
-    },
-    input_box:{
-        marginVertical:40,
-        marginHorizontal:20
-    },
-    input_text:{
-        fontWeight:'bold',
-        marginBottom:15
-    },
-    input:{
-        borderBottomColor:BGCOLOR_CODE,
-        borderBottomWidth:1,
-        marginBottom:20,
-        opacity:0.6,
-        paddingBottom:10
-    },
-    register_btn:{
-        backgroundColor:BGCOLOR_CODE,
-        borderRadius:10,
-        height:55,
-        marginTop:70,
-    }
-
-})
 
 export default RegisterScreen;
