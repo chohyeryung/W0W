@@ -3,7 +3,6 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 
 const { Category } = require("../models/Category");
-// const { User } = require('../models/User');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
