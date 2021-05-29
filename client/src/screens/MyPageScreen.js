@@ -13,22 +13,55 @@ import styles from "../styles/MyPageStyles";
 export class MyPageScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { cates: [] };
+        this.state = { cates: [
+            { _id: { category: '종이빨대' }, category: '종이빨대', cnt: 0 },
+            { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
+            { _id: { category: '쓰레기줍기' }, category: '쓰레기줍기', cnt: 0 },
+            { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
+            { _id: { category: '대중교통' }, category: '대중교통', cnt: 0 },
+            { _id: { category: '기타' }, category: '기타', cnt: 0 }
+        ] };
     }
 
     componentDidMount() {
+
         axios.get('http://localhost:5000/mypage/cate')
             .then(response => {
-                this.setState({cates: response.data});
+                datas: response.data.map( data =>
+                    {
+                        const { cates } = this.state;
+                        this.setState({
+                            cates: cates.map( cate => 
+                                cate.category == data.category
+                                ? cate = data
+                                : cate
+                            )
+                        })
+                    }
+                )
+              
             })
     }
+    
 
     _fetchCate = (cate) => {
+
         axios.post('http://localhost:5000/mypage/pointing', {ca : cate})
         .then(response => {
             axios.get('http://localhost:5000/mypage/cate')
             .then(response => {
-                this.setState({cates: response.data});
+                datas: response.data.map( data =>
+                    {
+                        const { cates } = this.state;
+                        this.setState({
+                            cates: cates.map( cate => 
+                                cate.category == data.category
+                                ? cate = data
+                                : cate
+                            )
+                        })
+                    }
+                )
             })
         });
     }
@@ -36,6 +69,7 @@ export class MyPageScreen extends Component {
 
     render(){
         const { cates } = this.state;
+        console.log(cates);
 
         return(
             <View style={styles.container}>
@@ -64,6 +98,7 @@ export class MyPageScreen extends Component {
                 </View>
                
             </View>
+            // <></>
         )
     }
 
