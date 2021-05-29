@@ -1,22 +1,41 @@
-const schedule = require('node-schedule');
+const cron = require('node-cron');
+const { Category } = require("./models/Category");
 
-var job = schedule.scheduleJob('0 0 0 1 * *', function() {
-    let now = new Date();
-  
+const prevDate = (now) => {
+    let yyyy = now.getFullYear();
+    let month = now.getMonth();
     
-  
-    let students_sql = "SELECT stnum, name FROM students";
-    let insert_sql = `INSERT INTO check_students (stnum, name, temp, date, checked) 
-                        VALUES (?, ?, "", ?, 0);`
-    db.query(students_sql, function(error, students) {  //자정이 되면 초기화
-        for(let i=0; i<students.length; i++) {
-            let snum = students[i].stnum;
-            let sname = students[i].name;
-            db.query(insert_sql, [snum, sname, getFormDate(now)], function(e, result) {
-                if(e) throw e;
-            });
-        }
-    });
+    if(month < 10) {
+        month = `0${month}`
+    }
+
+    return yyyy + '-' + month;
+}
+
+//0 0 0 1 * * 매달 1월 12시에
+var job = cron.schedule('0 41 23 * * *', function() {
+
+    let now = new Date();
+    let yyyy = now.getFullYear();
+    let month = now.getMonth()+1;
+    
+    if(month < 10) {
+        month = `0${month}`
+    }
+
+    let ndate = yyyy + '-' + month;
+    let pdate = prevDate(now);
+
+    Category.deleteMany(
+        { created: { 
+            $not: { $regex: ndate }, 
+            $not: { $regex: ndate }
+        } }
+    ).exec(function (err, results) {
+        if(err) console.log(err);
+        console.log(results);
+    })
+
 })
 
 
