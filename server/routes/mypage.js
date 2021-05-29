@@ -26,7 +26,7 @@ router.get('/cate', (req, res) => {
             { $match: { 
                 $and: [ 
                     { $or: [{ category: "종이빨대" }, { category: "용기내" }, { category: "쓰레기줍기" }, { category: "분리수거" }, { category: "대중교통" }, { category: "기타" } ] },
-                    // { created: `${ndate}/` } 
+                    { created: { $regex: ndate } }
                 ] } },
             { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
             { $sort: { category: -1 } }
