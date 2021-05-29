@@ -12,8 +12,8 @@ const prevDate = (now) => {
     return yyyy + '-' + month;
 }
 
-//0 0 0 1 * * 매달 1월 12시에
-var job = cron.schedule('0 41 23 * * *', function() {
+//매달 1월 12시에
+var job = cron.schedule('0 0 0 1 * *', function() {
 
     let now = new Date();
     let yyyy = now.getFullYear();
