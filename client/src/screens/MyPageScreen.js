@@ -3,11 +3,12 @@ import {
     View,
     Text,
     TouchableOpacity,
+    ImageBackground,
 } from 'react-native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 
-import cateData from "../data/cate_data.json";
+import Modal from './Modal';
 import styles from "../styles/MyPageStyles";
 
 export class MyPageScreen extends Component {
@@ -20,7 +21,9 @@ export class MyPageScreen extends Component {
             { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
             { _id: { category: '대중교통' }, category: '대중교통', cnt: 0 },
             { _id: { category: '기타' }, category: '기타', cnt: 0 }
-        ] };
+        ],
+        settingModal: false,
+        };
     }
 
     componentDidMount() {
@@ -43,61 +46,70 @@ export class MyPageScreen extends Component {
             })
     }
     
+    toggleSettingModal() {
+        this.setState({
+          settingModal: !this.state.settingModal
+        })
+      }
 
     _fetchCate = (cate) => {
-
-        axios.post('http://localhost:5000/mypage/pointing', {ca : cate})
-        .then(response => {
-            axios.get('http://localhost:5000/mypage/cate')
-            .then(response => {
-                datas: response.data.map( data =>
-                    {
-                        const { cates } = this.state;
-                        this.setState({
-                            cates: cates.map( cate => 
-                                cate.category == data.category
-                                ? cate = data
-                                : cate
-                            )
-                        })
-                    }
-                )
-            })
-        });
+        // this.setState({ settingModal: !this.state.settingModal })
+        // axios.post('http://localhost:5000/mypage/pointing', {ca : cate})
+        // .then(response => {
+        //     axios.get('http://localhost:5000/mypage/cate')
+        //     .then(response => {
+        //         datas: response.data.map( data =>
+        //             {
+        //                 const { cates } = this.state;
+        //                 this.setState({
+        //                     cates: cates.map( cate => 
+        //                         cate.category == data.category
+        //                         ? cate = data
+        //                         : cate
+        //                     )
+        //                 })
+        //             }
+        //         )
+        //     })
+        // });
     }
 
 
     render(){
         const { cates } = this.state;
-        console.log(cates);
 
         return(
-            <View style={styles.container}>
-                <View style={styles.headerContainer}>
-                    <TouchableOpacity>
-                        <Ionicons 
-                            name="chevron-back-sharp" size={50} style={styles.backIcon}
-                            onPress={() => props.navigation.navigate('SignIn')}/>
-                    </TouchableOpacity>
-                    <Text style={styles.topTitle}>MY ZERO</Text>
+            <ImageBackground
+            style={{width: '100%', height: '100%'}}>
+                <View style={styles.container}>
+                    <View style={styles.headerContainer}>
+                        <TouchableOpacity>
+                            <Ionicons 
+                                name="chevron-back-sharp" size={50} style={styles.backIcon}
+                                onPress={() => props.navigation.navigate('SignIn')}/>
+                        </TouchableOpacity>
+                        <Text style={styles.topTitle}>MY ZERO</Text>
+                    </View>
+        
+                    <View style={styles.cateContainer}>
+                        {cates.map((cate, index) => {
+                            return (
+                                <TouchableOpacity
+                                    key={cate.category}
+                                    // onPress={(e) => {this._fetchCate(cate.category)}}>
+                                    onPress={() => this.toggleSettingModal()}>
+                                    <View style={styles.cateCon} onClick={this.handleClick}>
+                                        <Text style={styles.text_count}>{cate.cnt}</Text>
+                                        <Text style={styles.text_title}>{cate.category}</Text>
+                                    </View> 
+                                </TouchableOpacity>
+                            ) 
+                        })}
+                    </View>
                 </View>
-    
-                <View style={styles.cateContainer}>
-                    {cates.map((cate, index) => {
-                        return (
-                            <TouchableOpacity
-                                key={cate.category}
-                                onPress={(e) => {this._fetchCate(cate.category)}}>
-                                <View style={styles.cateCon} onClick={this.handleClick}>
-                                    <Text style={styles.text_count}>{cate.cnt}</Text>
-                                    <Text style={styles.text_title}>{cate.category}</Text>
-                                </View> 
-                            </TouchableOpacity>
-                        ) 
-                    })}
-                </View>
-               
-            </View>
+                { this.state.settingModal ? 
+                <Modal modalHandler = {() => this.toggleSettingModal()} /> : <></> }
+                </ImageBackground>
             // <></>
         )
     }
