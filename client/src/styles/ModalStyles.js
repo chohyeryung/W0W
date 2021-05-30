@@ -15,29 +15,27 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'rgba(0,0,0,0.5)'
       },
-      ddayInput: {
-        backgroundColor: 'white',
-        marginBottom: 20,
-        width: '75%',
-        height: 40,
-        borderBottomWidth: 1,
-        borderBottomColor: '#a5a5a5'
-      },
       modal: {
         marginHorizontal: 20,
         borderRadius: 10,
         alignItems: 'center',
         marginTop: '50%',
-        backgroundColor: 'white',
+        backgroundColor: 'white'
       },
       doneText: {
-        color: 'rgb(1,123,255)',
         fontSize: 15,
-        margin: 10
+        margin: 15,
+        marginBottom: 20
       },
       titleText: {
         fontSize: 18,
-        margin: 10
+        fontWeight: 'bold',
+        margin: 20
+      },
+      subText: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        margin: 12
       }
 });
 

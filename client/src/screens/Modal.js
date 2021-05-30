@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 
 import styles from "../styles/ModalStyles";
 
@@ -14,7 +14,7 @@ export default class Setting extends React.Component {
             onPress={this.props.modalHandler}/>
             <View style={styles.modal}>
                 <Text style={styles.titleText}>{this.props.cate}</Text>
-                <Text>적립하시겠습니까?</Text>
+                <Text style={styles.subText}>적립하시겠습니까?</Text>
                 <TextInput/>
                 <TouchableOpacity onPress = {() => this.props.settingHandler()}>
                 <Text style={styles.doneText}>
