@@ -23,6 +23,7 @@ export class MyPageScreen extends Component {
             { _id: { category: '기타' }, category: '기타', cnt: 0 }
         ],
         settingModal: false,
+        curCate: '',
         };
     }
 
@@ -46,11 +47,12 @@ export class MyPageScreen extends Component {
             })
     }
     
-    toggleSettingModal() {
+    toggleSettingModal = (cate) => {
         this.setState({
-          settingModal: !this.state.settingModal
+          settingModal: !this.state.settingModal,
+          curCate: cate,
         })
-      }
+    }
 
     _fetchCate = (cate) => {
         // this.setState({ settingModal: !this.state.settingModal })
@@ -97,7 +99,7 @@ export class MyPageScreen extends Component {
                                 <TouchableOpacity
                                     key={cate.category}
                                     // onPress={(e) => {this._fetchCate(cate.category)}}>
-                                    onPress={() => this.toggleSettingModal()}>
+                                    onPress={(e) => this.toggleSettingModal(cate.category)}>
                                     <View style={styles.cateCon} onClick={this.handleClick}>
                                         <Text style={styles.text_count}>{cate.cnt}</Text>
                                         <Text style={styles.text_title}>{cate.category}</Text>
@@ -108,7 +110,7 @@ export class MyPageScreen extends Component {
                     </View>
                 </View>
                 { this.state.settingModal ? 
-                <Modal modalHandler = {() => this.toggleSettingModal()} /> : <></> }
+                <Modal modalHandler = {() => this.toggleSettingModal()} cate = {this.state.curCate} /> : <></> }
                 </ImageBackground>
             // <></>
         )

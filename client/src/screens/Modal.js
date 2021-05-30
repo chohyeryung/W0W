@@ -11,7 +11,7 @@ export default class Setting extends React.Component {
             activeOpacity={1} //깜빡이 효과 해제
             onPress={this.props.modalHandler}/>
             <View style={styles.modal}>
-                <Text style={styles.titleText}>설정</Text>
+                <Text style={styles.titleText}>{this.props.cate}</Text>
                 <TextInput/>
                 <TouchableOpacity>
                 <Text style={styles.doneText}>
