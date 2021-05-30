@@ -57,6 +57,7 @@ export default function App() {
                 },
                 headerBackImage: MyCustomHeaderBackImage,}}
               /> */}
+              
             <Stack.Screen
               name="MyPage"
               component={MyPageScreen}

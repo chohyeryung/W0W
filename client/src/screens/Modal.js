@@ -12,10 +12,11 @@ export default class Setting extends React.Component {
             onPress={this.props.modalHandler}/>
             <View style={styles.modal}>
                 <Text style={styles.titleText}>{this.props.cate}</Text>
+                <Text>적립하시겠습니까?</Text>
                 <TextInput/>
                 <TouchableOpacity onPress = {() => this.props.settingHandler()}>
                 <Text style={styles.doneText}>
-                    완료
+                    예
                 </Text>
                 </TouchableOpacity>
             </View>
