@@ -99,7 +99,6 @@ export class MyPageScreen extends Component {
                             return (
                                 <TouchableOpacity
                                     key={cate.category}
-                                    // onPress={(e) => {this._fetchCate(cate.category)}}>
                                     onPress={(e) => this.toggleSettingModal(cate.category)}>
                                     <View style={styles.cateCon} onClick={this.handleClick}>
                                         <Text style={styles.text_count}>{cate.cnt}</Text>
