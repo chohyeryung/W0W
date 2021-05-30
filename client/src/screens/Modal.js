@@ -13,7 +13,7 @@ export default class Setting extends React.Component {
             <View style={styles.modal}>
                 <Text style={styles.titleText}>{this.props.cate}</Text>
                 <TextInput/>
-                <TouchableOpacity>
+                <TouchableOpacity onPress = {() => this.props.settingHandler()}>
                 <Text style={styles.doneText}>
                     완료
                 </Text>

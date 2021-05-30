@@ -54,26 +54,27 @@ export class MyPageScreen extends Component {
         })
     }
 
-    _fetchCate = (cate) => {
-        // this.setState({ settingModal: !this.state.settingModal })
-        // axios.post('http://localhost:5000/mypage/pointing', {ca : cate})
-        // .then(response => {
-        //     axios.get('http://localhost:5000/mypage/cate')
-        //     .then(response => {
-        //         datas: response.data.map( data =>
-        //             {
-        //                 const { cates } = this.state;
-        //                 this.setState({
-        //                     cates: cates.map( cate => 
-        //                         cate.category == data.category
-        //                         ? cate = data
-        //                         : cate
-        //                     )
-        //                 })
-        //             }
-        //         )
-        //     })
-        // });
+    _fetchCate = () => {
+        axios.post('http://localhost:5000/mypage/pointing', {ca : this.state.curCate})
+        .then(response => {
+            axios.get('http://localhost:5000/mypage/cate')
+            .then(response => {
+                datas: response.data.map( data =>
+                    {
+                        const { cates } = this.state;
+                        this.setState({
+                            cates: cates.map( cate => 
+                                cate.category == data.category
+                                ? cate = data
+                                : cate
+                            )
+                        })
+                    }
+                )
+            })
+        });
+
+        this.toggleSettingModal();
     }
 
 
@@ -110,7 +111,9 @@ export class MyPageScreen extends Component {
                     </View>
                 </View>
                 { this.state.settingModal ? 
-                <Modal modalHandler = {() => this.toggleSettingModal()} cate = {this.state.curCate} /> : <></> }
+                <Modal modalHandler = {() => this.toggleSettingModal()} 
+                       cate = {this.state.curCate} 
+                       settingHandler = {() => this._fetchCate()}/> : <></> }
                 </ImageBackground>
             // <></>
         )
