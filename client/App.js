@@ -9,6 +9,7 @@ import {
 import SignInScreen from './src/screens/SignInScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MyPageScreen from './src/screens/MyPageScreen';
+import ChartScreen from './src/screens/Chart';
 import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
@@ -64,8 +65,15 @@ export default function App() {
               options={{
                 headerShown: false, 
                 title: '',
-              }}
-            />
+              }}/>
+
+              <Stack.Screen
+              name="Chart"
+              component={ChartScreen}
+              options={{
+                headerShown: false, 
+                title: '',
+              }}/>
           </Stack.Navigator>
       </NavigationContainer>
     </Provider>   

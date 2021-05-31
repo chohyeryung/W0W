@@ -126,7 +126,7 @@ const SignInScreen = (props) => {
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, paddingHorizontal: 5}}>
                         <Text
                             style={{color: '#707070'}}
-                            onPress={() => props.navigation.navigate('MyPage')}>
+                            onPress={() => props.navigation.navigate('Chart')}>
                             회원가입
                         </Text>
                         <View><Text style={{color: '#707070'}}>비밀번호 찾기</Text></View>
