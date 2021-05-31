@@ -10,6 +10,7 @@ import SignInScreen from './src/screens/SignInScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MyPageScreen from './src/screens/MyPageScreen';
 import ChartScreen from './src/screens/Chart';
+import ChartScreen2 from './src/screens/Chart2';
 import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
@@ -70,6 +71,14 @@ export default function App() {
               <Stack.Screen
               name="Chart"
               component={ChartScreen}
+              options={{
+                headerShown: false, 
+                title: '',
+              }}/>
+
+            <Stack.Screen
+              name="Chart2"
+              component={ChartScreen2}
               options={{
                 headerShown: false, 
                 title: '',

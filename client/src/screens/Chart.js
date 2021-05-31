@@ -17,7 +17,7 @@ export default class Chart extends Component {
           { _id: { category: '대중교통' }, category: '대중교통', cnt: 0 },
           { _id: { category: '기타' }, category: '기타', cnt: 0 }
         ],
-        tooltipPos : {x: 0, y: 0, visible: false, value: 0}
+        tooltipPos : {x: 0, y: 0, visible: true, value: 0}
     }
   }
 
@@ -71,12 +71,51 @@ export default class Chart extends Component {
             backgroundGradientTo:"#bdf8e4",
             decimalPlaces:1,
             color:(opacity=0) => `rgba(255,0,0, ${opacity}})`,
-            labelColor:(opacity=0) => `rgba(0,0,0, ${opacity}})`
+            labelColor:(opacity=0) => `rgba(0,0,0, ${opacity}})`,
           }}
           bezier
 
-          onDataPointClick = {(data) => {
-            console.log(data.value)
+            decorator={() => {
+              return tooltipPos.visible ? <View>
+                  <Svg>
+                      <Rect x={tooltipPos.x - 15} 
+                          y={tooltipPos.y + 10} 
+                          width="40" 
+                          height="30"
+                          fill="black" />
+                          <TextSVG
+                              x={tooltipPos.x + 5}
+                              y={tooltipPos.y + 30}
+                              fill="white"
+                              fontSize="16"
+                              fontWeight="bold"
+                              textAnchor="middle">
+                              {tooltipPos.value}
+                          </TextSVG>
+                  </Svg>
+              </View> : null
+          }}
+
+          onDataPointClick={(data) => {
+
+            // let isSamePoint = (tooltipPos.x === data.x 
+            //                     && tooltipPos.y === data.y)
+
+            // isSamePoint ? this.setState((previousState) => {
+            //     return { 
+            //               ...previousState,
+            //               value: data.value,
+            //               visible: !previousState.visible
+            //           }
+            // })
+            //     : 
+            // this.setState((state) => {
+            //   state.x = data.x
+            //   state.value = data.value 
+            //   state.y = data.y
+            //   state.visible = true
+            // })
+            console.log(data)
           }}
       />
       </View>
