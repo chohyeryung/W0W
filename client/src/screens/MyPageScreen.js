@@ -4,6 +4,7 @@ import {
     Text,
     TouchableOpacity,
     ImageBackground,
+    Image,
     ScrollView,
 } from 'react-native';
 import axios from 'axios';
@@ -11,6 +12,8 @@ import { Ionicons } from '@expo/vector-icons';
 
 import Modal from './Modal';
 import styles from "../styles/MyPageStyles";
+
+const IMAGE_URL = "../../assets/";
 
 export class MyPageScreen extends Component {
     constructor(props) {
@@ -83,6 +86,7 @@ export class MyPageScreen extends Component {
         const { cates } = this.state;
 
         return(
+            <>
             <ImageBackground
             style={{width: '100%', height: '100%'}}>
                 <View style={styles.container}>
@@ -94,6 +98,8 @@ export class MyPageScreen extends Component {
                         </TouchableOpacity>
                         <Text style={styles.topTitle}>MY ZERO</Text>
                     </View>
+
+                   
         
                     <ScrollView 
                     style={styles.cateContainer}
@@ -110,6 +116,9 @@ export class MyPageScreen extends Component {
                                     key={cate.category}
                                     onPress={(e) => this.toggleSettingModal(cate.category)}>
                                     <View style={styles.cateCon} onClick={this.handleClick}>
+                                        <Image
+                                        source={require(`${IMAGE_URL}/${(index+1)}.png`)}
+                                        style={{width: 200, height: 200}} />
                                         <Text style={styles.text_count}>{cate.cnt}</Text>
                                         <Text style={styles.text_title}>{cate.category}</Text>
                                     </View> 
@@ -117,13 +126,14 @@ export class MyPageScreen extends Component {
                             ) 
                         })}
                     </ScrollView>
+                    
                 </View>
                 { this.state.settingModal ? 
                 <Modal modalHandler = {() => this.toggleSettingModal()} 
                        cate = {this.state.curCate} 
                        settingHandler = {() => this._fetchCate()}/> : <></> }
                 </ImageBackground>
-            // <></>
+            </>
         )
     }
 
