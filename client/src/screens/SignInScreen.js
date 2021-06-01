@@ -8,14 +8,13 @@ import {
     Keyboard,
 } from 'react-native';
 
+import styles from '../styles/SignInStyles';
 import 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/_actions/user_action';
-
-const BGCOLOR_CODE = '#6CDDBF'
+import { loginUser } from '../_actions/user_action';
 
 const SignInScreen = (props) => {
     const dispatch = useDispatch();
@@ -109,7 +108,7 @@ const SignInScreen = (props) => {
                         <TouchableOpacity onPressOut={onChecked} style={{flexDirection: 'row'}}>
                             {checked ? (
                                 <View style={styles.check_icon}>
-                                    <Icon name="checkbox" size={20} color={BGCOLOR_CODE}></Icon>
+                                    <Icon name="checkbox" size={20} color="#A0CAF3"></Icon>
                                 </View>
                             ) : (
                                 <View style={styles.uncheck_icon}>
@@ -121,81 +120,21 @@ const SignInScreen = (props) => {
                     </View>
                     {/* sign in button */}
                     <TouchableOpacity style={[styles.login_btn]} onPress={handleSubmitPress}>
-                        <Text style={{color: '#fff', fontSize: 20, alignSelf: 'center', marginTop: 15}}>로그인</Text>
+                        <Text style={{color: '#fff', fontSize: 20, alignSelf: 'center', marginTop: 15, fontWeight: 'bold'}}>로그인</Text>
                     </TouchableOpacity>
                     {/* side menu */}
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, paddingHorizontal: 5}}>
                         <Text
                             style={{color: '#707070'}}
-                            onPress={() => props.navigation.navigate('Register')}>
+                            onPress={() => props.navigation.navigate('Chart')}>
                             회원가입
                         </Text>
-                        <View><Text style={{color: '#707070'}}>비밀번호 찾기</Text></View>
+                        <View><Text style={{color: '#707070'}} onPress={() => props.navigation.navigate('MyPage')}>비밀번호 찾기</Text></View>
                     </View>
                 </View>
             </View>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container : {
-        flex: 1,
-        backgroundColor: BGCOLOR_CODE
-    },
-    header: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        paddingHorizontal: 20,
-        paddingBottom: 50,
-    },
-    main_text: {
-        color: '#fff',
-        fontSize: 35,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginTop: 40,
-    },
-    sub_text: {
-        color: '#fff',
-        fontSize: 30,
-        alignSelf: 'center',
-        marginTop: 10
-    },
-    footer: {
-        flex: 3,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30,
-        marginHorizontal: 20,
-        borderColor: '#9DD4C5',
-        borderWidth: 2,
-        shadowColor: '#000000',
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-    },
-    input_box: {
-        marginHorizontal: 10,
-    },
-    sign_in_text: {
-        alignSelf: 'center',
-        marginTop: 20,
-        fontSize: 25,
-    },
-    text_input: {
-        borderBottomColor: BGCOLOR_CODE,
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-        opacity: 0.5,
-    },
-    login_btn: {
-        marginTop: 70,
-        backgroundColor: BGCOLOR_CODE,
-        height: 50,
-        borderRadius: 10,
-    }
-})
 
 export default SignInScreen;
