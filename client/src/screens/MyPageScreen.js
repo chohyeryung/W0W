@@ -4,6 +4,7 @@ import {
     Text,
     TouchableOpacity,
     ImageBackground,
+    ScrollView,
 } from 'react-native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
@@ -94,7 +95,15 @@ export class MyPageScreen extends Component {
                         <Text style={styles.topTitle}>MY ZERO</Text>
                     </View>
         
-                    <View style={styles.cateContainer}>
+                    <ScrollView 
+                    style={styles.cateContainer}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={true}
+                    contentContainerStyle={{
+                        alignItems: 'center',
+                        paddingStart: 5,
+                        paddingEnd: 5
+                    }}>
                         {cates.map((cate, index) => {
                             return (
                                 <TouchableOpacity
@@ -107,7 +116,7 @@ export class MyPageScreen extends Component {
                                 </TouchableOpacity>
                             ) 
                         })}
-                    </View>
+                    </ScrollView>
                 </View>
                 { this.state.settingModal ? 
                 <Modal modalHandler = {() => this.toggleSettingModal()} 

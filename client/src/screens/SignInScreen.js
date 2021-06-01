@@ -129,7 +129,7 @@ const SignInScreen = (props) => {
                             onPress={() => props.navigation.navigate('Chart')}>
                             회원가입
                         </Text>
-                        <View><Text style={{color: '#707070'}}>비밀번호 찾기</Text></View>
+                        <View><Text style={{color: '#707070'}} onPress={() => props.navigation.navigate('MyPage')}>비밀번호 찾기</Text></View>
                     </View>
                 </View>
             </View>
