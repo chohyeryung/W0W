@@ -36,7 +36,11 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 5,
         borderStyle: 'solid',
-        width: Dimensions.get('window').width,
+        margin: 20,
+        width: 200,
+        height: 200,
+        padding: 20,
+        textAlign: 'center',
     },
     // cateContainer: {
     //     flexDirection: 'column',

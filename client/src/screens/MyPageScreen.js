@@ -99,14 +99,12 @@ export class MyPageScreen extends Component {
                         <Text style={styles.topTitle}>MY ZERO</Text>
                     </View>
 
-                   
-        
                     <ScrollView 
                     style={styles.cateContainer}
                     horizontal={true}
                     showsHorizontalScrollIndicator={true}
                     contentContainerStyle={{
-                        alignItems: 'center',
+                        alignItems: 'start',
                         paddingStart: 5,
                         paddingEnd: 5
                     }}>
@@ -117,8 +115,8 @@ export class MyPageScreen extends Component {
                                     onPress={(e) => this.toggleSettingModal(cate.category)}>
                                     <View style={styles.cateCon} onClick={this.handleClick}>
                                         <Image
-                                        source={require(`${IMAGE_URL}/${(index+1)}.png`)}
-                                        style={{width: 200, height: 200}} />
+                                        source={require(`../../assets/${index+1}.png`)}
+                                        style={{width: 80, height: 80}} />
                                         <Text style={styles.text_count}>{cate.cnt}</Text>
                                         <Text style={styles.text_title}>{cate.category}</Text>
                                     </View> 

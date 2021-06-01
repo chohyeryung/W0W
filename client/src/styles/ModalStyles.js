@@ -1,18 +1,19 @@
 import { 
     StyleSheet,
+    Dimensions
 } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        height: '100%',
-        width: '100%',
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
         backgroundColor: 'transparent'
       },
       background: {
         position: 'absolute',
-        height: '100%',
-        width: '100%',
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
         backgroundColor: 'rgba(0,0,0,0.5)'
       },
       modal: {
