@@ -1,18 +1,29 @@
 /* global kakao */
 import React from "react";
 import "react-native-gesture-handler";
-import styled from "styled-components";
 
 class MapScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  state = {
+    width: 0,
+    height: 0,
+  };
+
   async componentDidMount() {
+    this.setState = {
+      width: "100%",
+      height: "100%",
+    };
     const script = await document.createElement("script");
     script.async = true;
     script.src =
       "https://dapi.kakao.com/v2/maps/sdk.js?appkey=a727a9ce6d84e20e9db8f890c59382d6&autoload=false";
-    document.head.appendChild(script);
+    document.body.appendChild(script);
 
     script.onload = () => {
-      //   console.log("script.onload");
       kakao.maps.load(() => {
         let container = document.getElementById("Map");
         let options = {
@@ -37,20 +48,9 @@ class MapScreen extends React.Component {
       });
     };
   }
-
   render() {
-    return (
-      <MapScreens
-        id="Map"
-        style={{ width: "100vw", height: "100vh" }}
-      ></MapScreens>
-    );
+    return <div id="Map" style={{ width: "100%", height: "100%" }}></div>;
   }
 }
-
-const MapScreens = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 export default MapScreen;
