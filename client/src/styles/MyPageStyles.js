@@ -14,18 +14,25 @@ const styles = StyleSheet.create({
     headerContainer: {
         marginTop:45,
         paddingHorizontal:70,
-        flexDirection:'row',
-        justifyContent: 'space-between',
+        flexDirection:'column',
+        justifyContent: 'flex-start',
     },
     backIcon: {
         flex: 1,
         color:'#000',
     },
     topTitle: {
-        flex:1,
-        fontSize: 40,
-        textAlign: 'center',
+        fontSize: 38,
         fontWeight: 'bold',
+    },
+    subTitle: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color:'#FFFFFF',
+        fontFamily:'Times New Roman',
+        textShadowColor:'#000000',
+        textShadowOffset:{width: 1, height: 1},
+        textShadowRadius:5,
     },
 
     cateContainer: {
@@ -71,21 +78,18 @@ const styles = StyleSheet.create({
     // cateCon: {
     //     margin:20,
     // },
-    // text_count: {
-    //     color:'#fff',
-    //     backgroundColor: mainColor, 
-    //     fontSize:36,
-    //     fontWeight: 'bold',
-    //     textAlign: 'center',
-    //     width: 100,
-    //     height: 100,
-    // },
-    // text_title: {
-    //     color:'#000',
-    //     fontSize: 25,
-    //     textAlign: 'center',
-    //     fontWeight: 'bold',
-    // }
+    text_count: {
+        color:'#000',
+        fontSize:36,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    text_title: {
+        color:'#000',
+        fontSize: 25,
+        textAlign: 'center',
+        fontWeight: 'bold',
+    }
 });
 
 export default styles;

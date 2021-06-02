@@ -13,8 +13,6 @@ import { Ionicons } from '@expo/vector-icons';
 import Modal from './Modal';
 import styles from "../styles/MyPageStyles";
 
-const IMAGE_URL = "../../assets/";
-
 export class MyPageScreen extends Component {
     constructor(props) {
         super(props);
@@ -91,46 +89,56 @@ export class MyPageScreen extends Component {
             style={{width: '100%', height: '100%'}}>
                 <View style={styles.container}>
                     <View style={styles.headerContainer}>
-                        <TouchableOpacity>
+                        {/* <TouchableOpacity>
                             <Ionicons 
                                 name="chevron-back-sharp" size={50} style={styles.backIcon}
                                 onPress={() => props.navigation.navigate('SignIn')}/>
-                        </TouchableOpacity>
-                        <Text style={styles.topTitle}>MY ZERO</Text>
+                        </TouchableOpacity> */}
+                        <Text style={styles.topTitle}>쬬이오셩님</Text>
+                        <Text style={styles.subTitle}>MY ZERO</Text>
                     </View>
+                
 
-                    <ScrollView 
-                    style={styles.cateContainer}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={true}
-                    contentContainerStyle={{
-                        alignItems: 'start',
-                        paddingStart: 5,
-                        paddingEnd: 5
-                    }}>
-                        {cates.map((cate, index) => {
-                            return (
-                                <TouchableOpacity
-                                    key={cate.category}
-                                    onPress={(e) => this.toggleSettingModal(cate.category)}>
-                                    <View style={styles.cateCon} onClick={this.handleClick}>
-                                        <Image
-                                        source={require(`../../assets/${index+1}.png`)}
-                                        style={{width: 80, height: 80}} />
-                                        <Text style={styles.text_count}>{cate.cnt}</Text>
-                                        <Text style={styles.text_title}>{cate.category}</Text>
-                                    </View> 
-                                </TouchableOpacity>
-                            ) 
-                        })}
-                    </ScrollView>
-                    
+                <ScrollView 
+                style={styles.cateContainer}
+                horizontal={true}
+                showsHorizontalScrollIndicator={true}
+                contentContainerStyle={{
+                    alignItems: 'start',
+                    paddingStart: 5,
+                    paddingEnd: 5
+                }}>
+                    {cates.map((cate, index) => {
+                        return (
+                            <TouchableOpacity
+                                key={cate.category}
+                                onPress={(e) => this.toggleSettingModal(cate.category)}>
+                                <View style={styles.cateCon} onClick={this.handleClick}>
+                                    <Image
+                                    source={require(`../../assets/${index+1}.png`)}
+                                    style={{width: 80, height: 80}} />
+                                    <Text style={styles.text_count}>{cate.cnt}</Text>
+                                    <Text style={styles.text_title}>{cate.category}</Text>
+                                </View> 
+                            </TouchableOpacity>
+                        ) 
+                    })}
+                </ScrollView>
+                
+                {/* 밑 화면 */}
+                <View>
+                    <Text></Text>
+                </View>
+
+                {/*  */}
                 </View>
                 { this.state.settingModal ? 
                 <Modal modalHandler = {() => this.toggleSettingModal()} 
                        cate = {this.state.curCate} 
                        settingHandler = {() => this._fetchCate()}/> : <></> }
                 </ImageBackground>
+
+                
             </>
         )
     }
