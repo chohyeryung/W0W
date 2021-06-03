@@ -42,31 +42,33 @@ export default class Chart extends Component {
         )
     })  
 
-    axios.get('http://localhost:5000/mypage/statistics')
-    .then(response => {
-        datas: response.data.map( data =>
-            {
-                const { thisMonths,  prevMonths} = this.state;
-
-                data._id.created == _getYYYYMM() ?
-                this.setState({ 
-                    thisMonths: thisMonths.map( month =>{
-                        month.total = data.total 
-                })})
-                :  this.setState({ 
-                    prevMonths: prevMonths.map( pmonth =>
-                        pmonth.total = data.total 
-                )})
-            }
-        )
-    })  
   }
+
+  // componentDidMount() {
+  //   axios.get('http://localhost:5000/mypage/statistics')
+  //   .then(response => {
+  //       datas: response.data.map( data =>
+  //           {
+  //               const { thisMonths,  prevMonths} = this.state;
+
+  //               data._id.created == _getYYYYMM() ?
+  //               this.setState({ 
+  //                   thisMonths: thisMonths.map( month =>{
+  //                       month.total = data.total 
+  //               })})
+  //               :  this.setState({ 
+  //                   prevMonths: prevMonths.map( pmonth =>
+  //                       pmonth.total = data.total 
+  //               )})
+  //           }
+  //       )
+  //   })  
+  // }
   
 
 
   render() {
-    const { cates } = this.state;
-    const { thisMonths,  prevMonths} = this.state;
+    const { cates, thisMonths, prevMonths } = this.state;
     console.log(thisMonths);
 
     return (

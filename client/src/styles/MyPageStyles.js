@@ -10,12 +10,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        fontFamily: 'Noto Sans KR',
+        // alignItems: 'center',
     },
     headerContainer: {
         marginTop:45,
         paddingHorizontal:70,
         flexDirection:'column',
         justifyContent: 'flex-start',
+        alignItems: 'flex-start',
     },
     backIcon: {
         flex: 1,
@@ -29,65 +32,51 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         color:'#FFFFFF',
-        fontFamily:'Times New Roman',
         textShadowColor:'#000000',
         textShadowOffset:{width: 1, height: 1},
         textShadowRadius:5,
     },
 
     cateContainer: {
-        width: Dimensions.get('window').width,
+        margin:80,
+        padding: 50,
+        shadowColor: "rgb(50,50,50)",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.55,
+        shadowRadius: 16,
+
+        elevation: 25,
+        borderRadius: 20,
     },
 
     cateCon: {
-        borderWidth: 2,
-        borderRadius: 5,
+        borderBottomWidth: 1,
         borderStyle: 'solid',
-        margin: 20,
-        width: 200,
-        height: 200,
-        padding: 20,
-        textAlign: 'center',
+        borderBottomColor: 'gray',
+        padding: 30,
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
-    // cateContainer: {
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     marginTop: 60,
-    //     shadowColor: "#000",
-    //     shadowOffset: {
-    //         width: 0,
-    //         height: 3,
-    //     },
-    //     shadowOpacity: 0.24,
-    //     shadowRadius: 10.32,
-    //     elevation: 16,
-    //     borderRadius: 10,
-    // },
-    // cateFirst: {
-    //     display: 'flex',
-    //     flexDirection: 'row',
-    //     justifyContent: 'center',
-    //     margin: 20,
-    // },
-    // cateSecond: {
-    //     display: 'flex',
-    //     flexDirection: 'row',
-    //     justifyContent: 'center',
-    //     margin: 20,
-    // },
-    // cateCon: {
-    //     margin:20,
-    // },
+
+    cateTextView: {
+        flex:1,
+        flexDirection:'column',
+        alignItems: 'center',
+    },
+
     text_count: {
-        color:'#000',
-        fontSize:36,
-        fontWeight: 'bold',
-        textAlign: 'center',
+        color:'#898998',
+        fontSize:15,
+        fontFamily: 'Noto Sans KR',
     },
+
     text_title: {
         color:'#000',
-        fontSize: 25,
-        textAlign: 'center',
+        fontSize: 20,
         fontWeight: 'bold',
     }
 });

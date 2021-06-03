@@ -84,7 +84,6 @@ export class MyPageScreen extends Component {
         const { cates } = this.state;
 
         return(
-            <>
             <ImageBackground
             style={{width: '100%', height: '100%'}}>
                 <View style={styles.container}>
@@ -98,48 +97,35 @@ export class MyPageScreen extends Component {
                         <Text style={styles.subTitle}>MY ZERO</Text>
                     </View>
                 
-
-                <ScrollView 
-                style={styles.cateContainer}
-                horizontal={true}
-                showsHorizontalScrollIndicator={true}
-                contentContainerStyle={{
-                    alignItems: 'start',
-                    paddingStart: 5,
-                    paddingEnd: 5
-                }}>
-                    {cates.map((cate, index) => {
-                        return (
-                            <TouchableOpacity
-                                key={cate.category}
-                                onPress={(e) => this.toggleSettingModal(cate.category)}>
-                                <View style={styles.cateCon} onClick={this.handleClick}>
-                                    <Image
-                                    source={require(`../../assets/${index+1}.png`)}
-                                    style={{width: 80, height: 80}} />
-                                    <Text style={styles.text_count}>{cate.cnt}</Text>
-                                    <Text style={styles.text_title}>{cate.category}</Text>
-                                </View> 
-                            </TouchableOpacity>
-                        ) 
-                    })}
-                </ScrollView>
+                    <View stlye={styles.conCon}>
+                        <View style={styles.cateContainer}>
+                            {cates.map((cate, index) => {
+                                return (
+                                    <TouchableOpacity
+                                        key={cate.category}
+                                        onPress={(e) => this.toggleSettingModal(cate.category)}>
+                                        <View style={styles.cateCon} onClick={this.handleClick}>
+                                            <Image
+                                            source={require(`../../assets/${index+1}.png`)}
+                                            style={{width: 80, height: 80}} />
+                                            <View style={styles.cateTextView}>
+                                                <Text style={styles.text_title}>{cate.category}</Text>
+                                                <Text style={styles.text_count}>실천 횟수 : {cate.cnt}</Text>
+                                            </View>
+                                        </View> 
+                                    </TouchableOpacity>
+                                ) 
+                            })}
+                        </View>
+                    </View>
+                    
                 
-                {/* 밑 화면 */}
-                <View>
-                    <Text></Text>
-                </View>
-
-                {/*  */}
                 </View>
                 { this.state.settingModal ? 
                 <Modal modalHandler = {() => this.toggleSettingModal()} 
-                       cate = {this.state.curCate} 
-                       settingHandler = {() => this._fetchCate()}/> : <></> }
-                </ImageBackground>
-
-                
-            </>
+                        cate = {this.state.curCate} 
+                        settingHandler = {() => this._fetchCate()}/> : <></> }
+            </ImageBackground>
         )
     }
 
