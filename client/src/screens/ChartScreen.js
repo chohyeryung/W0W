@@ -24,7 +24,7 @@ export default class Chart extends Component {
   }
 
   componentDidMount() {
-    
+
     // 그래프 data componentDidMount()
     axios.get('http://localhost:5000/mypage/cate')
     .then(response => {
@@ -93,7 +93,6 @@ export default class Chart extends Component {
         </View>
 
         <View style={{
-            marginHorizontal:20,
             marginTop:40}}>
             <LineChart
             style={styles.lineChart}

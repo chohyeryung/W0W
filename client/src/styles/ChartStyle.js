@@ -10,20 +10,16 @@ const styles = StyleSheet.create({
 
     Container: {
         fontFamily: 'Noto Sans KR',
-        width: width,
     },
 
     staContainer: {
-        // flex:1,
         flexDirection: 'row',
         justifyContent: 'space-around',
         height: 140,
     },
 
     contentCon: {
-        // flex:1,
         width: '45%',
-        // height: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
         shadowColor: "rgb(50,50,50)",
