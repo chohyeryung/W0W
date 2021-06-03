@@ -73,25 +73,8 @@ router.get('/statistics', (req, res) => {
     ]).exec(function (err, results) {
         if(err) console.log(err);
         res.send(results);
-        // console.log(results);
     })
 });
 
-// router.get('/charts', (req, res) => {
-//     let cnt = []
-//     let category = []
-//     Category.aggregate([
-//         { $match: { 
-//             $and: [ 
-//                 { $or: [{ category: "종이빨대" }, { category: "용기내" }, { category: "쓰레기줍기" }, { category: "분리수거" }, { category: "대중교통" }, { category: "기타" } ] },
-//                 { created: { $regex: ndate } }
-//             ] } },
-//         { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
-//         { $sort: { category: -1 } }
-//     ]).exec(function (err, results) {
-//         if(err) console.log(err);
-//         console.log(results);
-//     })
-// });
 
 module.exports = router;
