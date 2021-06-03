@@ -107,7 +107,7 @@ export class MyPageScreen extends Component {
                                         <View style={styles.cateCon} onClick={this.handleClick}>
                                             <Image
                                             source={require(`../../assets/${index+1}.png`)}
-                                            style={{width: 80, height: 80}} />
+                                            style={styles.cateImage} />
                                             <View style={styles.cateTextView}>
                                                 <Text style={styles.text_title}>{cate.category}</Text>
                                                 <Text style={styles.text_count}>실천 횟수 : {cate.cnt}</Text>

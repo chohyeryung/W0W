@@ -18,13 +18,14 @@ export default class Chart extends Component {
           { _id: { category: '대중교통' }, category: '대중교통', cnt: 0 },
           { _id: { category: '기타' }, category: '기타', cnt: 0 }
         ],
-        thisMonths: [{total: 0, text: '이번달'}],
-        prevMonths: [{total: 0, text: '지난달'}],
+        months: [{_id: {created: "2021-05"}, total: 0}, {_id: {created: "2021-06"}, total: 0}],
     }
   }
 
+
   componentDidMount() {
 
+    // 그래프 data componentDidMount()
     axios.get('http://localhost:5000/mypage/cate')
     .then(response => {
         datas: response.data.map( data =>
@@ -41,40 +42,47 @@ export default class Chart extends Component {
             }
         )
     })  
+    
+    // 지난 달, 이번 달 data componentDidMount()
+    axios.get('http://localhost:5000/mypage/statistics')
+    .then(response => {
+
+      datas: response.data.map( data =>
+          {
+            const { months } = this.state;
+            this.setState({
+              months: months.map(month => 
+                month._id.created == data._id.created
+                ? month = data
+                : month
+              )
+            })
+          })
+    })  
 
   }
 
-  // componentDidMount() {
-  //   axios.get('http://localhost:5000/mypage/statistics')
-  //   .then(response => {
-  //       datas: response.data.map( data =>
-  //           {
-  //               const { thisMonths,  prevMonths} = this.state;
-
-  //               data._id.created == _getYYYYMM() ?
-  //               this.setState({ 
-  //                   thisMonths: thisMonths.map( month =>{
-  //                       month.total = data.total 
-  //               })})
-  //               :  this.setState({ 
-  //                   prevMonths: prevMonths.map( pmonth =>
-  //                       pmonth.total = data.total 
-  //               )})
-  //           }
-  //       )
-  //   })  
-  // }
-  
-
 
   render() {
-    const { cates, thisMonths, prevMonths } = this.state;
-    console.log(thisMonths);
+    const { cates, months } = this.state;
 
     return (
         <>
         <View>
-            
+            {months.map((month) => (
+                <View>
+                  <View>
+                    <Text>+{month.total}</Text>
+                    <Text>{month.text}</Text>
+                  </View>
+                  {/* <View style={[
+                    month.text == '이번달' ?
+                    { backgroundColor: '#FFE071' }
+                    : {backgroundColor: '#FF6060'}
+                  ]}/> */}
+                </View>
+              
+            ))}
         </View>
 
         <View style={{

@@ -55,11 +55,18 @@ const styles = StyleSheet.create({
     cateCon: {
         borderBottomWidth: 1,
         borderStyle: 'solid',
-        borderBottomColor: 'gray',
-        padding: 30,
+        borderBottomColor: '#CFCFCF',
+        paddingTop: 30,
+        paddingBottom: 30,
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+    },
+
+    cateImage: {
+        marginLeft: 20,
+        width: 100,
+        height: 100,
     },
 
     cateTextView: {
@@ -71,7 +78,6 @@ const styles = StyleSheet.create({
     text_count: {
         color:'#898998',
         fontSize:15,
-        fontFamily: 'Noto Sans KR',
     },
 
     text_title: {
