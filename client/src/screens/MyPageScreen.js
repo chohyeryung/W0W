@@ -89,8 +89,8 @@ export class MyPageScreen extends Component {
                     <View style={styles.headerContainer}>
                         <TouchableOpacity>
                             <Ionicons 
-                                name="chevron-back-sharp" size={50} style={styles.backIcon}
-                                onPress={() => props.navigation.navigate('SignIn')}/>
+                                 name="chevron-back-sharp" size={50} style={styles.backIcon}
+                                 onPress={() => props.navigation.navigate('SignIn')}/> 
                         </TouchableOpacity>
                         <Text style={styles.topTitle}>MY ZERO</Text>
                     </View>
