@@ -12,6 +12,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Noto Sans KR',
     },
 
+    firCon: {
+        flexDirection: 'column',
+        padding: 50,
+    },
+
     staContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -52,12 +57,12 @@ const styles = StyleSheet.create({
     line: {
         width:3,
         height:'100%',
-    },
-
-    lineChart: {
         
     },
 
+    lineBox: {
+        padding: 50,
+    }
 
 });
 

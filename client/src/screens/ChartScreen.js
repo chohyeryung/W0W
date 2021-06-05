@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, DotContent } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { Rect, Text as TextSVG, Svg } from "react-native-svg";
 
@@ -68,56 +68,74 @@ export default class Chart extends Component {
 
     return (
       <View style={styles.Container}>
-        <View style={styles.staContainer}>
-            {months.map((month) => (
-                <View style={styles.contentCon}>
-                  <View style={styles.totalCon}>
-                    <Text style={styles.text_total}>+{month.total}</Text>
-                    <Text style={styles.text_created}>
-                      {[
-                        month._id.created == _getYYYYMM() ?
-                        '이번달'
-                        : '저번달'
-                      ]}
-                    </Text>
+        <View style={styles.firCon}>
+            <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30}}>STATISTICS A</Text>
+            <View style={styles.staContainer}>
+              {months.map((month) => (
+                  <View style={styles.contentCon}>
+                    <View style={styles.totalCon}>
+                      <Text style={styles.text_total}>+{month.total}</Text>
+                      <Text style={styles.text_created}>
+                        {[
+                          month._id.created == _getYYYYMM() ?
+                          '이번달'
+                          : '저번달'
+                        ]}
+                      </Text>
+                    </View>
+                    <View style={[
+                      styles.line,
+                      month._id.created == _getYYYYMM() ?
+                      { backgroundColor: '#FFE071' }
+                      : {backgroundColor: '#FF6060'}
+                    ]}/>
                   </View>
-                  <View style={[
-                    styles.line,
-                    month._id.created == _getYYYYMM() ?
-                    { backgroundColor: '#FFE071' }
-                    : {backgroundColor: '#FF6060'}
-                  ]}/>
-                </View>
-              
-            ))}
+              ))}
+            </View>
+            
         </View>
 
-        <View style={{
-            marginTop:40}}>
+        <View style={styles.lineBox}>
+            <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30}}>STATISTICS B</Text>
             <LineChart
-            style={styles.lineChart}
+            // style={styles.lineChart}
             data = {{
                 labels: cates.map(cate => cate.category),
-                datasets: [
-                {
+                datasets: [{
                     data: cates.map(cate => cate.cnt),
-                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // optional
+                    color: (opacity = 0.8) => `rgba(22, 148, 108, ${opacity})`, // optional
                     strokeWidth: 2 // optional
-                },
-                ],
+                }],
             }}
-            width={Dimensions.get('window').width}
+            
+            width={Dimensions.get('window').width-100}
             height={320}
             yAxisInterval={1}
             chartConfig={{
-                backgroundColor:'#bdf8e4',
-                backgroundGradientFrom:"#FFF",
-                backgroundGradientTo:"#bdf8e4",
+                backgroundColor:'#fff',
+                backgroundGradientFrom:"#fff",
+                backgroundGradientTo:"#fff",
+                fillShadowGradient: '#d4fbda',
+                fillShadowGradientOpacity: 0.7,
                 decimalPlaces:1,
-                color:(opacity=0) => `rgba(255,0,0, ${opacity}})`,
-                labelColor:(opacity=0) => `rgba(0,0,0, ${opacity}})`,
+                color:(opacity=1) => `rgba(255,0,0, ${opacity}})`,
+                labelColor:(opacity=1) => `rgba(0,0,0, ${opacity}})`,
+                propsForDots: {
+                  r: "4",
+                  strokeWidth: "2",
+                  stroke: "#218838"
+                },
+                
             }}
-            bezier />
+
+            bezier
+            style={{
+              borderRadius: 20,
+              flexDirection:'row',
+              justifyContent: 'center',
+            }} 
+            
+            />
         </View>
 
       </View>
