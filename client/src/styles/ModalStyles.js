@@ -6,13 +6,13 @@ import {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        height: Dimensions.get('window').height,
+        height: Dimensions.get('screen').height,
         width: Dimensions.get('window').width,
         backgroundColor: 'transparent'
       },
       background: {
         position: 'absolute',
-        height: Dimensions.get('window').height,
+        height: Dimensions.get('screen').height,
         width: Dimensions.get('window').width,
         backgroundColor: 'rgba(0,0,0,0.5)'
       },

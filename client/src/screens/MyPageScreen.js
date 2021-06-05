@@ -17,11 +17,11 @@ export class MyPageScreen extends Component {
     constructor(props) {
         super(props);
         this.state = { cates: [
-            { _id: { category: '종이빨대' }, category: '종이빨대', cnt: 0 },
+            { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
             { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
             { _id: { category: '쓰레기줍기' }, category: '쓰레기줍기', cnt: 0 },
             { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
-            { _id: { category: '대중교통' }, category: '대중교통', cnt: 0 },
+            { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
             { _id: { category: '기타' }, category: '기타', cnt: 0 }
         ],
         settingModal: false,

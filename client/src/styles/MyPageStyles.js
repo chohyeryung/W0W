@@ -37,6 +37,11 @@ const styles = StyleSheet.create({
         textShadowRadius:5,
     },
 
+    conCon: {
+        flex:1,
+        justifyContent: 'center',
+    },
+
     cateContainer: {
         margin:80,
         padding: 50,
