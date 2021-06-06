@@ -14,6 +14,8 @@ import styles from '../styles/MainStyle';
 export class MainScreen extends Component {
 
     // constructor(props) {
+    //     // alert(AsyncStorage.getItem(userData));
+
     //     // try {
     //     //     const value = await AsyncStorage.getItem('TASKS');
     //     //     if (value !== null) {
@@ -24,6 +26,7 @@ export class MainScreen extends Component {
     //     //     // Error retrieving data
     //     //   }
 
+        
     // }
     render(){
 
@@ -33,14 +36,14 @@ export class MainScreen extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={styles.headerContainer}>                  
-                    <Text style={styles.mainText}>WITH</Text>
+                {/* <View style={styles.headerContainer}>                   */}
+                    <Text style={styles.topText}>WITH</Text>
                     <Text style={styles.middleText}>ZERO</Text>
-                    <Text style={styles.middleText}>WASTE</Text>
-                </View>
+                    <Text style={styles.bottomText}>WASTE</Text>
+                {/* </View> */}
                 <View style={styles.footerContainer}>
                     <View style={styles.icon}>
-                        <TouchableOpacity onPress={() => navigation.navigate('MyPage')}>
+                        <TouchableOpacity onPress={() => this.navigation.navigate('MyPage')}>
                             <Image
                             style={styles.category_icon}
                             source={require('../image/main/category_icon.png')} />

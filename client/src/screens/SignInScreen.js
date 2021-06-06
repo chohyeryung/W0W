@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { loginUser } from '../_actions/user_action';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 
 class SignInScreen extends React.Component {
 
@@ -35,6 +36,7 @@ class SignInScreen extends React.Component {
         this.setErrorText = this.setErrorText.bind(this);
         this.setResult = this.setResult.bind(this);
         this.handleSubmitPress = this.handleSubmitPress.bind(this);
+        // this.navigation = useNavigation();
 
     }
 
@@ -70,6 +72,7 @@ class SignInScreen extends React.Component {
 
 
     handleSubmitPress() {
+        const { loginUser, loginSuccess, message } = this.props;
 
         this.setErrorText('');
         if (!this.state.userEmail) {

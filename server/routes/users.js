@@ -53,7 +53,8 @@ router.post("/login", (req, res) => {
             AsyncStorage.setItem(
                 'userData',
                 JSON.stringify({
-                  token: user.tokenExp,
+                  tokenExp: user.tokenExp,
+                  token: user.token,
                   userId: user._id
                 })
               );
@@ -68,7 +69,7 @@ router.get("/logout", auth, (req, res) => {
             success: true
         });
     });
-    // AsyncStorage.removeItem('userData')
+    AsyncStorage.removeItem('userData')
 
 });
 
