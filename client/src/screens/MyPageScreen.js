@@ -108,9 +108,18 @@ export class MyPageScreen extends Component {
                                             <Image
                                             source={require(`../../assets/${index+1}.png`)}
                                             style={[styles.cateImage,
-                                            index == 1 ?
-                                            {width: 145, height:77, marginLeft: 50}
-                                            :{width:110, height:100, marginLeft: 70}
+                                            (index == 0 ?
+                                                {width: 110, height:110, marginLeft: 65}
+                                                :(index == 1 ?
+                                                    {width: 145, height:77, marginLeft: 50}
+                                                    :(index == 2 ?
+                                                        {width: 110, height:110, marginLeft: 65}
+                                                        :(index == 4 ?
+                                                            {width: 110, height:120, marginLeft: 70}
+                                                            :(index == 5 ?
+                                                                {width: 110, height:110, marginLeft: 70}
+                                                                :{width:110, height:100, marginLeft: 70})))))
+                                            
                                             ]} />
                                             <View style={styles.cateTextView}>
                                                 <Text style={styles.text_title}>{cate.category}</Text>
