@@ -50,18 +50,20 @@ export default class App extends Component {
                   title: '',}}
               />
   
-               {/* <Stack.Screen
-                name="Register"
-                component={RegisterScreen}
-                options={{
-                  headerBackTitleVisible: false,
-                  title: '',
-                  headerTintColor: '#fff',
-                  headerStyle: {
-                    backgroundColor: mainColor,
-                  },
-                  headerBackImage: MyCustomHeaderBackImage,}}
-                /> */}
+              <Stack.Screen
+              name="Register"
+              component={RegisterScreen}
+              options={{
+                headerShown: false,
+                title: '',
+                // headerBackTitleVisible: false,
+                // title: '',
+                // headerTintColor: '#fff',
+                // headerStyle: {
+                //   backgroundColor: mainColor,
+                }}
+                // headerBackImage: MyCustomHeaderBackImage,}}
+              />
                 
               <Stack.Screen
                 name="MyPage"
@@ -100,7 +102,6 @@ export default class App extends Component {
       </Provider>   
     );
   }
- 
 }
 
 const styles = StyleSheet.create({

@@ -92,14 +92,14 @@ class SignInScreen extends React.Component {
             url: 'http://localhost:5000/users/login',
             changeOrigin: true,
         }).then((response) =>{
-            return response.data.loginSuccess ;
+            return [response.data.loginSuccess, response.data.message];
         })
 
         request.then(res=> {
-            if(res){
+            if(res[0]){
                 this.props.navigation.navigate('MainScreen')
             }else{
-                this.setErrorText("다시 한번 확인해주세요");
+                this.setErrorText(res[1]);
             }
         })
         
@@ -186,7 +186,7 @@ class SignInScreen extends React.Component {
                     <View><Text style={{ fontSize: 15 }}>Don't have a account?</Text></View>
                         <Text
                             style={{ fontSize: 15, color: '#35C9C9' }}
-                            onPress={() => this.props.navigation.navigate('MainScreen')}>
+                            onPress={() => this.props.navigation.navigate('Register')}>
                             Sign up
                         </Text>
                     </View>
