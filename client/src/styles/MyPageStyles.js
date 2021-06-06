@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Noto Sans KR',
         // alignItems: 'center',
     },
+
     headerContainer: {
         marginTop:45,
         paddingHorizontal:70,
@@ -20,6 +21,19 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
     },
+
+    headThCon: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
+    iconCon: {
+        width: 115,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
     backIcon: {
         flex: 1,
         color:'#000',

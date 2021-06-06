@@ -93,12 +93,28 @@ export class MyPageScreen extends Component {
                                 name="chevron-back-sharp" size={50} style={styles.backIcon}
                                 onPress={() => props.navigation.navigate('SignIn')}/>
                         </TouchableOpacity> */}
-                        <Text style={styles.topTitle}>쬬이오셩님</Text>
+                        <View style={styles.headThCon}>
+                            <Text style={styles.topTitle}>쬬이오셩님</Text>
+                            <View style={styles.iconCon}>
+                                <TouchableOpacity>
+                                    <Ionicons 
+                                        name="help-circle-outline" size={50} style={styles.helpIcon}
+                                        onPress={() => props.navigation.navigate('SignIn')}/>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <Ionicons 
+                                        name="exit-outline" size={50} style={styles.logoutIcon}
+                                        onPress={() => props.navigation.navigate('SignIn')}/>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        
                         <Text style={styles.subTitle}>MY ZERO</Text>
                     </View>
                 
                     <View stlye={styles.conCon}>
                         <View style={styles.cateContainer}>
+                            <Text style={{ fontSize: 24, fontWeight: 'bold' }}>카테고리</Text>
                             {cates.map((cate, index) => {
                                 return (
                                     <TouchableOpacity
