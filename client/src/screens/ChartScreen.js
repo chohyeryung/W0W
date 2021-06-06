@@ -14,7 +14,7 @@ export default class Chart extends Component {
         cates: [
           { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
           { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
-          { _id: { category: '쓰레기줍기' }, category: '쓰레기줍기', cnt: 0 },
+          { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
           { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
           { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
           { _id: { category: '기타' }, category: '기타', cnt: 0 }

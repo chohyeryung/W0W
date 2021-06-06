@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 
 import Modal from './PointModal';
+import CModal from './CateModal';
 import styles from "../styles/MyPageStyles";
 
 export class MyPageScreen extends Component {
@@ -19,7 +20,7 @@ export class MyPageScreen extends Component {
         this.state = { cates: [
             { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
             { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
-            { _id: { category: '쓰레기줍기' }, category: '쓰레기줍기', cnt: 0 },
+            { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
             { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
             { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
             { _id: { category: '기타' }, category: '기타', cnt: 0 }
@@ -108,8 +109,7 @@ export class MyPageScreen extends Component {
                                 </TouchableOpacity>
                                 <TouchableOpacity>
                                     <Ionicons 
-                                        name="exit-outline" size={50} style={styles.logoutIcon}
-                                        onPress={() => props.navigation.navigate('SignIn')}/>
+                                        name="exit-outline" size={50} style={styles.logoutIcon}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -161,7 +161,7 @@ export class MyPageScreen extends Component {
                         settingHandler = {() => this._fetchCate()}/> : <></> }
 
                 { this.state.settingCModal ? 
-                <Modal modalHandler = {() => this.toggleSettingCModal()} /> : <></> }
+                <CModal modalHandler = {() => this.toggleSettingCModal()} /> : <></> }
             </ImageBackground>
         )
     }

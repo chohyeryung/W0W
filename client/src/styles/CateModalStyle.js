@@ -18,27 +18,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.5)'
       },
       modal: {
-        marginHorizontal: 20,
+        marginHorizontal: 60,
         borderRadius: 10,
         alignItems: 'center',
-        marginTop: '70%',
-        backgroundColor: 'white'
+        marginTop: '10%',
+        backgroundColor: 'white',
+        height: '90%',
       },
-      doneText: {
-        fontSize: 15,
-        margin: 15,
-        marginBottom: 20
-      },
-      titleText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        margin: 20
-      },
-      subText: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        margin: 12
-      }
 });
 
 export default styles;

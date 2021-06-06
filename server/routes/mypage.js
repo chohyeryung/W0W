@@ -22,7 +22,7 @@ router.get('/cate', (req, res) => {
         [
             { $match: { 
                 $and: [ 
-                    { $or: [{ category: "장바구니 이용" }, { category: "용기내" }, { category: "쓰레기줍기" }, { category: "분리수거" }, { category: "대중교통 이용" }, { category: "기타" } ] },
+                    { $or: [{ category: "장바구니 이용" }, { category: "용기내" }, { category: "쓰레기 줍기" }, { category: "분리수거" }, { category: "대중교통 이용" }, { category: "기타" } ] },
                     { created: { $regex: ndate } }
                 ] } },
             { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
