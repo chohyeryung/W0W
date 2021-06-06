@@ -16,15 +16,15 @@ export default class Setting extends React.Component {
                 onPress={this.props.modalHandler}/>
                 <View style={styles.modal}>
                     <View style={styles.headContainer}>
-                    <View style={styles.headCon}>
-                        <Text style={{ fontSize: 42, fontWeight: 'bold' }}>MY ZERO GUIDE</Text>
-                        <TouchableOpacity>
-                            <Ionicons 
-                                name="close-circle-outline" size={50}
-                                onPress={() => this.props.modalHandler()}/>
-                        </TouchableOpacity>
-                    </View>
-                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#35C9C9' }}>환경을 돕는 제로 웨이스트 활동 실천 횟수</Text>
+                        <View style={styles.headCon}>
+                            <Text style={{ fontSize: 42, fontWeight: 'bold' }}>MY ZERO GUIDE</Text>
+                            <TouchableOpacity>
+                                <Ionicons 
+                                    name="close-circle-outline" size={50}
+                                    onPress={() => this.props.modalHandler()}/>
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#35C9C9' }}>환경을 돕는 제로 웨이스트 활동 실천 횟수</Text>
                     </View>
                     <View style={styles.cateContainer}>
                         {cateList.map((cate, index) => {

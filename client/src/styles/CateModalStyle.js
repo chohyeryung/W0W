@@ -28,14 +28,13 @@ const styles = StyleSheet.create({
         marginTop: '20%',
         backgroundColor: 'white',
         height: '80%',
-        padding: 10,
-        // flexDirection: 'column',
-        // justifyContent: 'flex-start'
+        padding: 10
       },
 
       headContainer: {
         flexDirection: 'column',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        width: '100%'
       },
 
       headCon: {
@@ -55,30 +54,30 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     },
 
     cateImage: {
         marginLeft: 50,
-        marginRight: 50,
+        marginRight: 50
     },
 
     cateTextView: {
         flex:1,
         flexDirection:'column',
-        alignItems: 'center',
+        alignItems: 'center'
     },
 
     text_explan: {
         color:'#898998',
         fontSize:15,
-        textAlign: 'center',
+        textAlign: 'center'
     },
 
     text_title: {
         color:'#000',
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     }
 });
 
