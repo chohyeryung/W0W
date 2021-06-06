@@ -49,13 +49,13 @@ router.post("/login", (req, res) => {
                     });
                 
             });
-            AsyncStorage.setItem(
-                'userData',
-                JSON.stringify({
-                  token: user.tokenExp,
-                  userId: user._id
-                })
-              );
+            // AsyncStorage.setItem(
+            //     'userData',
+            //     JSON.stringify({
+            //       token: user.tokenExp,
+            //       userId: user._id
+            //     })
+            //   );
         });
     });
 });
@@ -67,7 +67,7 @@ router.get("/logout", auth, (req, res) => {
             success: true
         });
     });
-    AsyncStorage.removeItem('userData')
+    // AsyncStorage.removeItem('userData')
 
 });
 

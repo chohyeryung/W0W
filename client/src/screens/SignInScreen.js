@@ -1,20 +1,20 @@
-import React, { createRef, useState } from 'react';
+import React, { createRef } from 'react';
 import {
     View,
     Text,
     TouchableOpacity,
-    StyleSheet,
     TextInput,
     Keyboard,
+    ScrollView
 } from 'react-native';
 
 import styles from '../styles/SignInStyles';
 import 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import { loginUser } from '../_actions/user_action';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 class SignInScreen extends React.Component {
 
@@ -24,34 +24,123 @@ class SignInScreen extends React.Component {
             checked: false,
             userEmail: '',
             userPassword: '',
+            result: {},
             errorText: '',
         };
+        this.passwordInputRef = createRef();
+
+        this.onChecked = this.onChecked.bind(this);
+        this.setUserEmail = this.setUserEmail.bind(this);
+        this.setUserPassword = this.setUserPassword.bind(this);
+        this.setErrorText = this.setErrorText.bind(this);
+        this.setResult = this.setResult.bind(this);
+        this.handleSubmitPress = this.handleSubmitPress.bind(this);
+    }
+
+    onChecked() {
+        this.setState(state => ({
+            checked: !state.checked
+        }))
+    }
+
+    setResult(result) {
+        this.setState(state => ({
+            result: result
+        }))
+    }
+
+    setUserEmail(email) {
+        this.setState(state => ({
+            userEmail: email
+        }))
+    }
+
+    setUserPassword(password) {
+        this.setState(state => ({
+            userPassword: password
+        }))
+    }
+
+    setErrorText(text) {
+        this.setState(state => ({
+            errorText: text
+        }))
+    }
+
+
+    handleSubmitPress() {
+        const { loginUser, loginSuccess, message } = this.props;
+
+        this.setErrorText('');
+        if (!this.state.userEmail) {
+            this.setErrorText('아이디를 입력해주세요');
+            return;
+        }
+        if (!this.state.userPassword) {
+            this.setErrorText('비밀번호를 입력해주세요');
+            return;
+        }
+
+        let body = {
+            email: this.state.userEmail,
+            password: this.state.userPassword
+        }
+
+        // const request = loginUser(body);
+        // console.log(request)
+        // console.log(response.payload)
+
+        const request = axios({
+            method: 'post',
+            data: body,
+            url: 'http://localhost:5000/users/login',
+            changeOrigin: true,
+        }).then(function(response) {
+            console.log(response.data)
+            // this.setResult(response.data);
+            if(response.data.loginSuccess ){
+                alert('로그인 성공')
+                navigation.navigate('MainScreen')
+                // navigation.navigate('MainScreen')
+            } else {
+                alert(response.data.message)
+                // this.setErrorText(request.message);
+            }
+        })
+
+        console.log(this.state.result);
+
+        // if(request.loginSuccess) {
+        //        props.navigation.navigate('MyPage')
+        //     } else {
+        //         this.setErrorText(request.message);
+        //     }
     }
 
     render() {
 
-        const { checked } = this.state;
+        const { checked, errorText } = this.state;
+        const passwordInputRef = this.passwordInputRef;
 
         return (
             <View style={styles.container}>
             {/* header */}
             <View style={styles.header}>
-                <Text style={styles.main_text}>W0W</Text>
-                <Text style={styles.sub_text}>With zerO Waste</Text>
+                <Text style={styles.sub_text}>Welcome to</Text>
+                <Text style={styles.main_text}>W0W.</Text>
             </View>
             {/* footer */}
-            <View style={styles.footer}>
-                <Text style={styles.sign_in_text}>로그인</Text>
+            <View style={{ flex: 2, marginTop: 100 }}>
                 {/* footer - input box */}
-                <View style={styles.input_box}>
+                <View>
                     <Text style={[styles.text_title, {
                         marginTop: 60}]}>E-mail</Text>
                     <TextInput
                         style={[styles.text_input, {marginTop: 10}]}
-                        placeholder="이메일을 입력해주세요"
-                        placeholderTextColor="#707070"
+                        placeholder="Email"
+                        placeholderTextColor="#C4C4C4"
                         autoCapitalize="none"
-                        onChangeText={(userEmail) => setUserEmail(userEmail)}
+                        onChangeText={(userEmail) => this.setUserEmail(userEmail)}
                         onSubmitEditing={() =>
                             passwordInputRef.current && passwordInputRef.current.focus()
                         }
@@ -60,17 +149,17 @@ class SignInScreen extends React.Component {
                         blurOnSubmit={false}
                         />
                     <Text style={[styles.text_title, {
-                        marginTop: 30}]}>Password</Text>
+                        marginTop: 50}]}>Password</Text>
                     <TextInput
                         style={[styles.text_input, {marginTop: 10}]}
-                        placeholder="비밀번호를 입력해주세요"
-                        placeholderTextColor="#707070"
+                        placeholder="Password"
+                        placeholderTextColor="#C4C4C4"
                         autoCapitalize="none"
                         secureTextEntry={true}
                         ref={passwordInputRef}
                         keyboardType="default"
                         returnKeyType="next"
-                        onChangeText={(userPassword) => setUserPassword(userPassword)}
+                        onChangeText={(userPassword) => this.setUserPassword(userPassword)}
                         onSubmitEditing={Keyboard.dismiss}
                         blurOnSubmit={false}
                     />
@@ -78,79 +167,52 @@ class SignInScreen extends React.Component {
                         <Text style={{marginTop:10, color:'#ff4d4d'}}>{errorText}</Text>
                     ) : null }
                     {/* checkbox */}
-                    <View style={{marginTop: 10}}>
-                        <TouchableOpacity onPressOut={onChecked} style={{flexDirection: 'row'}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
+                        <View>
+                            <TouchableOpacity onPressOut={this.onChecked}>
                             {checked ? (
-                                <View style={styles.check_icon}>
-                                    <Icon name="checkbox" size={20} color="#A0CAF3"></Icon>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Icon name="checkbox" size={22} color="#35C9C9"></Icon>
+                                    <Text style={{ marginLeft: 5, fontSize: 15, }}>Stay Logged in</Text>
                                 </View>
                             ) : (
-                                <View style={styles.uncheck_icon}>
-                                    <Icon name="checkbox-outline" size={20} color="#707070" />
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Icon name="checkbox-outline" size={22} color="#35C9C9" />
+                                    <Text style={{ marginLeft: 5, fontSize: 15 }}>Stay Logged in</Text>
                                 </View>
                             )}
-                            <Text style={{marginTop: 3, marginLeft: 6, color: '#707070'}}>로그인 상태 유지</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {/* sign in button */}
-                    <TouchableOpacity style={[styles.login_btn]} onPress={handleSubmitPress}>
-                        <Text style={{color: '#fff', fontSize: 20, alignSelf: 'center', marginTop: 15, fontWeight: 'bold'}}>로그인</Text>
-                    </TouchableOpacity>
-                    {/* side menu */}
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, paddingHorizontal: 5}}>
-                        <Text
-                            style={{color: '#707070'}}
-                            onPress={() => props.navigation.navigate('Chart')}>
-                            회원가입
-                        </Text>
-                        <View><Text style={{color: '#707070'}} onPress={() => props.navigation.navigate('MainScreen')}>비밀번호 찾기</Text></View>
+                            </TouchableOpacity>
+                        </View>
+                        <View><Text style={{ color: '#35C9C9', fontSize: 15 }}>Forgot Password?</Text></View>
                     </View>
                 </View>
-            </View>
+                </View>
+                <View style={{ flex: 3, marginTop: 150 }}>
+                    {/* sign in button */}
+                    <TouchableOpacity style={[styles.login_btn]} onPress={this.handleSubmitPress}>
+                        <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold', marginTop: 18, }}>Log In</Text>
+                    </TouchableOpacity>
+                    {/* side menu */}
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 30, paddingHorizontal: 150 }}>
+                    <View><Text style={{ fontSize: 15 }}>Don't have a account?</Text></View>
+                        <Text
+                            style={{ fontSize: 15, color: '#35C9C9' }}
+                            onPress={() => this.props.navigation.navigate('MainScreen')}>
+                            Sign up
+                        </Text>
+                    </View>
+                </View>
         </View>
         )
     }
 }
 
-const SignInScreen = (props) => {
-    const dispatch = useDispatch();
+const mapStateToProps = state => ({
+    payload: state.payload,
+})
 
-    
+const mapDispatchToProps = {
+    loginUser,
+};
 
-    const passwordInputRef = createRef();
-
-    const onChecked = (e) => {
-        setChecked(!checked);
-    }
-
-    const handleSubmitPress = () => {
-
-        setErrorText('');
-        if (!userEmail) {
-            setErrorText('아이디를 입력해주세요');
-            return;
-        }
-        if (!userPassword) {
-            setErrorText('비밀번호를 입력해주세요');
-            return;
-        }
-
-        let body = {
-            email: userEmail,
-            password: userPassword
-        }
-
-        dispatch(loginUser(body))
-            .then(response => {
-                if (response.payload.loginSuccess) {
-                    alert('로그인 성공')
-                } else {
-                    setErrorText(response.payload.message)
-                }
-            })
-
-    }
-
-}
-
-export default SignInScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);

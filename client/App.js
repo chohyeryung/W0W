@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React , {Component}from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -35,68 +35,71 @@ const MyCustomHeaderBackImage = () => (
   />
 );
 
-export default function App() {
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen
-              name="SignIn"
-              component={SignInScreen}
-              options={{
-                headerShown: false, 
-                title: '',}}
-            />
-
-             {/* <Stack.Screen
-              name="Register"
-              component={RegisterScreen}
-              options={{
-                headerBackTitleVisible: false,
-                title: '',
-                headerTintColor: '#fff',
-                headerStyle: {
-                  backgroundColor: mainColor,
-                },
-                headerBackImage: MyCustomHeaderBackImage,}}
-              /> */}
-              
-            <Stack.Screen
-              name="MyPage"
-              component={MyPageScreen}
-              options={{
-                headerShown: false, 
-                title: '',
-              }}/>
-
+export default class App extends Component {
+  render(){
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator>
               <Stack.Screen
-              name="Chart"
-              component={ChartScreen}
-              options={{
-                headerShown: false, 
-                title: '',
-              }}/>
-
-            <Stack.Screen
-              name="Chart2"
-              component={ChartScreen2}
-              options={{
-                headerShown: false, 
-                title: '',
-              }}/>
-
-            <Stack.Screen
-              name="MainScreen"
-              component={MainScreen}
-              options={{
-                headerShown: false, 
-                title: '',
-              }}/>
-
-          </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>   
-  );
+                name="SignIn"
+                component={SignInScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',}}
+              />
+  
+               {/* <Stack.Screen
+                name="Register"
+                component={RegisterScreen}
+                options={{
+                  headerBackTitleVisible: false,
+                  title: '',
+                  headerTintColor: '#fff',
+                  headerStyle: {
+                    backgroundColor: mainColor,
+                  },
+                  headerBackImage: MyCustomHeaderBackImage,}}
+                /> */}
+                
+              <Stack.Screen
+                name="MyPage"
+                component={MyPageScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+                <Stack.Screen
+                name="Chart"
+                component={ChartScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+              <Stack.Screen
+                name="Chart2"
+                component={ChartScreen2}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+              <Stack.Screen
+                name="MainScreen"
+                component={MainScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+            </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>   
+    );
+  }
+ 
 }
 
 const styles = StyleSheet.create({
