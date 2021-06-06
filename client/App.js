@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React , {Component}from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -9,6 +9,9 @@ import {
 import SignInScreen from './src/screens/SignInScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MyPageScreen from './src/screens/MyPageScreen';
+import ChartScreen from './src/screens/Chart';
+import ChartScreen2 from './src/screens/Chart2';
+import MainScreen from './src/screens/MainScreen';
 import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
@@ -33,41 +36,71 @@ const MyCustomHeaderBackImage = () => (
   />
 );
 
-export default function App() {
-  return (
-    // <QrcodeScannerScreen />
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="SignIn"
-            component={SignInScreen}
-            options={{
-              headerShown: false, 
-              title: '',}} />
-          <Stack.Screen
-            name="Register"
-            component={RegisterScreen}
-            options={{
-              headerBackTitleVisible: false,
-              title: '',
-              headerTintColor: '#fff',
-              headerStyle: {
-                backgroundColor: mainColor,
-              },
-              headerBackImage: MyCustomHeaderBackImage,}} />
-            <Stack.Screen
-              name="MyPage"
-              component={MyPageScreen}
-              options={{
-                headerShown: false, 
-                title: '',
-              }}
-            />
-          </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
-  );
+export default class App extends Component {
+  render(){
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator>
+              <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',}}
+              />
+  
+               {/* <Stack.Screen
+                name="Register"
+                component={RegisterScreen}
+                options={{
+                  headerBackTitleVisible: false,
+                  title: '',
+                  headerTintColor: '#fff',
+                  headerStyle: {
+                    backgroundColor: mainColor,
+                  },
+                  headerBackImage: MyCustomHeaderBackImage,}}
+                /> */}
+                
+              <Stack.Screen
+                name="MyPage"
+                component={MyPageScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+                <Stack.Screen
+                name="Chart"
+                component={ChartScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+              <Stack.Screen
+                name="Chart2"
+                component={ChartScreen2}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+              <Stack.Screen
+                name="MainScreen"
+                component={MainScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+            </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>   
+    );
+  }
+ 
 }
 
 const styles = StyleSheet.create({

@@ -1,67 +1,54 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
-const mainColor = "#E1F0FF";
-const btnColor = "#A0CAF3";
+const mainColor = "#35C9C9";
 
 const styles = StyleSheet.create({
     container : {
-        flex:1,
-        backgroundColor: mainColor,
+        flex: 1,
+        // width: Dimensions.get('window').width,
+        // height: Dimensions.get('window').height,
+        backgroundColor: '#FFFFFF',
+        paddingHorizontal: 70,
+        paddingVertical: 70,
     },
-    header:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center'
+    header: {
+        flex: 1,
     },
-    main_text:{
-        fontSize:35,
-        fontWeight:'bold',
-        color:'#000'
+    main_text: {
+        color: mainColor,
+        fontSize: 40,
+        fontWeight: 'bold',
+        textAlign: 'left',
     },
-    sub_text:{
-        fontSize:28,
-        color:'#000'
-    },  
-    footer:{
-        flex: 3,
+    sub_text: {
+        color: '#000000',
+        fontSize: 40,
+        fontWeight: 'bold',
+        marginTop: 60,
+    },
+    text_title: {
+        fontSize: 22,
+    },
+    input_text: {
+        fontWeight: 'bold',
+    },
+    text_input: {
+        fontSize: 20,
         backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30,
-        marginHorizontal: 20,
-        shadowColor: '#000000',
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 15,
+        borderRadius: 6,
+        borderColor: '#000000',
+        height: 70,
+        borderWidth: 1,
     },
-    register_text:{
-        fontSize:25,
-        marginTop:40,
-        alignSelf:'center',
-        fontWeight:'bold'
-    },
-    input_box:{
-        marginVertical:40,
-        marginHorizontal:20
-    },
-    input_text:{
-        fontWeight:'bold',
-        marginBottom:15
-    },
-    input:{
-        borderBottomColor:mainColor,
-        borderBottomWidth:1,
-        marginBottom:20,
-        opacity:0.6,
-        paddingBottom:10
-    },
-    register_btn:{
-        backgroundColor:btnColor,
-        borderRadius:10,
-        height:55,
-        marginTop:70,
+    login_btn: {
+        marginTop: 70,
+        backgroundColor: '#000000',
+        height: 70,
+        borderRadius: 10,
+        alignItems: 'center',
     }
-
 });
 
 export default styles;

@@ -28,12 +28,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
+    cateContainer: {
+        width: Dimensions.get('window').width,
+    },
+
     cateCon: {
         borderWidth: 2,
         borderRadius: 5,
-        borderStyle: 'solid'
-    }
-
+        borderStyle: 'solid',
+        width: Dimensions.get('window').width,
+    },
     // cateContainer: {
     //     flexDirection: 'column',
     //     alignItems: 'center',

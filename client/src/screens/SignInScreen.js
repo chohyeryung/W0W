@@ -35,6 +35,7 @@ class SignInScreen extends React.Component {
         this.setErrorText = this.setErrorText.bind(this);
         this.setResult = this.setResult.bind(this);
         this.handleSubmitPress = this.handleSubmitPress.bind(this);
+
     }
 
     onChecked() {
@@ -69,7 +70,6 @@ class SignInScreen extends React.Component {
 
 
     handleSubmitPress() {
-        const { loginUser, loginSuccess, message } = this.props;
 
         this.setErrorText('');
         if (!this.state.userEmail) {
@@ -86,30 +86,24 @@ class SignInScreen extends React.Component {
             password: this.state.userPassword
         }
 
-        // const request = loginUser(body);
-        // console.log(request)
-        // console.log(response.payload)
-
         const request = axios({
             method: 'post',
             data: body,
             url: 'http://localhost:5000/users/login',
             changeOrigin: true,
-        }).then(function(response) {
-            if(response.data.loginSuccess) {
-                this.props.navigation.navigate('Register')
-            } else {
-                alert('실패')
-            }
+        }).then((response) =>{
+            return response.data.loginSuccess ;
         })
 
-        console.log(this.state.result);
-
-        // if(request.loginSuccess) {
-        //        props.navigation.navigate('MyPage')
-        //     } else {
-        //         this.setErrorText(request.message);
-        //     }
+        request.then(res=> {
+            if(res){
+                this.props.navigation.navigate('MainScreen')
+            }else{
+                this.setErrorText("다시 한번 확인해주세요");
+            }
+        })
+        
+      
     }
 
     render() {
@@ -192,7 +186,7 @@ class SignInScreen extends React.Component {
                     <View><Text style={{ fontSize: 15 }}>Don't have a account?</Text></View>
                         <Text
                             style={{ fontSize: 15, color: '#35C9C9' }}
-                            onPress={() => props.navigation.navigate('Register')}>
+                            onPress={() => this.props.navigation.navigate('MainScreen')}>
                             Sign up
                         </Text>
                     </View>

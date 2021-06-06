@@ -20,8 +20,7 @@ const cateSchema = mongoose.Schema({
         default: 0
     },
     created: {
-        type: Date,
-        default: Date.now,
+        type: String,
         required: true
     }
 });
