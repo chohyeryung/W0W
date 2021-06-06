@@ -96,7 +96,11 @@ class SignInScreen extends React.Component {
             url: 'http://localhost:5000/users/login',
             changeOrigin: true,
         }).then(function(response) {
-            this.setResult(response.data);
+            if(response.data.loginSuccess) {
+                this.props.navigation.navigate('Register')
+            } else {
+                alert('실패')
+            }
         })
 
         console.log(this.state.result);

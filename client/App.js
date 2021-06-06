@@ -18,6 +18,7 @@ import { createStore, applyMiddleware } from 'redux';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+// import QrcodeScannerScreen from './src/screens/QrcodeScannerScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,29 +35,27 @@ const MyCustomHeaderBackImage = () => (
 
 export default function App() {
   return (
+    // <QrcodeScannerScreen />
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen
-              name="SignIn"
-              component={SignInScreen}
-              options={{
-                headerShown: false, 
-                title: '',}}
-            />
-
-             {/* <Stack.Screen
-              name="Register"
-              component={RegisterScreen}
-              options={{
-                headerBackTitleVisible: false,
-                title: '',
-                headerTintColor: '#fff',
-                headerStyle: {
-                  backgroundColor: mainColor,
-                },
-                headerBackImage: MyCustomHeaderBackImage,}}
-              /> */}
+          <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{
+              headerShown: false, 
+              title: '',}} />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{
+              headerBackTitleVisible: false,
+              title: '',
+              headerTintColor: '#fff',
+              headerStyle: {
+                backgroundColor: mainColor,
+              },
+              headerBackImage: MyCustomHeaderBackImage,}} />
             <Stack.Screen
               name="MyPage"
               component={MyPageScreen}
@@ -67,7 +66,7 @@ export default function App() {
             />
           </Stack.Navigator>
       </NavigationContainer>
-    </Provider>   
+    </Provider>
   );
 }
 
