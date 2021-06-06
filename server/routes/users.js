@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
-import { AsyncStorage } from 'react-native';
+// import { AsyncStorage } from 'react-native';
 
 router.get("/auth", auth, (req, res) => {
     res.status(200).json({
@@ -18,12 +18,22 @@ router.get("/auth", auth, (req, res) => {
 
 router.post("/register", (req, res) => {
 
-    const user = new User(req.body);
-    user.save((err, doc) => {
-        if (err) return res.json({ registerSuccess: false, err });
-        return res.status(200).json({
-            registerSuccess: true
-        });
+    User.findOne({ email: req.body.email }, (err, user) => {
+        if (user) {
+            return res.json({
+                loginSuccess: false,
+                message: "이미 존재하는 아이디입니다."
+            })
+        } else {
+            const user = new User(req.body);
+            user.save((err, doc) => {
+                if (err) return res.json({ registerSuccess: false, err });
+                return res.status(200).json({
+                    registerSuccess: true
+                });
+            });
+        }
+            
     });
 });
 
@@ -50,13 +60,13 @@ router.post("/login", (req, res) => {
                     });
                 
             });
-            AsyncStorage.setItem(
-                'userData',
-                JSON.stringify({
-                  token: user.tokenExp,
-                  userId: user._id
-                })
-              );
+            // AsyncStorage.setItem(
+            //     'userData',
+            //     JSON.stringify({
+            //       token: user.tokenExp,
+            //       userId: user._id
+            //     })
+            //   );
         });
     });
 });

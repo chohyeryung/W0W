@@ -5,17 +5,16 @@ const mainColor = "#35C9C9";
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        // width: Dimensions.get('window').width,
-        // height: Dimensions.get('window').height,
         backgroundColor: '#FFFFFF',
         paddingHorizontal: 70,
         paddingVertical: 70,
+        fontFamily: 'Noto Sans KR',
     },
     header: {
         flex: 1,
     },
     main_text: {
-        color: mainColor,
+        color: '#000000',
         fontSize: 40,
         fontWeight: 'bold',
         textAlign: 'left',
