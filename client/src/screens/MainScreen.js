@@ -1,4 +1,6 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
+
 import {
     View,
     Image,
@@ -11,7 +13,18 @@ import styles from '../styles/MainStyle';
 
 export class MainScreen extends Component {
 
-    
+    // constructor(props) {
+    //     // try {
+    //     //     const value = await AsyncStorage.getItem('TASKS');
+    //     //     if (value !== null) {
+    //     //       // We have data!!
+    //     //       console.log(value);
+    //     //     }
+    //     //   } catch (error) {
+    //     //     // Error retrieving data
+    //     //   }
+
+    // }
     render(){
 
         // const [score, setScore] = useState('ZERO');
@@ -32,7 +45,7 @@ export class MainScreen extends Component {
                             style={styles.category_icon}
                             source={require('../image/main/category_icon.png')} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('Chart')}>
+                        <TouchableOpacity onPress={() => this.navigation.navigate('Chart')}>
                             <Image
                             style={styles.statistics_icon}
                             source={require('../image/main/statistics_icon.png')} />

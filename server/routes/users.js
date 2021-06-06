@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
-const AsyncStorage = require('@react-native-community/async-storage')
+import { AsyncStorage } from 'react-native';
+
 router.get("/auth", auth, (req, res) => {
     res.status(200).json({
         _id: req.user._id,
@@ -49,13 +50,13 @@ router.post("/login", (req, res) => {
                     });
                 
             });
-            // AsyncStorage.setItem(
-            //     'userData',
-            //     JSON.stringify({
-            //       token: user.tokenExp,
-            //       userId: user._id
-            //     })
-            //   );
+            AsyncStorage.setItem(
+                'userData',
+                JSON.stringify({
+                  token: user.tokenExp,
+                  userId: user._id
+                })
+              );
         });
     });
 });
