@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 
-import Modal from './Modal';
+import Modal from './PointModal';
 import styles from "../styles/MyPageStyles";
 
 export class MyPageScreen extends Component {
@@ -25,6 +25,7 @@ export class MyPageScreen extends Component {
             { _id: { category: '기타' }, category: '기타', cnt: 0 }
         ],
         settingModal: false,
+        settingCModal: false,
         curCate: '',
         };
     }
@@ -54,6 +55,10 @@ export class MyPageScreen extends Component {
           settingModal: !this.state.settingModal,
           curCate: cate,
         })
+    }
+
+    toggleSettingCModal = () => {
+        this.setState({settingCModal: !this.state.settingCModal})
     }
 
     _fetchCate = () => {
@@ -99,7 +104,7 @@ export class MyPageScreen extends Component {
                                 <TouchableOpacity>
                                     <Ionicons 
                                         name="help-circle-outline" size={50} style={styles.helpIcon}
-                                        onPress={() => props.navigation.navigate('SignIn')}/>
+                                        onPress={() => this.toggleSettingCModal()}/>
                                 </TouchableOpacity>
                                 <TouchableOpacity>
                                     <Ionicons 
@@ -154,6 +159,9 @@ export class MyPageScreen extends Component {
                 <Modal modalHandler = {() => this.toggleSettingModal()} 
                         cate = {this.state.curCate} 
                         settingHandler = {() => this._fetchCate()}/> : <></> }
+
+                { this.state.settingCModal ? 
+                <Modal modalHandler = {() => this.toggleSettingCModal()} /> : <></> }
             </ImageBackground>
         )
     }

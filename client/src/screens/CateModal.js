@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 
-import styles from "../styles/ModalStyles";
+import styles from "../styles/PointModalStyles";
 
 export default class Setting extends React.Component {
 
