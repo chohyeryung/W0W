@@ -44,10 +44,6 @@ export default class App extends Component {
         <NavigationContainer>
           <Stack.Navigator>
               <Stack.Screen
-                name="SignIn"
-                component={QrcodeScannerScreen}
-              />
-              <Stack.Screen
                 name="AuthLoadingScreen"
                 component={AuthLoadingScreen}
                 options={{
@@ -69,13 +65,7 @@ export default class App extends Component {
               options={{
                 headerShown: false,
                 title: '',
-                // headerBackTitleVisible: false,
-                // title: '',
-                // headerTintColor: '#fff',
-                // headerStyle: {
-                //   backgroundColor: mainColor,
                 }}
-                // headerBackImage: MyCustomHeaderBackImage,}}
               />
                 
               <Stack.Screen

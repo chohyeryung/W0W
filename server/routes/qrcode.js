@@ -8,7 +8,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.post('/pointing', (req, res) => {
-    let category = req.body.ca;
+    const userId = req.body.userId;
 
     let now = new Date();
     let yyyy = now.getFullYear();
@@ -28,8 +28,8 @@ router.post('/pointing', (req, res) => {
     let data = {
         "idx": 1,
         "useridx": 2,
-        "category": category,
-        "score": 3,
+        "category": '용기내',
+        "score": 5,
         "created": ndate
     }
 
