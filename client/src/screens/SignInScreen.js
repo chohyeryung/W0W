@@ -97,7 +97,7 @@ class SignInScreen extends React.Component {
 
         request.then(res=> {
             if(res[0]){
-                this.props.navigation.navigate('MainScreen')
+                this.props.navigation.navigate('QrcodeScreen')
             }else{
                 this.setErrorText(res[1]);
             }
