@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
-
+import {Video} from 'expo-av';
 import {
     View,
     Image,
@@ -33,7 +33,7 @@ export class MainScreen extends Component {
         // const [score, setScore] = useState('ZERO');
     // const [endText, setEndTExt] = useState('WASTE');
 
-
+    // const video =React.useRef(null)
         return (
             <View style={styles.container}>
                 {/* <View style={styles.headerContainer}>                   */}
@@ -43,12 +43,12 @@ export class MainScreen extends Component {
                 {/* </View> */}
                 <View style={styles.footerContainer}>
                     <View style={styles.icon}>
-                        <TouchableOpacity onPress={() => this.navigation.navigate('MyPage')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('MyPage')}>
                             <Image
                             style={styles.category_icon}
                             source={require('../image/main/category_icon.png')} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.navigation.navigate('Chart')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Chart')}>
                             <Image
                             style={styles.statistics_icon}
                             source={require('../image/main/statistics_icon.png')} />
@@ -61,7 +61,16 @@ export class MainScreen extends Component {
                         source={require('../image/main/qr_icon.png')} />
                     </View>
                     <View styles={styles.mov}>
-                        
+                    <Video
+                        // ref={video}
+                        style={styles.video}
+                        source={{
+                        uri: 'http://localhost:5000/uploads/sea_BN.mp4',
+                        }}
+                        shouldPlay="true"
+                        resizeMode="contain"
+                        isLooping
+                    />
                     </View>
                 </View>
             </View>

@@ -27,6 +27,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
        
     },
+    video: {
+        marginTop:45,
+        width: 500,
+        height: 624,
+    },
+    footerContainer:{
+        flexDirection: 'row'
+    },
     bottomText:{
         marginLeft:70,
         fontSize:100,
@@ -37,7 +45,7 @@ const styles = StyleSheet.create({
         textShadowRadius:5,
     },
     icon:{
-        margin:20,
+        marginTop:20,
         marginLeft:70
     },
     category_icon :{

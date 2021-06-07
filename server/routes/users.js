@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
-import { AsyncStorage } from 'react-native';
+// import { AsyncStorage } from 'react-native';
 
 router.get("/auth", auth, (req, res) => {
     res.status(200).json({
@@ -50,14 +50,14 @@ router.post("/login", (req, res) => {
                     });
                 
             });
-            AsyncStorage.setItem(
-                'userData',
-                JSON.stringify({
-                  tokenExp: user.tokenExp,
-                  token: user.token,
-                  userId: user._id
-                })
-              );
+            // AsyncStorage.setItem(
+            //     'userData',
+            //     JSON.stringify({
+            //       tokenExp: user.tokenExp,
+            //       token: user.token,
+            //       userId: user._id
+            //     })
+            //   );
         });
     });
 });
@@ -69,7 +69,7 @@ router.get("/logout", auth, (req, res) => {
             success: true
         });
     });
-    AsyncStorage.removeItem('userData')
+    // AsyncStorage.removeItem('userData')
 
 });
 
