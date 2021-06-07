@@ -7,10 +7,9 @@ import {
     Keyboard,
     ScrollView
 } from 'react-native';
-
+import { AsyncStorage } from 'react-native';
 import styles from '../styles/SignInStyles';
 import 'react-native-gesture-handler';
-
 import Icon from 'react-native-vector-icons/Ionicons';
 import { loginUser } from '../_actions/user_action';
 import { connect } from 'react-redux';
@@ -92,9 +91,16 @@ class SignInScreen extends React.Component {
         const request = axios({
             method: 'post',
             data: body,
-            url: 'http://localhost:5000/users/login',
+            url: 'https://78d25616f33f.ngrok.io/users/login',
             changeOrigin: true,
         }).then((response) =>{
+            AsyncStorage.setItem(
+                'userData',
+                JSON.stringify({
+                  token: response.data.token,
+                  userId: response.data.userId
+                })
+              );
             return response.data.loginSuccess ;
         })
 

@@ -12,6 +12,7 @@ import MyPageScreen from './src/screens/MyPageScreen';
 import ChartScreen from './src/screens/Chart';
 import ChartScreen2 from './src/screens/Chart2';
 import MainScreen from './src/screens/MainScreen';
+import AuthLoadingScreen from './src/screens/AythLoadingScreen'
 import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
@@ -41,13 +42,21 @@ export default class App extends Component {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
-              <Stack.Screen
-                name="SignIn"
-                component={SignInScreen}
+          <Stack.Screen
+                name="AuthLoadingScreen"
+                component={AuthLoadingScreen}
                 options={{
                   headerShown: false, 
-                  title: '',}}
-              />
+                  title: '',
+                }}/>
+          <Stack.Screen
+                name="MainScreen"
+                component={MainScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
   
                {/* <Stack.Screen
                 name="Register"
@@ -77,7 +86,13 @@ export default class App extends Component {
                   headerShown: false, 
                   title: '',
                 }}/>
-  
+              <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',}}
+              />
               <Stack.Screen
                 name="Chart2"
                 component={ChartScreen2}
@@ -86,14 +101,7 @@ export default class App extends Component {
                   title: '',
                 }}/>
   
-              <Stack.Screen
-                name="MainScreen"
-                component={MainScreen}
-                options={{
-                  headerShown: false, 
-                  title: '',
-                }}/>
-  
+            
             </Stack.Navigator>
         </NavigationContainer>
       </Provider>   

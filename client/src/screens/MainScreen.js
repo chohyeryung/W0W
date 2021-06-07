@@ -13,27 +13,11 @@ import styles from '../styles/MainStyle';
 
 export class MainScreen extends Component {
 
-    // constructor(props) {
-    //     // alert(AsyncStorage.getItem(userData));
-
-    //     // try {
-    //     //     const value = await AsyncStorage.getItem('TASKS');
-    //     //     if (value !== null) {
-    //     //       // We have data!!
-    //     //       console.log(value);
-    //     //     }
-    //     //   } catch (error) {
-    //     //     // Error retrieving data
-    //     //   }
-
-        
-    // }
+    constructor(props) {
+        super(props);
+    }
     render(){
 
-        // const [score, setScore] = useState('ZERO');
-    // const [endText, setEndTExt] = useState('WASTE');
-
-    // const video =React.useRef(null)
         return (
             <View style={styles.container}>
                 {/* <View style={styles.headerContainer}>                   */}
@@ -43,7 +27,7 @@ export class MainScreen extends Component {
                 {/* </View> */}
                 <View style={styles.footerContainer}>
                     <View style={styles.icon}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('MyPage')}>
+                        <TouchableOpacity onPress={() =>  AsyncStorage.removeItem('userData')}>
                             <Image
                             style={styles.category_icon}
                             source={require('../image/main/category_icon.png')} />
@@ -65,7 +49,7 @@ export class MainScreen extends Component {
                         // ref={video}
                         style={styles.video}
                         source={{
-                        uri: 'http://localhost:5000/uploads/sea_BN.mp4',
+                        uri: 'https://78d25616f33f.ngrok.io/uploads/sea_BN.mp4',
                         }}
                         shouldPlay="true"
                         resizeMode="contain"
