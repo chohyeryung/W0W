@@ -21,7 +21,7 @@ import { createStore, applyMiddleware } from 'redux';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-// import QrcodeScannerScreen from './src/screens/QrcodeScannerScreen';
+import QrcodeScannerScreen from './src/screens/QrcodeScannerScreen';
 
 const Stack = createStackNavigator();
 
@@ -44,7 +44,7 @@ export default class App extends Component {
           <Stack.Navigator>
               <Stack.Screen
                 name="SignIn"
-                component={SignInScreen}
+                component={QrcodeScannerScreen}
                 options={{
                   headerShown: false, 
                   title: '',}}
@@ -92,6 +92,14 @@ export default class App extends Component {
               <Stack.Screen
                 name="MainScreen"
                 component={MainScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+              
+              <Stack.Screen
+                name="QrcodeScreen"
+                component={QrcodeScannerScreen}
                 options={{
                   headerShown: false, 
                   title: '',

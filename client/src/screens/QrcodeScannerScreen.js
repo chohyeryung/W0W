@@ -10,7 +10,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default class QrcodeScannerScreen extends Component {
   state = {
@@ -23,36 +23,85 @@ export default class QrcodeScannerScreen extends Component {
   }
 
   _requestCameraPermission = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status } = await BarCodeScanner.requestPermissionsAsync();
     this.setState({
       hasCameraPermission: status === 'granted',
     });
   };
 
-  _handleBarCodeRead = (result) => {
+  _handleBarCodeRead = result => {
     if (result.data !== this.state.lastScannedUrl) {
-      LayoutAnimation.spring();
       this.setState({ lastScannedUrl: result.data });
-    }
-  };
+
+      Alert.alert(
+        '5 포인트를 적립하시겠습니까?',
+        this.state.lastScannedUrl,
+        [
+          {
+            text: 'Yes',
+            onPress: () => _handleSavePoint(this.state.lastScannedUrl),
+          },
+          { text: 'No', onPress: () => {} },
+        ],
+        { cancellable: false }
+      );
+  }
+
+  _handleSavePoint = endpoint => {
+      alert('하이')
+  }
+};
 
   render() {
     return (
       <View style={styles.container}>
         {this.state.hasCameraPermission === null ? (
-          <Text>Requesting for camera permission</Text>
+          <Text style={{ color: '#fff', fontSize: 30 }}>
+          카메라 허용 권한을 불러오는 중
+        </Text>
         ) : this.state.hasCameraPermission === false ? (
-          <Text style={{ color: '#fff' }}>
-            Camera permission is not granted
+          <Text style={{ color: '#fff', fontSize: 30 }}>
+            카메라 허용 권한이 거부되었습니다
           </Text>
         ) : (
-          <BarCodeScanner
-            onBarCodeRead={this._handleBarCodeRead}
+          <View
             style={{
-              height: Dimensions.get('window').height,
-              width: Dimensions.get('window').width,
-            }}
-          />
+              position: 'absolute',
+              height: '100%',
+              width: '100%',
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 0,
+            }}>
+            <BarCodeScanner
+              onBarCodeScanned={this._handleBarCodeRead}
+              style={{
+                flex: 1,
+                height: '100%',
+                width: '100%',
+                position: 'absolute',
+                zIndex: 1,
+              }}
+            />
+            <Text
+            style={{
+                color: 'white',
+                fontSize: 30,
+                marginBottom:30,
+                zIndex: 1,
+            }}>
+                QR 코드를 사각형 안에 맞춰주세요
+            </Text>
+            <View
+            style={{
+                borderColor: '#fff',
+                borderWidth: 6,
+                borderRadius: 20,
+                zIndex: 2,
+                width: '50%',
+                height: '30%',
+            }}/>
+          </View>
         )}
 
         {this._maybeRenderUrl()}
@@ -86,20 +135,20 @@ export default class QrcodeScannerScreen extends Component {
       return;
     }
 
-    return (
-      <View style={styles.bottomBar}>
-        <TouchableOpacity style={styles.url} onPress={this._handlePressUrl}>
-          <Text numberOfLines={1} style={styles.urlText}>
-            {this.state.lastScannedUrl}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.cancelButton}
-          onPress={this._handlePressCancel}>
-          <Text style={styles.cancelButtonText}>Cancel</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    // return (
+    //   <View style={styles.bottomBar}>
+    //     <TouchableOpacity style={styles.url} onPress={this._handlePressUrl}>
+    //       <Text numberOfLines={1} style={styles.urlText}>
+    //         {this.state.lastScannedUrl}
+    //       </Text>
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       style={styles.cancelButton}
+    //       onPress={this._handlePressCancel}>
+    //       <Text style={styles.cancelButtonText}>Cancel</Text>
+    //     </TouchableOpacity>
+    //   </View>
+    // );
   };
 }
 
@@ -108,7 +157,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#000',
+    backgroundColor: '#000000',
+    width: '100%',
+    height: '100%'
   },
   bottomBar: {
     position: 'absolute',
