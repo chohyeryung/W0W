@@ -13,9 +13,22 @@ import styles from '../styles/MainStyle';
 
 export class MainScreen extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+    constructor() {
+        super();
+        this._bootstrapAsync();
+      }
+
+      _bootstrapAsync = async () => {
+        const userData = await AsyncStorage.getItem('userData');
+        alert(userData)
+        // this.props.navigation.navigate(userData ? 'MainScreen' : 'SignIn');
+      };
+
+    // data = async () => {
+    //     const userData = await AsyncStorage.getItem('userData');
+    //     alert(userData)     
+    // };
+
     render(){
 
         return (
@@ -49,7 +62,7 @@ export class MainScreen extends Component {
                         // ref={video}
                         style={styles.video}
                         source={{
-                        uri: 'https://78d25616f33f.ngrok.io/uploads/sea_BN.mp4',
+                        uri: ' https://13d1986e199d.ngrok.io/uploads/sea_BN.mp4',
                         }}
                         shouldPlay="true"
                         resizeMode="contain"
