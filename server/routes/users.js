@@ -47,7 +47,7 @@ router.post("/login", (req, res) => {
 
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (!isMatch)
-                return res.json({ loginSuccess: false, message: "비밀번호가 일치하지 않습니다." });
+                return res.json({ loginSuccess: false, message: "비밀번호가 일치하지 않습니다." ,token : user.token,  userId: user._id});
 
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
