@@ -27,6 +27,7 @@
     "mongoose": "^5.12.3",
     "node-cron": "^3.0.0",
     "node-schedule": "^2.0.0",
+    "package.json": "^2.0.1",
     "react-redux": "^5.0.7",
     "socket.io": "^2.2.0"
   }

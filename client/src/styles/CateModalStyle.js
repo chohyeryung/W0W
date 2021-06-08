@@ -34,19 +34,20 @@ const styles = StyleSheet.create({
       headContainer: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        width: '100%'
+        width: '100%',
+        padding: 20
       },
 
       headCon: {
         flexDirection: 'row', 
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         width: '100%'
       },  
 
       cateContainer: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        marginTop: 50
+        marginTop: 15
       },
 
       cateCon: {

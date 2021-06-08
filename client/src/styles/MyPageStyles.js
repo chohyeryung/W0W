@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         fontFamily: 'Noto Sans KR',
-        // alignItems: 'center',
     },
 
     headerContainer: {

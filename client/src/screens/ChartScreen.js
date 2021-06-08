@@ -108,10 +108,11 @@ export default class Chart extends Component {
                 }],
             }}
             
-            width={Dimensions.get('window').width-100}
+            width={Dimensions.get('window').width-20}
             height={320}
             yAxisInterval={1}
             chartConfig={{
+                padding: 10,
                 backgroundColor:'#fff',
                 backgroundGradientFrom:"#fff",
                 backgroundGradientTo:"#fff",
@@ -131,8 +132,12 @@ export default class Chart extends Component {
             bezier
             style={{
               borderRadius: 20,
+              borderWidth: 1,
+              borderColor: '#000',
               flexDirection:'row',
               justifyContent: 'center',
+              paddingTop: 20,
+              backgroundColor: '#fff'
             }} 
             
             />

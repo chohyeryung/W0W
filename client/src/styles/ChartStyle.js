@@ -19,12 +19,13 @@ const styles = StyleSheet.create({
 
     staContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        height: 140,
+        justifyContent: 'space-between',
+        height: 220,
     },
 
     contentCon: {
-        width: '45%',
+        width: '44%',
+        height: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
         shadowColor: "rgb(50,50,50)",
@@ -42,16 +43,20 @@ const styles = StyleSheet.create({
 
     totalCon: {
         flexDirection: 'column',
-        justifyContent: 'space-around',
+        paddingLeft: 30,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     text_total: {
-        fontSize: 28,
-        fontWeight: 'bold'
+        fontSize: 42,
+        fontWeight: 'bold',
+        margin:20
     },
 
     text_created: {
-        fontSize: 18,
+        fontSize: 28,
+        textAlign: 'right'
     },
 
     line: {
