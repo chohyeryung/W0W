@@ -8,13 +8,14 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 
-
-router.get('/statistics', (req, res) => {
+router.get('/score', (req, res) => {
     Category.aggregate([
-        { $group: { _id: { created: { $substr: ["$created", 0, 7] } }, total: { $sum: "$score" } } }
+        {$match:{ state : {'useridx' : useridx}}},
+        { $group: { _id: "$useridx", total: { $sum: "$score" } } }
     ]).exec(function (err, results) {
         if(err) console.log(err);
-        res.send(results);
+        // res.send(results);
+        console.log(res)
     })
 });
 

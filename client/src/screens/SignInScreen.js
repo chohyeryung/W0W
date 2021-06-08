@@ -91,15 +91,22 @@ class SignInScreen extends React.Component {
         const request = axios({
             method: 'post',
             data: body,
-            url: 'https://13d1986e199d.ngrok.io/users/login',
+            url: '  https://9f697b2cf7da.ngrok.io/users/login',
             changeOrigin: true,
         }).then((response) =>{
+            AsyncStorage.setItem(
+                'userData',
+                JSON.stringify({
+                  token: response.data.token,
+                  userId: response.data.userId
+                })
+              );
             return [response.data.loginSuccess, response.data.message];
         })
 
         request.then(res=> {
             if(res[0]){
-                this.props.navigation.navigate('QrcodeScreen')
+                this.props.navigation.navigate('MainScreen')
             }else{
                 this.setErrorText(res[1]);
             }
