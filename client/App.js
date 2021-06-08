@@ -9,8 +9,7 @@ import {
 import SignInScreen from './src/screens/SignInScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MyPageScreen from './src/screens/MyPageScreen';
-import ChartScreen from './src/screens/Chart';
-import ChartScreen2 from './src/screens/Chart2';
+import ChartScreen from './src/screens/ChartScreen';
 import MainScreen from './src/screens/MainScreen';
 import AuthLoadingScreen from './src/screens/AuthLoadingScreen'
 import rootReducer from './src/_reducers/index';
@@ -66,13 +65,7 @@ export default class App extends Component {
               options={{
                 headerShown: false,
                 title: '',
-                // headerBackTitleVisible: false,
-                // title: '',
-                // headerTintColor: '#fff',
-                // headerStyle: {
-                //   backgroundColor: mainColor,
                 }}
-                // headerBackImage: MyCustomHeaderBackImage,}}
               />
                 
               <Stack.Screen
@@ -97,13 +90,6 @@ export default class App extends Component {
                   headerShown: false, 
                   title: '',}}
               />
-              <Stack.Screen
-                name="Chart2"
-                component={ChartScreen2}
-                options={{
-                  headerShown: false, 
-                  title: '',
-                }}/>
               
               <Stack.Screen
                 name="QrcodeScreen"

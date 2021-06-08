@@ -4,6 +4,7 @@ import {
   Linking,
   Dimensions,
   LayoutAnimation,
+  AsyncStorage,
   Text,
   View,
   StatusBar,
@@ -11,11 +12,22 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import axios from 'axios';
 
 export default class QrcodeScannerScreen extends Component {
+  constructor() {
+    super();
+    this._bootstrapAsync();
+  }
+  _bootstrapAsync = async () => {
+    const userData = await AsyncStorage.getItem('userData');
+    alert(userData.userId)
+  };
+
   state = {
     hasCameraPermission: null,
     lastScannedUrl: null,
+    userId: ''
   };
 
   componentDidMount() {
@@ -48,7 +60,10 @@ export default class QrcodeScannerScreen extends Component {
   }
 
   _handleSavePoint = endpoint => {
-      alert('하이')
+      axios.post(endpoint, {userId : this.state.userId}).then(() => {
+        alert('5포인트 적립되었습니다!')
+        this.props.navigation.navigate('QrcodeScreen')
+      })
   }
 };
 
@@ -134,21 +149,6 @@ export default class QrcodeScannerScreen extends Component {
     if (!this.state.lastScannedUrl) {
       return;
     }
-
-    // return (
-    //   <View style={styles.bottomBar}>
-    //     <TouchableOpacity style={styles.url} onPress={this._handlePressUrl}>
-    //       <Text numberOfLines={1} style={styles.urlText}>
-    //         {this.state.lastScannedUrl}
-    //       </Text>
-    //     </TouchableOpacity>
-    //     <TouchableOpacity
-    //       style={styles.cancelButton}
-    //       onPress={this._handlePressCancel}>
-    //       <Text style={styles.cancelButtonText}>Cancel</Text>
-    //     </TouchableOpacity>
-    //   </View>
-    // );
   };
 }
 

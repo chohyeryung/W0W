@@ -1,6 +1,8 @@
 import { 
     StyleSheet,
+    Dimensions
 } from "react-native";
+
 
 const styles = StyleSheet.create({
     container: {
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         borderRadius: 10,
         alignItems: 'center',
-        marginTop: '50%',
+        marginTop: '70%',
         backgroundColor: 'white'
       },
       doneText: {

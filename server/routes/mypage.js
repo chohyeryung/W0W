@@ -22,7 +22,7 @@ router.get('/cate', (req, res) => {
         [
             { $match: { 
                 $and: [ 
-                    { $or: [{ category: "종이빨대" }, { category: "용기내" }, { category: "쓰레기줍기" }, { category: "분리수거" }, { category: "대중교통" }, { category: "기타" } ] },
+                    { $or: [{ category: "장바구니 이용" }, { category: "용기내" }, { category: "쓰레기 줍기" }, { category: "분리수거" }, { category: "대중교통 이용" }, { category: "기타" } ] },
                     { created: { $regex: ndate } }
                 ] } },
             { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
@@ -52,7 +52,6 @@ router.post('/pointing', (req, res) => {
     let ndate = yyyy + '-' + month + '-' + day;
 
     let data = {
-        "idx": 1,
         "useridx": 2,
         "category": category,
         "score": 3,
@@ -67,21 +66,14 @@ router.post('/pointing', (req, res) => {
     })
 });
 
-// router.get('/charts', (req, res) => {
-//     let cnt = []
-//     let category = []
-//     Category.aggregate([
-//         { $match: { 
-//             $and: [ 
-//                 { $or: [{ category: "종이빨대" }, { category: "용기내" }, { category: "쓰레기줍기" }, { category: "분리수거" }, { category: "대중교통" }, { category: "기타" } ] },
-//                 { created: { $regex: ndate } }
-//             ] } },
-//         { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
-//         { $sort: { category: -1 } }
-//     ]).exec(function (err, results) {
-//         if(err) console.log(err);
-//         console.log(results);
-//     })
-// });
+router.get('/statistics', (req, res) => {
+    Category.aggregate([
+        { $group: { _id: { created: { $substr: ["$created", 0, 7] } }, total: { $sum: "$score" } } }
+    ]).exec(function (err, results) {
+        if(err) console.log(err);
+        res.send(results);
+    })
+});
+
 
 module.exports = router;

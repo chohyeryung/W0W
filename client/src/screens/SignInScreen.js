@@ -103,7 +103,6 @@ class SignInScreen extends React.Component {
               );
             return [response.data.loginSuccess, response.data.message];
         })
-
         request.then(res=> {
             if(res[0]){
                 this.props.navigation.navigate('MainScreen')

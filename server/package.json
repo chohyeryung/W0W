@@ -26,9 +26,10 @@
     "jsonwebtoken": "8.5.1",
     "moment": "2.29.1",
     "mongoose": "^5.12.3",
-    "ngrok": "4.0.1",
+    "ngrok": "^4.0.1",
     "node-cron": "^3.0.0",
     "node-schedule": "^2.0.0",
+    "package.json": "^2.0.1",
     "react-native": "0.64.2",
     "react-redux": "^5.0.7",
     "socket.io": "^2.2.0"
