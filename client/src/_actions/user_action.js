@@ -11,9 +11,10 @@ export function loginUser(dataToSubmit) {
         url: 'http://localhost:5000/users/login',
         changeOrigin: true,
     }).then(response => response.data)
-    // const request = axios.post('/users/login', dataToSubmit)
+    // const request = axios.post('http://localhost:5000/users/login', dataToSubmit)
     //     .then(response => response.data)
-    
+    // const request = fetch('http://localhost:5000/users/login').then(response => response.json());
+
     return {
         type: LOGIN_USER,
         payload: request

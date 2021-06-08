@@ -26,6 +26,7 @@ app.use(cookieParser());
 
 app.use('/users', require('./routes/users'));
 app.use('/mypage', require('./routes/mypage'));
+app.use('/qrcode', require('./routes/qrcode'));
 
 app.use('/uploads', express.static('uploads'));
 

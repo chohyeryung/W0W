@@ -1,122 +1,222 @@
-import React, {useState} from 'react';
+import React, { createRef } from 'react';
 import {
-    View, 
-    Text, 
-    TextInput, 
+    View,
+    Text,
     TouchableOpacity,
-    StyleSheet
+    TextInput,
+    Keyboard,
+    ScrollView
 } from 'react-native';
 
 import styles from '../styles/RegisterStyles';
 import 'react-native-gesture-handler';
 
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
 
-import { useDispatch } from 'react-redux';
-import { registerUser } from '../_actions/user_action';
+class RegisterScreen extends React.Component {
 
-const RegisterScreen = (props) => { 
+    constructor(props) {
+        super(props);
+        this.state = {
+            checked: false,
+            userName: '',
+            userEmail: '',
+            userPassword: '',
+            errorText: '',
+        };
+        this.emailInputRef = createRef();
+        this.passwordInputRef = createRef();
 
-    const dispatch = useDispatch();
+        this.onChecked = this.onChecked.bind(this);
+        this.setUserName = this.setUserName.bind(this);
+        this.setUserEmail = this.setUserEmail.bind(this);
+        this.setUserPassword = this.setUserPassword.bind(this);
+        this.setErrorText = this.setErrorText.bind(this);
+        this.handleSubmitPress = this.handleSubmitPress.bind(this);
+    }
 
-    const [userName, setUserName] = useState('');
-    const [userEmail, setUserEmail] = useState('');
-    const [userPassword, setUserPassword] = useState('');
-    const [userPasswordchk, setUserPasswordchk] = useState('');
-    const [errorText, setErrorText] = useState('');
+    onChecked() {
+        this.setState(state => ({
+            checked: !state.checked
+        }))
+    }
 
-    const handleSubmitButton = () => {
-        setErrorText('');
+    setUserName(name) {
+        this.setState(state => ({
+            userName: name
+        }))
+    }
 
-        if(!userName) {
-            alert('이름을 입력해주세요');
+    setUserEmail(email) {
+        this.setState(state => ({
+            userEmail: email
+        }))
+    }
+
+    setUserPassword(password) {
+        this.setState(state => ({
+            userPassword: password
+        }))
+    }
+
+    setErrorText(text) {
+        this.setState(state => ({
+            errorText: text
+        }))
+    }
+
+
+    handleSubmitPress() {
+
+        this.setErrorText('');
+        if (!this.state.userName) {
+            this.setErrorText('이름을 입력해주세요');
+        }
+        if (!this.state.userEmail) {
+            this.setErrorText('아이디를 입력해주세요');
             return;
         }
-        if(!userEmail) {
-            alert('이메일을 입력해주세요');
+        if (!this.state.userPassword) {
+            this.setErrorText('비밀번호를 입력해주세요');
             return;
         }
-        if(!userPassword) {
-            alert('비밀번호를 입력해주세요');
-            return;
-        }
-        if(userPasswordchk != userPassword) {
-            alert('비밀번호가 일치하지 않습니다');
+        if (!this.state.checked) {
+            this.setErrorText('개인정보 동의에 체크해주세요');
             return;
         }
 
         let body = {
-            name : userName,
-            email : userEmail,
-            password : userPassword
+            name: this.state.userName,
+            email: this.state.userEmail,
+            password: this.state.userPassword
         }
-        
-        dispatch(registerUser(body))
-        .then(response => {
-            if(response.payload.registerSuccess){
-                alert('회원가입이 완료되었습니다.')
-                props.navigation.navigate('SignIn')
-            } else { 
-                setErrorText(response.payload.message);
+
+        const request = axios({
+            method: 'post',
+            data: body,
+            url: 'http://localhost:5000/users/register',
+            changeOrigin: true,
+        }).then((response) =>{
+            return [response.data.registerSuccess, response.data.message];
+        })
+
+        request.then(res=> {
+            if(res[0]){
+                this.props.navigation.navigate('SignIn')
+            }else{
+                this.setErrorText(res[1]);
             }
         })
+        
+      
     }
 
+    render() {
 
-    return (
-        <View style={styles.container}>
+        const { checked, errorText } = this.state;
+        const passwordInputRef = this.passwordInputRef;
+        const emailInputRef = this.emailInputRef;
+
+        return (
+            <View style={styles.container}>
+            {/* header */}
             <View style={styles.header}>
-                <Text style={styles.main_text}>W0W</Text>
-                <Text style={styles.sub_text}>With zerO Waste</Text>
+                <Text style={styles.sub_text}>Create your</Text>
+                <Text style={styles.main_text}>Account</Text>
             </View>
-            <View style={styles.footer}>
-                <Text style={styles.register_text}>회원가입</Text>
-                <View style={styles.input_box}>
-                    <Text style={styles.input_text}>이름</Text>
-                    <TextInput style={styles.input}
-                        placeholder="이름을 입력해주세요"
-                        onChangeText={(userName) => setUserName(userName)}
+            {/* footer */}
+            <View style={{ flex: 2, marginTop: 100 }}>
+                {/* footer - input box */}
+                <View>
+                    <Text style={[styles.text_title, {
+                        marginTop: 60}]}>Name</Text>
+                    <TextInput
+                        style={[styles.text_input, {marginTop: 10}]}
+                        placeholder="Name"
+                        placeholderTextColor="#C4C4C4"
                         autoCapitalize="none"
-                    />
-                    <Text style={styles.input_text}>이메일</Text>
-                    <TextInput style={styles.input}
-                        placeholder="이메일을 입력해주세요"
-                        onChangeText={(userEmail) => setUserEmail(userEmail)}
+                        onChangeText={(userName) => this.setUserName(userName)}
+                        onSubmitEditing={() =>
+                            emailInputRef.current && emailInputRef.current.focus()
+                        }
+                        keyboardType="default"
+                        returnKeyType="next"
+                        blurOnSubmit={false}
+                        />
+                    <Text style={[styles.text_title, {
+                        marginTop: 60}]}>E-mail</Text>
+                    <TextInput
+                        style={[styles.text_input, {marginTop: 10}]}
+                        placeholder="Email"
+                        placeholderTextColor="#C4C4C4"
                         autoCapitalize="none"
-                    />
-                    <Text style={styles.input_text}>비밀번호</Text>
-                    <TextInput style={styles.input}
-                        placeholder="비밀번호를 입력해주세요"
-                        onChangeText={(userPassword) => setUserPassword(userPassword)}
+                        ref={emailInputRef}
+                        onChangeText={(userEmail) => this.setUserEmail(userEmail)}
+                        onSubmitEditing={() =>
+                            passwordInputRef.current && passwordInputRef.current.focus()
+                        }
+                        keyboardType="email-address"
+                        returnKeyType="next"
+                        blurOnSubmit={false}
+                        />
+                    <Text style={[styles.text_title, {
+                        marginTop: 50}]}>Password</Text>
+                    <TextInput
+                        style={[styles.text_input, {marginTop: 10}]}
+                        placeholder="Password"
+                        placeholderTextColor="#C4C4C4"
                         autoCapitalize="none"
+                        secureTextEntry={true}
+                        ref={passwordInputRef}
+                        keyboardType="default"
+                        returnKeyType="next"
+                        onChangeText={(userPassword) => this.setUserPassword(userPassword)}
+                        onSubmitEditing={Keyboard.dismiss}
+                        blurOnSubmit={false}
                     />
-                    <Text style={styles.input_text}>비밀번호 확인</Text>
-                    <TextInput style={styles.input}
-                        placeholder="비밀번호를 다시 입력해주세요"
-                        onChangeText={(userPasswordchk) => setUserPasswordchk(userPasswordchk)}
-                        autoCapitalize="none"
-                    />
-                    <TouchableOpacity style={[styles.register_btn]} onPress={handleSubmitButton}>
-                        <Text style={{color: '#fff', fontSize: 20, alignSelf: 'center', marginTop: 15, fontWeight:'bold',}}>회원가입</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flex: 0.5, justifyContent: 'center'}}>
-                    {userPassword !== userPasswordchk ? (
-                    <Text style={styles.TextValidation}>
-                        비밀번호가 일치하지 않습니다.
-                    </Text>
-                    ) : null}
-                </View>
-
-                {errorText != '' ? (
+                    {errorText != '' ? (
                         <Text style={{marginTop:10, color:'#ff4d4d'}}>{errorText}</Text>
                     ) : null }
-            </View>
+                    {/* checkbox */}
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
+                        <View>
+                            <TouchableOpacity onPressOut={this.onChecked}>
+                            {checked ? (
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Icon name="checkbox" size={22} color="#35C9C9"></Icon>
+                                    <Text style={{ marginLeft: 5, fontSize: 15, }}>개인정보 동의</Text>
+                                </View>
+                            ) : (
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Icon name="checkbox-outline" size={22} color="#35C9C9" />
+                                    <Text style={{ marginLeft: 5, fontSize: 15 }}>개인정보 동의</Text>
+                                </View>
+                            )}
+                            </TouchableOpacity>
+                        </View>
+                        <View><Text style={{ color: '#35C9C9', fontSize: 15 }}>자세히 보기</Text></View>
+                    </View>
+                </View>
+                </View>
+                <View style={{ flex: 3, marginTop: 150 }}>
+                    {/* sign in button */}
+                    <TouchableOpacity style={[styles.login_btn]} onPress={this.handleSubmitPress}>
+                        <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold', marginTop: 18, }}>Sign Up</Text>
+                    </TouchableOpacity>
+                    {/* side menu */}
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 30, paddingHorizontal: 150 }}>
+                    <View><Text style={{ fontSize: 15 }}>Already have a account?</Text></View>
+                        <Text
+                            style={{ fontSize: 15, color: '#35C9C9' }}
+                            onPress={() => this.props.navigation.navigate('SignIn')}>
+                            Log In
+                        </Text>
+                    </View>
+                </View>
         </View>
-    )
+        )
+    }
 }
 
 export default RegisterScreen;

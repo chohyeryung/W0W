@@ -52,7 +52,6 @@ router.post('/pointing', (req, res) => {
     let ndate = yyyy + '-' + month + '-' + day;
 
     let data = {
-        "idx": 1,
         "useridx": 2,
         "category": category,
         "score": 3,

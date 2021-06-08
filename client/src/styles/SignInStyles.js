@@ -1,67 +1,52 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
-const mainColor = "#E1F0FF";
-const btnColor = "#A0CAF3";
+const mainColor = "#35C9C9";
 
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        backgroundColor: mainColor,
+        backgroundColor: '#FFFFFF',
+        paddingHorizontal: 70,
+        paddingVertical: 70,
+        fontFamily: 'Noto Sans KR',
     },
     header: {
         flex: 1,
-        justifyContent: 'flex-end',
-        paddingHorizontal: 20,
-        paddingBottom: 50,
     },
     main_text: {
-        color: '#000000',
-        fontSize: 35,
+        color: mainColor,
+        fontSize: 40,
         fontWeight: 'bold',
-        textAlign: 'center',
-        marginTop: 40,
+        textAlign: 'left',
     },
     sub_text: {
         color: '#000000',
-        fontSize: 30,
-        alignSelf: 'center',
-        marginTop: 10
-    },
-    footer: {
-        flex: 3,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30,
-        marginHorizontal: 20,
-        shadowColor: '#000000',
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-    },
-    input_box: {
-        marginHorizontal: 10,
-    },
-    sign_in_text: {
-        alignSelf: 'center',
-        marginTop: 20,
-        fontSize: 25,
+        fontSize: 40,
         fontWeight: 'bold',
+        marginTop: 60,
+    },
+    text_title: {
+        fontSize: 22,
     },
     input_text: {
         fontWeight: 'bold',
     },
     text_input: {
-        borderBottomColor: mainColor,
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-        opacity: 0.5,
+        fontSize: 20,
+        backgroundColor: '#fff',
+        paddingHorizontal: 15,
+        paddingVertical: 15,
+        borderRadius: 6,
+        borderColor: '#000000',
+        height: 70,
+        borderWidth: 1,
     },
     login_btn: {
         marginTop: 70,
-        backgroundColor: btnColor,
-        height: 50,
+        backgroundColor: '#000000',
+        height: 70,
         borderRadius: 10,
+        alignItems: 'center',
     }
 });
 
