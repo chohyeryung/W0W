@@ -126,7 +126,7 @@ export class MyPageScreen extends Component {
                                         key={cate.category}
                                         onPress={(e) => this.toggleSettingModal(cate.category)}>
                                         <View style={styles.cateCon} onClick={this.handleClick}>
-                                            <Image
+                                            {/* <Image
                                             source={require(`../../assets/${index+1}.png`)}
                                             style={[styles.cateImage,
                                             (index == 0 ?
@@ -141,7 +141,7 @@ export class MyPageScreen extends Component {
                                                                 {width: 110, height:110, marginLeft: 70}
                                                                 :{width:110, height:100, marginLeft: 70})))))
                                             
-                                            ]} />
+                                            ]} /> */}
                                             <View style={styles.cateTextView}>
                                                 <Text style={styles.text_title}>{cate.category}</Text>
                                                 <Text style={styles.text_count}>실천 횟수 : {cate.cnt}</Text>

@@ -39,17 +39,13 @@ router.post('/pointing', (req, res) => {
     let now = new Date();
     let yyyy = now.getFullYear();
     let month = now.getMonth()+1;
-    let day = now.getDate();
     
     if(month < 10) {
         month = `0${month}`
     }
 
-    if(day < 10) {
-        day = `0${day}`
-    }
 
-    let ndate = yyyy + '-' + month + '-' + day;
+    let ndate = yyyy + '-' + month ;
 
     let data = {
         "useridx": 2,

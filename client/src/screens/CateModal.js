@@ -30,7 +30,7 @@ export default class Setting extends React.Component {
                         {cateList.map((cate, index) => {
                             return (
                                 <View style={styles.cateCon}>
-                                    <Image
+                                    {/* <Image
                                     source={require(`../../assets/${index+1}.png`)}
                                     style={[styles.cateImage,
                                     (index == 0 ?
@@ -45,7 +45,7 @@ export default class Setting extends React.Component {
                                                         {width: 110, height:110, marginLeft: 25}
                                                         :{width:110, height:100, marginLeft: 25})))))
                                     
-                                    ]} />
+                                    ]} /> */}
                                     <View style={styles.cateTextView}>
                                         <Text style={styles.text_title}>{cate.category}</Text>
                                         <Text style={styles.text_explan}>{cate.explan}</Text>

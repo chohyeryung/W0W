@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import {Video} from 'expo-av';
-// import axios from 'axios';
+import axios from 'axios';
 
 import {
     View,
@@ -20,17 +20,25 @@ export class MainScreen extends Component {
         this.state = {
             middleText: 'ZERO',
             bottomText: 'WASTE',
+            imgSrc : ''
         };
 
         this.setMiddleText = this.setMiddleText.bind(this);
         this.setBottomText = this.setBottomText.bind(this);
+        this.setImgSrc = this.setImgSrc.bind(this);
 
         this._bootstrapAsync();
 
-        // axios.get('http://localhost:5000/mypage/statistics')
-        // .then(res => {
-            
-        // })  
+
+        axios.get('http://localhost:5000/main/main')
+        .then(res => {
+            if(res.data.length!=0 && res.data[0].total!=0){
+                this.setMiddleText(res.data[0].total+"%")
+                this.setBottomText("SAVING")
+                // this.setImgSrc()
+            }
+
+        })  
       }
 
 
@@ -45,9 +53,16 @@ export class MainScreen extends Component {
             bottomText: BottomText
         }))
     }
+
+    setImgSrc(src) {
+        this.setState(state => ({
+            imgSrc: src
+        }))
+    }
         
     _bootstrapAsync = async () => {
         const userData = await AsyncStorage.getItem('userData');
+        // alert(userData)
     };
 
     _handleVideoRef = component => {
