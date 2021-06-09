@@ -64,7 +64,7 @@ router.post('/pointing', (req, res) => {
 
 router.get('/statistics', (req, res) => {
     Category.aggregate([
-        { $group: { _id: { created: { $substr: ["$created", 0, 7] } }, total: { $sum: "$score" } } }
+        { $group: { _id: { created:"$created"} , total: { $sum: "$score" } } }
     ]).exec(function (err, results) {
         if(err) console.log(err);
         res.send(results);
