@@ -6,6 +6,7 @@ import {
     ImageBackground,
     Image,
     ScrollView,
+    AsyncStorage
 } from 'react-native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,6 +14,46 @@ import { Ionicons } from '@expo/vector-icons';
 import Modal from './PointModal';
 import CModal from './CateModal';
 import styles from "../styles/MyPageStyles";
+
+import bowlIcon from '../../assets/1.png';
+import courIcon from '../../assets/2.png';
+import trashIcon from '../../assets/3.png';
+import recycleIcon from '../../assets/4.png';
+import transIcon from '../../assets/5.png';
+import etcIcon from '../../assets/6.png';
+
+const iconsInfo = [
+    {
+        imageId: 1,
+        src: bowlIcon,
+        width: 105, height:105, marginLeft: 65
+    },
+    {
+        imageId: 2,
+        src: courIcon,
+        width: 138, height:74, marginLeft: 50
+    },
+    {
+        imageId: 3,
+        src: trashIcon,
+        width: 110, height:110, marginLeft: 65
+    },
+    {
+        imageId: 4,
+        src: recycleIcon,
+        width: 100, height: 90, marginLeft: 70
+    },
+    {
+        imageId: 5,
+        src: transIcon,
+        width: 100, height:110, marginLeft: 70
+    },
+    {
+        imageId: 6,
+        src: etcIcon,
+        width:100, height:100, marginLeft: 70
+    },
+]
 
 export class MyPageScreen extends Component {
     constructor(props) {
@@ -33,22 +74,54 @@ export class MyPageScreen extends Component {
 
     componentDidMount() {
 
+        // axios({
+        //     method: 'post',
+        //     data: body,
+        //     url: 'http://localhost:5000/mypage/cate',
+        //     changeOrigin: true,
+        // }).then((response) => {
+        //     AsyncStorage.getItem(
+        //         'userData', 
+        //         JSON.stringify({
+        //             userId: response.data.userId
+        //     }))
+        // })
+        // const userData = await AsyncStorage.getItem('userData');
+    //   alert(userData)
+
+        // axios.post('http://localhost:5000/mypage/cate', {userId: userData.userId})
+        //     .then(response => {
+        //         datas: response.data.map( data => {
+        //             const { cates } = this.state;
+        //             this.setState({
+        //                 cates: cates.map( cate => 
+        //                     cate.category == data.category
+        //                     ? cate = data
+        //                     : cate
+        //                 )
+        //             })
+        //         }
+        //     )
+        // })
+        
         axios.get('http://localhost:5000/mypage/cate')
             .then(response => {
-                datas: response.data.map( data =>
-                    {
-                        const { cates } = this.state;
-                        this.setState({
-                            cates: cates.map( cate => 
-                                cate.category == data.category
-                                ? cate = data
-                                : cate
-                            )
-                        })
-                    }
-                )
+                datas: response.data.map( data => {
+                    const { cates } = this.state;
+                    this.setState({
+                        cates: cates.map( cate => 
+                            cate.category == data.category
+                            ? cate = data
+                            : cate
+                        )
+                    })
+                }
+            )
               
-            })
+        })
+
+       
+
     }
     
     toggleSettingModal = (cate) => {
@@ -126,8 +199,8 @@ export class MyPageScreen extends Component {
                                         key={cate.category}
                                         onPress={(e) => this.toggleSettingModal(cate.category)}>
                                         <View style={styles.cateCon} onClick={this.handleClick}>
-                                            <Image
-                                            source={require(`../../assets/${index+1}.png`)}
+                                            {/* <Image
+                                            source={require(`../../assets/1.png`)}
                                             style={[styles.cateImage,
                                             (index == 0 ?
                                                 {width: 110, height:110, marginLeft: 65}
@@ -141,7 +214,20 @@ export class MyPageScreen extends Component {
                                                                 {width: 110, height:110, marginLeft: 70}
                                                                 :{width:110, height:100, marginLeft: 70})))))
                                             
-                                            ]} />
+                                            ]} /> */}
+                                            {iconsInfo.map((item) => ([
+                                            item.imageId === (index+1) ?
+                                            (
+                                                <Image
+                                                source={item.src}
+                                                style={{
+                                                    width: item.width,
+                                                    height: item.height,
+                                                    marginLeft: item.marginLeft,
+                                                    marginRight: 0
+                                                }}/>
+                                            ) : <></>
+                                            ]))}
                                             <View style={styles.cateTextView}>
                                                 <Text style={styles.text_title}>{cate.category}</Text>
                                                 <Text style={styles.text_count}>실천 횟수 : {cate.cnt}</Text>
