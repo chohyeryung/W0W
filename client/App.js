@@ -50,7 +50,8 @@ export default class App extends Component {
                   headerShown: false, 
                   title: '',
                 }}
-              />
+              /> 
+
               <Stack.Screen
                 name="MainScreen"
                 component={MainScreen}

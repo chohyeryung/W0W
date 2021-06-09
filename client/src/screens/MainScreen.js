@@ -27,18 +27,17 @@ export class MainScreen extends Component {
         this.setBottomText = this.setBottomText.bind(this);
         this.setImgSrc = this.setImgSrc.bind(this);
 
-        this._bootstrapAsync();
+       this._bootstrapAsync();
 
 
-        axios.get('http://localhost:5000/main/main')
-        .then(res => {
-            if(res.data.length!=0 && res.data[0].total!=0){
-                this.setMiddleText(res.data[0].total+"%")
-                this.setBottomText("SAVING")
-                // this.setImgSrc()
-            }
-
-        })  
+        // axios.get('https://e6490e3a17c2.ngrok.io/main/main')
+        // .then(res => {
+        //     if(res.data.length!=0 && res.data[0].total!=0){
+        //         this.setMiddleText(res.data[0].total+"%")
+        //         this.setBottomText("SAVING")
+        //         this.setImgSrc(res.data[0].src+".mp4")
+        //     }
+        // })  
       }
 
 
@@ -62,7 +61,7 @@ export class MainScreen extends Component {
         
     _bootstrapAsync = async () => {
         const userData = await AsyncStorage.getItem('userData');
-        // alert(userData)
+        alert(userData[0].userId)
     };
 
     _handleVideoRef = component => {
@@ -105,7 +104,7 @@ export class MainScreen extends Component {
                         ref={this._handleVideoRef}
                         style={styles.video}
                         source={{
-                        uri: '  https://9f697b2cf7da.ngrok.io/uploads/sea_BN.mp4',
+                        uri: ' https://e6490e3a17c2.ngrok.io/uploads/sea_BN.mp4',
                         }}
                         // useNativeControls
                         // shouldPlay="true"

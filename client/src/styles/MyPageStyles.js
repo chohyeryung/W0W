@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
     conCon: {
         flex:1,
         justifyContent: 'center',
+        height: 670,
+        borderRadius:20
     },
 
     cateContainer: {

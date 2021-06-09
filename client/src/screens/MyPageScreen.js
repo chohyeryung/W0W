@@ -33,7 +33,7 @@ export class MyPageScreen extends Component {
 
     componentDidMount() {
 
-        axios.get('http://localhost:5000/mypage/cate')
+        axios.get('https://e6490e3a17c2.ngrok.io/mypage/cate')
             .then(response => {
                 datas: response.data.map( data =>
                     {
@@ -63,9 +63,9 @@ export class MyPageScreen extends Component {
     }
 
     _fetchCate = () => {
-        axios.post('http://localhost:5000/mypage/pointing', {ca : this.state.curCate})
+        axios.post('https://e6490e3a17c2.ngrok.io/mypage/pointing', {ca : this.state.curCate})
         .then(response => {
-            axios.get('http://localhost:5000/mypage/cate')
+            axios.get('https://e6490e3a17c2.ngrok.io/mypage/cate')
             .then(response => {
                 datas: response.data.map( data =>
                     {
