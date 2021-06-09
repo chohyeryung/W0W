@@ -20,24 +20,15 @@ export class MainScreen extends Component {
         this.state = {
             middleText: 'ZERO',
             bottomText: 'WASTE',
-            imgSrc : ''
+            imgSrc : '',
         };
 
         this.setMiddleText = this.setMiddleText.bind(this);
         this.setBottomText = this.setBottomText.bind(this);
         this.setImgSrc = this.setImgSrc.bind(this);
-
        this._bootstrapAsync();
 
-
-        // axios.get('https://e6490e3a17c2.ngrok.io/main/main')
-        // .then(res => {
-        //     if(res.data.length!=0 && res.data[0].total!=0){
-        //         this.setMiddleText(res.data[0].total+"%")
-        //         this.setBottomText("SAVING")
-        //         this.setImgSrc(res.data[0].src+".mp4")
-        //     }
-        // })  
+      
       }
 
 
@@ -59,9 +50,20 @@ export class MainScreen extends Component {
         }))
     }
         
+
     _bootstrapAsync = async () => {
         const userData = await AsyncStorage.getItem('userData');
-        alert(userData[0].userId)
+        const userId = JSON.parse(userData).userId
+        axios.get(` https://c7af7e6e7a28.ngrok.io/main/main/${userId}`)
+        .then(res => {
+            if(res.data.length!=0 && res.data.num!=0){
+                this.setMiddleText(res.data.num+"%")
+                this.setBottomText("SAVING")
+                this.setImgSrc(res.data.src)
+            }
+        })
+        .catch((err)=>alert(err)) 
+
     };
 
     _handleVideoRef = component => {
@@ -104,10 +106,8 @@ export class MainScreen extends Component {
                         ref={this._handleVideoRef}
                         style={styles.video}
                         source={{
-                        uri: ' https://e6490e3a17c2.ngrok.io/uploads/sea_BN.mp4',
+                        uri: ` https://c7af7e6e7a28.ngrok.io/uploads/${this.state.imgSrc}.mp4`,
                         }}
-                        // useNativeControls
-                        // shouldPlay="true"
                         resizeMode="contain"
                         isLooping
                     />
