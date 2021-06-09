@@ -199,22 +199,6 @@ export class MyPageScreen extends Component {
                                         key={cate.category}
                                         onPress={(e) => this.toggleSettingModal(cate.category)}>
                                         <View style={styles.cateCon} onClick={this.handleClick}>
-                                            {/* <Image
-                                            source={require(`../../assets/1.png`)}
-                                            style={[styles.cateImage,
-                                            (index == 0 ?
-                                                {width: 110, height:110, marginLeft: 65}
-                                                :(index == 1 ?
-                                                    {width: 145, height:77, marginLeft: 50}
-                                                    :(index == 2 ?
-                                                        {width: 110, height:110, marginLeft: 65}
-                                                        :(index == 4 ?
-                                                            {width: 110, height:120, marginLeft: 70}
-                                                            :(index == 5 ?
-                                                                {width: 110, height:110, marginLeft: 70}
-                                                                :{width:110, height:100, marginLeft: 70})))))
-                                            
-                                            ]} /> */}
                                             {iconsInfo.map((item) => ([
                                             item.imageId === (index+1) ?
                                             (
