@@ -53,9 +53,12 @@ export class MainScreen extends Component {
                         <Image
                         style={styles.map_icon}
                         source={require('../image/main/map_icon.png')} />
-                        <Image
-                        style={styles.qr_icon}
-                        source={require('../image/main/qr_icon.png')} />
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('QrcodeScreen')}>
+                            <Image
+                            style={styles.qr_icon}
+                            source={require('../image/main/qr_icon.png')} />
+                        </TouchableOpacity>
+                        
                     </View>
                     <View styles={styles.mov}>
                     <Video

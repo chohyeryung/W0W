@@ -62,7 +62,7 @@ export default class QrcodeScannerScreen extends Component {
   _handleSavePoint = endpoint => {
       axios.post(endpoint, {userId : this.state.userId}).then(() => {
         alert('5포인트 적립되었습니다!')
-        this.props.navigation.navigate('QrcodeScreen')
+        this.props.navigation.navigate('MainScreen')
       })
   }
 };

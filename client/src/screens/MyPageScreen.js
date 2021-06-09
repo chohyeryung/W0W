@@ -127,7 +127,7 @@ export class MyPageScreen extends Component {
                                         onPress={(e) => this.toggleSettingModal(cate.category)}>
                                         <View style={styles.cateCon} onClick={this.handleClick}>
                                             <Image
-                                            source={require(`../../assets/${index+1}.png`)}
+                                            source={require(`../../assets/1.png`)}
                                             style={[styles.cateImage,
                                             (index == 0 ?
                                                 {width: 110, height:110, marginLeft: 65}
