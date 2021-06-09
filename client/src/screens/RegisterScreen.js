@@ -209,7 +209,7 @@ class RegisterScreen extends React.Component {
                     <View><Text style={{ fontSize: 15 }}>Already have a account?</Text></View>
                         <Text
                             style={{ fontSize: 15, color: '#35C9C9' }}
-                            onPress={() => this.props.navigation.navigate('SignIn')}>
+                            onPress={() => this.props.navigation.navigate('MyPage')}>
                             Log In
                         </Text>
                     </View>
