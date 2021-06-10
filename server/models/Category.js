@@ -1,13 +1,9 @@
 const mongoose = require('mongoose');
 
 const cateSchema = mongoose.Schema({
-    //idx, useridx, 항목, 점수, 날짜
-    idx: {
-        type: Number,
-        required: true
-    },
+    //useridx, 항목, 점수, 날짜
     useridx: {
-        type: Number,
+        type: String,
         required: true
     },
     category: {

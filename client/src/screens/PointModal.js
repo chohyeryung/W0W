@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 
-import styles from "../styles/ModalStyles";
+import styles from "../styles/PointModalStyles";
 
 export default class Setting extends React.Component {
 
     render() {
         return (
-            <View  style={styles.container}>
+            <View style={styles.container}>
             <TouchableOpacity 
             style={styles.background} 
             activeOpacity={1} //깜빡이 효과 해제
