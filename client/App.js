@@ -10,8 +10,8 @@ import SignInScreen from './src/screens/SignInScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MyPageScreen from './src/screens/MyPageScreen';
 import ChartScreen from './src/screens/ChartScreen';
-// import MainScreen from './src/screens/MainScreen';
-// import AuthLoadingScreen from './src/screens/AythLoadingScreen'
+import MainScreen from './src/screens/MainScreen';
+import AuthLoadingScreen from './src/screens/AuthLoadingScreen'
 import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
@@ -42,22 +42,23 @@ export default class App extends Component {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
-              {/* <Stack.Screen
+            
+              <Stack.Screen
                 name="AuthLoadingScreen"
                 component={AuthLoadingScreen}
                 options={{
                   headerShown: false, 
                   title: '',
                 }}
-              /> */}
+              /> 
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="MainScreen"
                 component={MainScreen}
                 options={{
                   headerShown: false, 
                   title: '',
-                }}/> */}
+                }}/>
   
               <Stack.Screen
               name="Register"

@@ -77,7 +77,7 @@ export class MyPageScreen extends Component {
         // axios({
         //     method: 'post',
         //     data: body,
-        //     url: 'http://localhost:5000/mypage/cate',
+        //     url: ' https://c7af7e6e7a28.ngrok.io/mypage/cate',
         //     changeOrigin: true,
         // }).then((response) => {
         //     AsyncStorage.getItem(
@@ -89,7 +89,7 @@ export class MyPageScreen extends Component {
         // const userData = await AsyncStorage.getItem('userData');
     //   alert(userData)
 
-        // axios.post('http://localhost:5000/mypage/cate', {userId: userData.userId})
+        // axios.post(' https://c7af7e6e7a28.ngrok.io/mypage/cate', {userId: userData.userId})
         //     .then(response => {
         //         datas: response.data.map( data => {
         //             const { cates } = this.state;
@@ -104,7 +104,7 @@ export class MyPageScreen extends Component {
         //     )
         // })
         
-        axios.get('http://localhost:5000/mypage/cate')
+        axios.get(' https://c7af7e6e7a28.ngrok.io/mypage/cate')
             .then(response => {
                 datas: response.data.map( data => {
                     const { cates } = this.state;
@@ -136,9 +136,9 @@ export class MyPageScreen extends Component {
     }
 
     _fetchCate = () => {
-        axios.post('http://localhost:5000/mypage/pointing', {ca : this.state.curCate})
+        axios.post(' https://c7af7e6e7a28.ngrok.io/mypage/pointing', {ca : this.state.curCate})
         .then(response => {
-            axios.get('http://localhost:5000/mypage/cate')
+            axios.get(' https://c7af7e6e7a28.ngrok.io/mypage/cate')
             .then(response => {
                 datas: response.data.map( data =>
                     {
