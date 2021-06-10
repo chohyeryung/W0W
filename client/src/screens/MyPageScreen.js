@@ -26,32 +26,32 @@ const iconsInfo = [
     {
         imageId: 1,
         src: bowlIcon,
-        width: 105, height:105, marginLeft: 65
+        width: 86, height:85, marginLeft: 60
     },
     {
         imageId: 2,
         src: courIcon,
-        width: 138, height:74, marginLeft: 50
+        width: 108, height:57.5, marginLeft: 45
     },
     {
         imageId: 3,
         src: trashIcon,
-        width: 110, height:110, marginLeft: 65
+        width: 92, height:90, marginLeft: 55
     },
     {
         imageId: 4,
         src: recycleIcon,
-        width: 100, height: 90, marginLeft: 70
+        width: 85, height: 74, marginLeft: 60
     },
     {
         imageId: 5,
         src: transIcon,
-        width: 100, height:110, marginLeft: 70
+        width: 82, height:92, marginLeft: 60
     },
     {
         imageId: 6,
         src: etcIcon,
-        width:100, height:100, marginLeft: 70
+        width:85.8, height:85, marginLeft: 55
     },
 ]
 
@@ -192,13 +192,14 @@ export class MyPageScreen extends Component {
                 
                     <View stlye={styles.conCon}>
                         <View style={styles.cateContainer}>
-                            <Text style={{ fontSize: 24, fontWeight: 'bold' }}>카테고리</Text>
+                            <Text style={{ fontSize: 28, marginBottom: 20, }}>카테고리</Text>
                             {cates.map((cate, index) => {
                                 return (
                                     <TouchableOpacity
                                         key={cate.category}
                                         onPress={(e) => this.toggleSettingModal(cate.category)}>
-                                        <View style={styles.cateCon} onClick={this.handleClick}>
+                                        <View style={[ index+1!==6 ? styles.cateCon : 
+                                        [styles.cateCon, {borderBottomWidth: 1, borderStyle: 'solid', borderBottomColor: '#fff',  paddingBottom: 20,}]]} onClick={this.handleClick}>
                                             {iconsInfo.map((item) => ([
                                             item.imageId === (index+1) ?
                                             (

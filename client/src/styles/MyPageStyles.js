@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
 
     headerContainer: {
-        marginTop:45,
+        marginTop:80,
         paddingHorizontal:70,
         flexDirection:'column',
         justifyContent: 'flex-start',
@@ -53,8 +53,6 @@ const styles = StyleSheet.create({
     conCon: {
         flex:1,
         justifyContent: 'center',
-        height: 670,
-        borderRadius:20
     },
 
     cateContainer: {
@@ -70,6 +68,10 @@ const styles = StyleSheet.create({
 
         elevation: 25,
         borderRadius: 20,
+        height: 950,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        backgroundColor: '#fff'
     },
 
     cateCon: {
@@ -77,14 +79,10 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderBottomColor: '#CFCFCF',
         paddingTop: 30,
-        paddingBottom: 30,
+        paddingBottom: 65,
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-    },
-
-    cateImage: {
-        marginLeft: 50,
     },
 
     cateTextView: {
