@@ -14,7 +14,6 @@ class AuthLoadingScreen extends React.Component {
     }
     _bootstrapAsync = async () => {
       const userData = await AsyncStorage.getItem('userData');
-      alert(userData)
       this.props.navigation.navigate(userData ? 'MainScreen' : 'SignIn');
     };
     render() {

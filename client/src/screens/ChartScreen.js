@@ -23,12 +23,14 @@ export default class Chart extends Component {
     }
   }
 
-  componentDidMount() {
-
+  componentDidMount = async() => {
+    const userData = await AsyncStorage.getItem('userData');
+    const userId = JSON.parse(userData).userId
+    
     // 그래프 data componentDidMount()
-    axios.get('http://localhost:5000/mypage/cate')
-    .then(response => {
-        datas: response.data.map( data =>
+    axios.post('http://localhost:5000/mypage/cate', { user_id: userId })
+    .then(res => {
+        datas: res.data.map( data =>
             {
                 const { cates } = this.state;
                
@@ -44,10 +46,10 @@ export default class Chart extends Component {
     })  
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.get('http://localhost:5000/mypage/statistics')
-    .then(response => {
+    axios.get('http://localhost:5000/mypage/statistics', { user_id: userId })
+    .then(res => {
 
-      datas: response.data.map( data =>
+      datas: res.data.map( data =>
           {
             const { months } = this.state;
             this.setState({

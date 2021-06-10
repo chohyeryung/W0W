@@ -35,6 +35,7 @@ class SignInScreen extends React.Component {
         this.setErrorText = this.setErrorText.bind(this);
         this.setResult = this.setResult.bind(this);
         this.handleSubmitPress = this.handleSubmitPress.bind(this);
+        this.handleForgotPassword = this.handleForgotPassword.bind(this);
         // this.navigation = useNavigation();
 
     }
@@ -91,27 +92,28 @@ class SignInScreen extends React.Component {
         const request = axios({
             method: 'post',
             data: body,
-            url: 'https://07c55d7518b3.ngrok.io/users/login',
+            url: 'https://e6490e3a17c2.ngrok.io/users/login',
             changeOrigin: true,
         }).then((response) =>{
             AsyncStorage.setItem(
                 'userData',
                 JSON.stringify({
-                  token: response.data.token,
                   userId: response.data.userId
                 })
-            );
+              );
             return [response.data.loginSuccess, response.data.message];
         })
         request.then(res=> {
             if(res[0]){
-                this.props.navigation.navigate('QrcodeScreen')
+                this.props.navigation.navigate('MainScreen')
             }else{
                 this.setErrorText(res[1]);
             }
         })
-        
-      
+    }
+
+    handleForgotPassword() {
+        this.props.navigation.navigate('ForgotPasswordScreen')
     }
 
     render() {
@@ -120,86 +122,92 @@ class SignInScreen extends React.Component {
         const passwordInputRef = this.passwordInputRef;
 
         return (
-            <View style={styles.container}>
-            {/* header */}
-            <View style={styles.header}>
-                <Text style={styles.sub_text}>Welcome to</Text>
-                <Text style={styles.main_text}>W0W.</Text>
-            </View>
-            {/* footer */}
-            <View style={{ flex: 2, marginTop: 100 }}>
-                {/* footer - input box */}
-                <View>
-                    <Text style={[styles.text_title, {
-                        marginTop: 60}]}>E-mail</Text>
-                    <TextInput
-                        style={[styles.text_input, {marginTop: 10}]}
-                        placeholder="Email"
-                        placeholderTextColor="#C4C4C4"
-                        autoCapitalize="none"
-                        onChangeText={(userEmail) => this.setUserEmail(userEmail)}
-                        onSubmitEditing={() =>
-                            passwordInputRef.current && passwordInputRef.current.focus()
-                        }
-                        keyboardType="email-address"
-                        returnKeyType="next"
-                        blurOnSubmit={false}
+            
+                <View style={styles.container}>
+                    <ScrollView>
+                        {/* header */}
+                <View style={styles.header}>
+                    <Text style={styles.sub_text}>Welcome to</Text>
+                    <Text style={styles.main_text}>W0W.</Text>
+                </View>
+                {/* footer */}
+                <View style={{ flex: 2, marginTop: 100 }}>
+                    {/* footer - input box */}
+                    <View>
+                        <Text style={[styles.text_title, {
+                            marginTop: 60}]}>E-mail</Text>
+                        <TextInput
+                            style={[styles.text_input, {marginTop: 10}]}
+                            placeholder="Email"
+                            placeholderTextColor="#C4C4C4"
+                            autoCapitalize="none"
+                            onChangeText={(userEmail) => this.setUserEmail(userEmail)}
+                            onSubmitEditing={() =>
+                                passwordInputRef.current && passwordInputRef.current.focus()
+                            }
+                            keyboardType="email-address"
+                            returnKeyType="next"
+                            blurOnSubmit={false}
+                            />
+                        <Text style={[styles.text_title, {
+                            marginTop: 50}]}>Password</Text>
+                        <TextInput
+                            style={[styles.text_input, {marginTop: 10}]}
+                            placeholder="Password"
+                            placeholderTextColor="#C4C4C4"
+                            autoCapitalize="none"
+                            secureTextEntry={true}
+                            ref={passwordInputRef}
+                            keyboardType="default"
+                            returnKeyType="next"
+                            onChangeText={(userPassword) => this.setUserPassword(userPassword)}
+                            onSubmitEditing={Keyboard.dismiss}
+                            blurOnSubmit={false}
                         />
-                    <Text style={[styles.text_title, {
-                        marginTop: 50}]}>Password</Text>
-                    <TextInput
-                        style={[styles.text_input, {marginTop: 10}]}
-                        placeholder="Password"
-                        placeholderTextColor="#C4C4C4"
-                        autoCapitalize="none"
-                        secureTextEntry={true}
-                        ref={passwordInputRef}
-                        keyboardType="default"
-                        returnKeyType="next"
-                        onChangeText={(userPassword) => this.setUserPassword(userPassword)}
-                        onSubmitEditing={Keyboard.dismiss}
-                        blurOnSubmit={false}
-                    />
-                    {errorText != '' ? (
-                        <Text style={{marginTop:10, color:'#ff4d4d'}}>{errorText}</Text>
-                    ) : null }
-                    {/* checkbox */}
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
-                        <View>
-                            <TouchableOpacity onPressOut={this.onChecked}>
-                            {checked ? (
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Icon name="checkbox" size={22} color="#35C9C9"></Icon>
-                                    <Text style={{ marginLeft: 5, fontSize: 15, }}>Stay Logged in</Text>
-                                </View>
-                            ) : (
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Icon name="checkbox-outline" size={22} color="#35C9C9" />
-                                    <Text style={{ marginLeft: 5, fontSize: 15 }}>Stay Logged in</Text>
-                                </View>
-                            )}
+                        {errorText != '' ? (
+                            <Text style={{marginTop:10, color:'#ff4d4d'}}>{errorText}</Text>
+                        ) : null }
+                        {/* checkbox */}
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 30, marginBottom: 80 }}>
+                            <View>
+                                <TouchableOpacity onPressOut={this.onChecked}>
+                                {checked ? (
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Icon name="checkbox" size={22} color="#35C9C9"></Icon>
+                                        <Text style={{ marginLeft: 5, fontSize: 15, }}>Stay Logged in</Text>
+                                    </View>
+                                ) : (
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Icon name="checkbox-outline" size={22} color="#35C9C9" />
+                                        <Text style={{ marginLeft: 5, fontSize: 15 }}>Stay Logged in</Text>
+                                    </View>
+                                )}
+                                </TouchableOpacity>
+                            </View>
+                            <TouchableOpacity onPressOut={this.handleForgotPassword}>
+                                <Text style={{ color: '#35C9C9', fontSize: 15 }}>Forgot Password?</Text>
                             </TouchableOpacity>
                         </View>
-                        <View><Text style={{ color: '#35C9C9', fontSize: 15 }}>Forgot Password?</Text></View>
                     </View>
-                </View>
-                </View>
-                <View style={{ flex: 3, marginTop: 150 }}>
-                    {/* sign in button */}
-                    <TouchableOpacity style={[styles.login_btn]} onPress={this.handleSubmitPress}>
-                        <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold', marginTop: 18, }}>Log In</Text>
-                    </TouchableOpacity>
-                    {/* side menu */}
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 30, paddingHorizontal: 150 }}>
-                    <View><Text style={{ fontSize: 15 }}>Don't have a account?</Text></View>
-                        <Text
-                            style={{ fontSize: 15, color: '#35C9C9' }}
-                            onPress={() => this.props.navigation.navigate('Register')}>
-                            Sign up
-                        </Text>
                     </View>
-                </View>
-        </View>
+                    <View style={{ flex: 3, justifyContent: 'flex-end' }}>
+                        {/* sign in button */}
+                        <TouchableOpacity style={[styles.login_btn]} onPress={this.handleSubmitPress}>
+                            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold', marginTop: 18, }}>Log In</Text>
+                        </TouchableOpacity>
+                        {/* side menu */}
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 30, paddingHorizontal: 150 }}>
+                        <View><Text style={{ fontSize: 15 }}>Don't have a account?</Text></View>
+                            <Text
+                                style={{ fontSize: 15, color: '#35C9C9' }}
+                                onPress={() => this.props.navigation.navigate('Register')}>
+                                Sign up
+                            </Text>
+                        </View>
+                    </View>
+                    </ScrollView>
+                
+            </View>
         )
     }
 }

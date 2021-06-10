@@ -8,13 +8,36 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 
+router.get('/main/:useridx', (req, res) => {
+    const useridx = req.params.useridx;
+    const image = ['sea_BN','sea_GB','sea_YG','sea_OY']
+    let now = new Date();
+    let yyyy = now.getFullYear();
+    let month = now.getMonth()+1;
+    
+    if(month < 10) {
+        month = `0${month}`
+    }
+    let ndate = yyyy + '-' + month ;
 
-router.get('/statistics', (req, res) => {
     Category.aggregate([
-        { $group: { _id: { created: { $substr: ["$created", 0, 7] } }, total: { $sum: "$score" } } }
-    ]).exec(function (err, results) {
+        {$match: { userid : useridx , created : ndate}},
+        { $group: { _id: { created: { $substr: ["$created", 0, 7] }, userid:"$userid" }, total: { $sum: "$score" } } }
+    ]).exec( (err, results) =>{
         if(err) console.log(err);
-        res.send(results);
+        let src;
+        let num =  Math.round(100/140*results[0].total);
+        if(num>=100){
+            src = image[0]
+        }else if(num>=60){
+            src = image[1]
+        }else if(num>=30){
+            src = image[2]
+        }else{
+            src = image[3]
+        }
+        const result={num : num , src : src};
+        res.send(result)        
     })
 });
 
