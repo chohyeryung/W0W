@@ -70,9 +70,29 @@ export class MyPageScreen extends Component {
         settingCModal: false,
         curCate: '',
         };
+
+        // this._bootstrapAsync();
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
+        const userData = await AsyncStorage.getItem('userData');
+        const userId = JSON.parse(userData).userId
+        axios.post('http://e1b32a057e61.ngrok.io/mypage/cate', {
+            user_id: userId
+        }).then(res => {
+            datas: res.data.map( data => {
+                const { cates } = this.state;
+                this.setState({
+                    cates: cates.map( cate => 
+                        cate.category == data.category
+                        ? cate = data
+                        : cate
+                    )
+                })
+            })
+        })
+        .catch((err)=>alert(err)) 
+
 
         // axios({
         //     method: 'post',
@@ -104,24 +124,21 @@ export class MyPageScreen extends Component {
         //     )
         // })
         
-        axios.get(' https://c7af7e6e7a28.ngrok.io/mypage/cate')
-            .then(response => {
-                datas: response.data.map( data => {
-                    const { cates } = this.state;
-                    this.setState({
-                        cates: cates.map( cate => 
-                            cate.category == data.category
-                            ? cate = data
-                            : cate
-                        )
-                    })
-                }
-            )
+        // axios.get('http://e1b32a057e61.ngrok.io/mypage/cate')
+        //     .then(response => {
+        //         datas: response.data.map( data => {
+        //             const { cates } = this.state;
+        //             this.setState({
+        //                 cates: cates.map( cate => 
+        //                     cate.category == data.category
+        //                     ? cate = data
+        //                     : cate
+        //                 )
+        //             })
+        //         }
+        //     )
               
-        })
-
-       
-
+        // })
     }
     
     toggleSettingModal = (cate) => {
@@ -135,12 +152,14 @@ export class MyPageScreen extends Component {
         this.setState({settingCModal: !this.state.settingCModal})
     }
 
-    _fetchCate = () => {
-        axios.post(' https://c7af7e6e7a28.ngrok.io/mypage/pointing', {ca : this.state.curCate})
-        .then(response => {
-            axios.get(' https://c7af7e6e7a28.ngrok.io/mypage/cate')
-            .then(response => {
-                datas: response.data.map( data =>
+    _fetchCate = async() => {
+        const userData = await AsyncStorage.getItem('userData');
+        const userId = JSON.parse(userData).userId
+        axios.post(' http://e1b32a057e61.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
+        .then(res => {
+            axios.post(' http://e1b32a057e61.ngrok.io/mypage/cate', { user_id: userId })
+            .then(res => {
+                datas: res.data.map( data =>
                     {
                         const { cates } = this.state;
                         this.setState({

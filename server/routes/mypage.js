@@ -38,6 +38,7 @@ router.post('/cate', (req, res) => {
 
 router.post('/pointing', (req, res) => {
     let category = req.body.ca;
+    const userId = req.body.user_id;
 
     let now = new Date();
     let yyyy = now.getFullYear();
@@ -51,7 +52,7 @@ router.post('/pointing', (req, res) => {
     let ndate = yyyy + '-' + month ;
 
     let data = {
-        "useridx": 2,
+        "userid": userId,
         "category": category,
         "score": 3,
         "created": ndate
@@ -65,8 +66,11 @@ router.post('/pointing', (req, res) => {
     })
 });
 
-router.get('/statistics', (req, res) => {
+router.post('/statistics', (req, res) => {
+    const userId = req.body.user_id;
+
     Category.aggregate([
+        { $match: { userid: userId } },
         { $group: { _id: { created:"$created"} , total: { $sum: "$score" } } }
     ]).exec(function (err, results) {
         if(err) console.log(err);
