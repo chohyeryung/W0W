@@ -7,10 +7,12 @@ const { Category } = require("../models/Category");
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.get('/cate', (req, res) => {
+router.post('/cate', (req, res) => {
     let now = new Date();
     let yyyy = now.getFullYear();
     let month = now.getMonth()+1;
+    const userId = req.body.user_id;
+    console.log(userId);
     
     if(month < 10) {
         month = `0${month}`
@@ -22,6 +24,7 @@ router.get('/cate', (req, res) => {
         [
             { $match: { 
                 $and: [ 
+                    { userid: userId },
                     { $or: [{ category: "장바구니 이용" }, { category: "용기내" }, { category: "쓰레기 줍기" }, { category: "분리수거" }, { category: "대중교통 이용" }, { category: "기타" } ] },
                     { created: { $regex: ndate } }
                 ] } },
