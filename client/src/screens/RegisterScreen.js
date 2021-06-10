@@ -13,6 +13,7 @@ import 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import PrivacyModal from './PrivacyModal';
 
 class RegisterScreen extends React.Component {
 
@@ -20,6 +21,7 @@ class RegisterScreen extends React.Component {
         super(props);
         this.state = {
             checked: false,
+            modal_clicked: false,
             userName: '',
             userEmail: '',
             userPassword: '',
@@ -39,6 +41,12 @@ class RegisterScreen extends React.Component {
     onChecked() {
         this.setState(state => ({
             checked: !state.checked
+        }))
+    }
+
+    onModalChecked() {
+        this.setState(state => ({
+            modal_clicked: !state.modal_clicked
         }))
     }
 
@@ -196,7 +204,11 @@ class RegisterScreen extends React.Component {
                                     )}
                                     </TouchableOpacity>
                                 </View>
-                                <View><Text style={{ color: '#35C9C9', fontSize: 15 }}>자세히 보기</Text></View>
+                                <View>
+                                    <TouchableOpacity onPressOut={this.onModalChecked}>
+                                        <Text style={{ color: '#35C9C9', fontSize: 15 }}>자세히 보기</Text>
+                                    </TouchableOpacity>
+                                </View>    
                             </View>
                         </View>
                         </View>
@@ -216,6 +228,13 @@ class RegisterScreen extends React.Component {
                             </View>
                         </View>
                     </ScrollView>
+                    {this.state.modal_clicked ? (
+                        <PrivacyModal />
+                        ) :
+                        (
+                        <></>
+                        )
+                    }
                 </View>
         )
     }
