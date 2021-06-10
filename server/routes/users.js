@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
-// import { AsyncStorage } from 'react-native';
 
 router.get("/auth", auth, (req, res) => {
     res.status(200).json({
@@ -79,7 +78,21 @@ router.get("/logout", auth, (req, res) => {
         });
     });
     // AsyncStorage.removeItem('userData')
-
 });
+
+router.post("/forgot_password", (req, res) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
+        if(!user) {
+            return res.json({
+                sendSuccess: false,
+                message: "해당 아이디가 존재하지 않습니다."
+            });
+        } else {
+            return res.status(200).send({
+                sendSuccess: true
+            })
+        }
+    })
+})
 
 module.exports = router;
