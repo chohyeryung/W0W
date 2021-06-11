@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import {
   Alert,
-  Linking,
-  Dimensions,
-  LayoutAnimation,
   AsyncStorage,
   Text,
   View,
-  StatusBar,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import { FancyAlert } from 'react-native-expo-fancy-alerts';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 
@@ -21,13 +18,15 @@ export default class QrcodeScannerScreen extends Component {
   }
   _bootstrapAsync = async () => {
     const userData = await AsyncStorage.getItem('userData');
-    alert(userData.userId)
+    this.setState({
+      userId: JSON.parse(userData).userId })
   };
 
   state = {
     hasCameraPermission: null,
     lastScannedUrl: null,
-    userId: ''
+    userId: '',
+    pointed: false,
   };
 
   componentDidMount() {
@@ -42,30 +41,31 @@ export default class QrcodeScannerScreen extends Component {
   };
 
   _handleBarCodeRead = result => {
-    if (result.data !== this.state.lastScannedUrl) {
-      this.setState({ lastScannedUrl: result.data });
-
-      Alert.alert(
-        '5 포인트를 적립하시겠습니까?',
-        this.state.lastScannedUrl,
-        [
-          {
-            text: 'Yes',
-            onPress: () => _handleSavePoint(this.state.lastScannedUrl),
-          },
-          { text: 'No', onPress: () => {} },
-        ],
-        { cancellable: false }
-      );
+    if (result.data === 'https://8ce38439b644.ngrok.io/qrcode/pointing') {
+      if (result.data !== this.state.lastScannedUrl) {
+        this.setState({ lastScannedUrl: result.data });
+  
+        Alert.alert(
+          '5 포인트를 적립하시겠습니까?',
+          this.state.lastScannedUrl,
+          [
+            {
+              text: 'Yes',
+              onPress: () => this._handleSavePoint(this.state.lastScannedUrl),
+            },
+            { text: 'No', onPress: () => this._handlePressCancel() },
+          ],
+          { cancellable: false }
+        );
+      }
+    }
   }
 
   _handleSavePoint = endpoint => {
       axios.post(endpoint, {userId : this.state.userId}).then(() => {
-        alert('5포인트 적립되었습니다!')
-        this.props.navigation.navigate('MainScreen')
+        this.setState({ pointed: true })
       })
-  }
-};
+  };
 
   render() {
     return (
@@ -118,31 +118,32 @@ export default class QrcodeScannerScreen extends Component {
             }}/>
           </View>
         )}
-
         {this._maybeRenderUrl()}
-
-        <StatusBar hidden />
+        <FancyAlert
+          visible={this.state.pointed}
+          icon={<View style={{
+            flex: 1,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'red',
+            borderRadius: 50,
+            width: '100%',
+          }}><Text>👌</Text></View>}
+          style={{ backgroundColor: 'white' }}
+          onRequestClose={() => this.props.navigation.navigate('MainScreen')}
+        >
+          <Text style={{ marginTop: -16, marginBottom: 32 }}>5포인트 적립했습니다!</Text>
+          <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('MainScreen')}>
+            <Text>OK</Text>
+          </TouchableOpacity>
+        </FancyAlert>
       </View>
     );
   }
 
-  _handlePressUrl = () => {
-    Alert.alert(
-      'Open this URL?',
-      this.state.lastScannedUrl,
-      [
-        {
-          text: 'Yes',
-          onPress: () => Linking.openURL(this.state.lastScannedUrl),
-        },
-        { text: 'No', onPress: () => {} },
-      ],
-      { cancellable: false }
-    );
-  };
-
   _handlePressCancel = () => {
-    this.setState({ lastScannedUrl: null });
+    this.setState({ lastScannedUrl: '' });
   };
 
   _maybeRenderUrl = () => {

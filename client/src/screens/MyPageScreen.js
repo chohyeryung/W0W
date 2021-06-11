@@ -77,7 +77,7 @@ export class MyPageScreen extends Component {
     componentDidMount = async () => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.post('http://e1b32a057e61.ngrok.io/mypage/cate', {
+        axios.post('https://8ce38439b644.ngrok.io/mypage/cate', {
             user_id: userId
         }).then(res => {
             datas: res.data.map( data => {
@@ -155,9 +155,9 @@ export class MyPageScreen extends Component {
     _fetchCate = async() => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.post(' http://e1b32a057e61.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
+        axios.post(' https://8ce38439b644.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
         .then(res => {
-            axios.post(' http://e1b32a057e61.ngrok.io/mypage/cate', { user_id: userId })
+            axios.post(' https://8ce38439b644.ngrok.io/mypage/cate', { user_id: userId })
             .then(res => {
                 datas: res.data.map( data =>
                     {

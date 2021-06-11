@@ -26,9 +26,12 @@ export class MainScreen extends Component {
         this.setMiddleText = this.setMiddleText.bind(this);
         this.setBottomText = this.setBottomText.bind(this);
         this.setImgSrc = this.setImgSrc.bind(this);
-       this._bootstrapAsync();
 
       
+      }
+
+      componentDidMount() {
+        this._bootstrapAsync();
       }
 
 
@@ -54,7 +57,7 @@ export class MainScreen extends Component {
     _bootstrapAsync = async () => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.get(` https://c7af7e6e7a28.ngrok.io/main/main/${userId}`)
+        axios.get(`https://8ce38439b644.ngrok.io/main/main/${userId}`)
         .then(res => {
             if(res.data.length!=0 && res.data.num!=0){
                 this.setMiddleText(res.data.num+"%")
@@ -62,7 +65,7 @@ export class MainScreen extends Component {
                 this.setImgSrc(res.data.src)
             }
         })
-        .catch((err)=>alert(err)) 
+        .catch((err)=>alert(err))
 
     };
 
@@ -106,7 +109,7 @@ export class MainScreen extends Component {
                         ref={this._handleVideoRef}
                         style={styles.video}
                         source={{
-                        uri: ` https://c7af7e6e7a28.ngrok.io/uploads/${this.state.imgSrc}.mp4`,
+                        uri: ` https://8ce38439b644.ngrok.io/uploads/${this.state.imgSrc}.mp4`,
                         }}
                         resizeMode="contain"
                         isLooping

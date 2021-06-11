@@ -22,7 +22,7 @@ router.post('/pointing', (req, res) => {
     let ndate = yyyy + '-' + month ;
 
     let data = {
-        "useridx": userId,
+        "userid": userId,
         "category": '제로웨이스트샵 방문',
         "score": 5,
         "created": ndate
