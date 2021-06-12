@@ -22,6 +22,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import QrcodeScannerScreen from './src/screens/QrcodeScannerScreen';
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 
 const Stack = createStackNavigator();
 
@@ -99,9 +100,15 @@ export default class App extends Component {
                   headerShown: false, 
                   title: '',
                 }}/>
-  
-            
-            </Stack.Navigator>
+              
+              <Stack.Screen
+                name="ForgotPasswordScreen"
+                component={ForgotPasswordScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+          </Stack.Navigator>
         </NavigationContainer>
       </Provider>   
     );

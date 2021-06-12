@@ -23,8 +23,10 @@ export default class Chart extends Component {
     }
   }
 
-  componentDidMount() {
-
+  componentDidMount = async() => {
+    const userData = await AsyncStorage.getItem('userData');
+    const userId = JSON.parse(userData).userId
+    
     // 그래프 data componentDidMount()
     axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate')
     .then(response => {
@@ -44,10 +46,10 @@ export default class Chart extends Component {
     })  
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics')
-    .then(response => {
+    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics', { user_id: userId })
+    .then(res => {
 
-      datas: response.data.map( data =>
+      datas: res.data.map( data =>
           {
             const { months } = this.state;
             this.setState({

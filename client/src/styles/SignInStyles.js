@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 70,
         paddingVertical: 70,
         fontFamily: 'Noto Sans KR',
+        justifyContent: 'space-between',
     },
     header: {
         flex: 1,

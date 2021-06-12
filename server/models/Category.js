@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const cateSchema = mongoose.Schema({
-    //useridx, 항목, 점수, 날짜
-    useridx: {
+    //userid, 항목, 점수, 날짜
+    userid: {
         type: String,
         required: true
     },

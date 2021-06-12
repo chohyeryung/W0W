@@ -21,8 +21,8 @@ router.get('/main/:useridx', (req, res) => {
     let ndate = yyyy + '-' + month ;
 
     Category.aggregate([
-        {$match: { useridx : useridx , created : ndate}},
-        { $group: { _id: { created: { $substr: ["$created", 0, 7] }, useridx:"$useridx" }, total: { $sum: "$score" } } }
+        {$match: { userid : useridx , created : ndate}},
+        { $group: { _id: { created: { $substr: ["$created", 0, 7] }, userid:"$userid" }, total: { $sum: "$score" } } }
     ]).exec( (err, results) =>{
         if(err) console.log(err);
         let src;
