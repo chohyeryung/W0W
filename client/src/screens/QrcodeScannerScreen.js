@@ -27,6 +27,7 @@ export default class QrcodeScannerScreen extends Component {
     lastScannedUrl: null,
     userId: '',
     pointed: false,
+    showAlert: false,
   };
 
   componentDidMount() {
@@ -41,22 +42,10 @@ export default class QrcodeScannerScreen extends Component {
   };
 
   _handleBarCodeRead = result => {
-    if (result.data === 'https://8ce38439b644.ngrok.io/qrcode/pointing') {
+    if (result.data === 'http://ec2-34-227-38-106.compute-1.amazonaws.com/qrcode/pointing') {
       if (result.data !== this.state.lastScannedUrl) {
         this.setState({ lastScannedUrl: result.data });
-  
-        Alert.alert(
-          '5 포인트를 적립하시겠습니까?',
-          this.state.lastScannedUrl,
-          [
-            {
-              text: 'Yes',
-              onPress: () => this._handleSavePoint(this.state.lastScannedUrl),
-            },
-            { text: 'No', onPress: () => this._handlePressCancel() },
-          ],
-          { cancellable: false }
-        );
+        this.setState({ showAlert: true });
       }
     }
   }
@@ -119,6 +108,31 @@ export default class QrcodeScannerScreen extends Component {
           </View>
         )}
         {this._maybeRenderUrl()}
+        {/* 적립 할지 말지 정하는 alert */}
+        <FancyAlert
+          visible={this.state.showAlert}
+          icon={<View style={{
+            flex: 1,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'blue',
+            borderRadius: 50,
+            width: '100%',
+          }}><Text>❔</Text></View>}
+          style={{ backgroundColor: 'white' }}
+        >
+          <Text style={{ marginTop: -16, marginBottom: 20 }}>5포인트 적립하시겠습니까?</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10,  width: '50%' }} onPress={() => this._handlePressCancel() }>
+              <Text style={{ textAlign: 'center', color: '#0008ff' }}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, width: '50%' }} onPress={() => this._handleSavePoint() }>
+              <Text style={{ textAlign: 'center', color: '#0008ff' }}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </FancyAlert>
+        {/* 확인 alert */}
         <FancyAlert
           visible={this.state.pointed}
           icon={<View style={{
@@ -126,15 +140,14 @@ export default class QrcodeScannerScreen extends Component {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'red',
+            backgroundColor: 'green',
             borderRadius: 50,
             width: '100%',
           }}><Text>👌</Text></View>}
           style={{ backgroundColor: 'white' }}
-          onRequestClose={() => this.props.navigation.navigate('MainScreen')}
         >
           <Text style={{ marginTop: -16, marginBottom: 32 }}>5포인트 적립했습니다!</Text>
-          <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('MainScreen')}>
+          <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, color: '#fff', backgroundColor: 'green', borderRadius: 50, width: '100%' }} onPress={() => this.props.navigation.navigate('MainScreen')}>
             <Text>OK</Text>
           </TouchableOpacity>
         </FancyAlert>
@@ -144,6 +157,7 @@ export default class QrcodeScannerScreen extends Component {
 
   _handlePressCancel = () => {
     this.setState({ lastScannedUrl: '' });
+    this.setState({ showAlert: false });
   };
 
   _maybeRenderUrl = () => {
