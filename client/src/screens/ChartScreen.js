@@ -28,9 +28,9 @@ export default class Chart extends Component {
     const userId = JSON.parse(userData).userId
     
     // 그래프 data componentDidMount()
-    axios.post('http://0f3dbf48d9c8.ngrok.io/mypage/cate', { user_id: userId })
-    .then(res => {
-        datas: res.data.map( data =>
+    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate')
+    .then(response => {
+        datas: response.data.map( data =>
             {
                 const { cates } = this.state;
                
@@ -46,8 +46,8 @@ export default class Chart extends Component {
     })  
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.get('https://0f3dbf48d9c8.ngrok.io/mypage/statistics', { user_id: userId })
-    .then(res => {
+    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics')
+    .then(response => {
 
       datas: res.data.map( data =>
           {

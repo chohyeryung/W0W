@@ -124,21 +124,21 @@ export class MyPageScreen extends Component {
         //     )
         // })
         
-        // axios.get('http://e1b32a057e61.ngrok.io/mypage/cate')
-        //     .then(response => {
-        //         datas: response.data.map( data => {
-        //             const { cates } = this.state;
-        //             this.setState({
-        //                 cates: cates.map( cate => 
-        //                     cate.category == data.category
-        //                     ? cate = data
-        //                     : cate
-        //                 )
-        //             })
-        //         }
-        //     )
+        axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate')
+            .then(response => {
+                datas: response.data.map( data => {
+                    const { cates } = this.state;
+                    this.setState({
+                        cates: cates.map( cate => 
+                            cate.category == data.category
+                            ? cate = data
+                            : cate
+                        )
+                    })
+                }
+            )
               
-        // })
+        })
     }
     
     toggleSettingModal = (cate) => {

@@ -57,7 +57,7 @@ export class MainScreen extends Component {
     _bootstrapAsync = async () => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.get(`https://8ce38439b644.ngrok.io/main/main/${userId}`)
+        axios.get(`http://ec2-34-227-38-106.compute-1.amazonaws.com/main/main/${userId}`)
         .then(res => {
             if(res.data.length!=0 && res.data.num!=0){
                 this.setMiddleText(res.data.num+"%")
@@ -78,11 +78,11 @@ export class MainScreen extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <View style={styles.headerContainer}>                   */}
+                <View style={styles.headerContainer}>                  
                     <Text style={styles.topText}>WITH</Text>
                     <Text style={styles.middleText}>{this.state.middleText}</Text>
                     <Text style={styles.bottomText}>{this.state.bottomText}</Text>
-                {/* </View> */}
+                </View>
                 <View style={styles.footerContainer}>
                     <View style={styles.icon}>
                         <TouchableOpacity onPress={() =>   this.props.navigation.navigate('MyPage')}>
@@ -105,15 +105,15 @@ export class MainScreen extends Component {
                         </TouchableOpacity>
                     </View>
                     <View styles={styles.mov}>
-                    <Video
-                        ref={this._handleVideoRef}
-                        style={styles.video}
-                        source={{
-                        uri: ` https://8ce38439b644.ngrok.io/uploads/${this.state.imgSrc}.mp4`,
-                        }}
-                        resizeMode="contain"
-                        isLooping
-                    />
+                        <Video
+                            ref={this._handleVideoRef}
+                            style={styles.video}
+                            source={{
+                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_BN.mp4`,
+                            }}
+                            resizeMode="contain"
+                            isLooping
+                        />
                     </View>
                 </View>
             </View>

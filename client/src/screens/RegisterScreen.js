@@ -103,7 +103,7 @@ class RegisterScreen extends React.Component {
         const request = axios({
             method: 'post',
             data: body,
-            url: 'http://localhost:5000/users/register',
+            url: 'http://ec2-34-227-38-106.compute-1.amazonaws.com/users/register',
             changeOrigin: true,
         }).then((response) =>{
             return [response.data.registerSuccess, response.data.message];
