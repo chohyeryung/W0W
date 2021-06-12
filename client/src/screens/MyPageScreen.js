@@ -104,7 +104,7 @@ export class MyPageScreen extends Component {
         //     )
         // })
         
-        axios.get(' https://c7af7e6e7a28.ngrok.io/mypage/cate')
+        axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate')
             .then(response => {
                 datas: response.data.map( data => {
                     const { cates } = this.state;

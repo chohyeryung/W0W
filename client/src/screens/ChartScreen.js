@@ -26,7 +26,7 @@ export default class Chart extends Component {
   componentDidMount() {
 
     // 그래프 data componentDidMount()
-    axios.get('http://localhost:5000/mypage/cate')
+    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate')
     .then(response => {
         datas: response.data.map( data =>
             {
@@ -44,7 +44,7 @@ export default class Chart extends Component {
     })  
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.get('http://localhost:5000/mypage/statistics')
+    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics')
     .then(response => {
 
       datas: response.data.map( data =>
