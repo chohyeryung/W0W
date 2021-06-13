@@ -2,17 +2,26 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require("body-parser");
 
+const { User }  = require("../models/User");
 const { Category } = require("../models/Category");
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
+
+router.post('/name', (req, res) => {
+    const userId = req.body.user_id;
+    //name
+    User.find({ _id: userId }, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    })
+})
 
 router.post('/cate', (req, res) => {
     let now = new Date();
     let yyyy = now.getFullYear();
     let month = now.getMonth()+1;
     const userId = req.body.user_id;
-    console.log(userId);
     
     if(month < 10) {
         month = `0${month}`
@@ -26,7 +35,7 @@ router.post('/cate', (req, res) => {
                 $and: [ 
                     { userid: userId },
                     { $or: [{ category: "장바구니 이용" }, { category: "용기내" }, { category: "쓰레기 줍기" }, { category: "분리수거" }, { category: "대중교통 이용" }, { category: "기타" } ] },
-                    { created: { $regex: ndate } }
+                    { created: ndate }
                 ] } },
             { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
             { $sort: { category: -1 } }
@@ -47,7 +56,6 @@ router.post('/pointing', (req, res) => {
     if(month < 10) {
         month = `0${month}`
     }
-
 
     let ndate = yyyy + '-' + month ;
 
@@ -71,7 +79,7 @@ router.post('/statistics', (req, res) => {
 
     Category.aggregate([
         { $match: { userid: userId } },
-        { $group: { _id: { created:"$created"} , total: { $sum: "$score" } } }
+        { $group: { _id: { created: "$created" } , total: { $sum: "$score" } } }
     ]).exec(function (err, results) {
         if(err) console.log(err);
         res.send(results);

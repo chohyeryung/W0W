@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 
     firCon: {
         flexDirection: 'column',
+        justifyContent: 'flex-start',
         padding: 50,
     },
 
@@ -62,11 +63,11 @@ const styles = StyleSheet.create({
     line: {
         width:3,
         height:'100%',
-        
     },
 
     lineBox: {
         padding: 50,
+        marginTop: 40,
     }
 
 });
