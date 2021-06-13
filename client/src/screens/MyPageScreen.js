@@ -199,9 +199,9 @@ export class MyPageScreen extends Component {
                                         name="help-circle-outline" size={50} style={styles.helpIcon}
                                         onPress={() => this.toggleSettingCModal()}/>
                                 </TouchableOpacity>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPressOut={() => AsyncStorage.removeItem('userData') }>
                                     <Ionicons 
-                                        name="exit-outline" size={50} style={styles.logoutIcon}/>
+                                        name="exit-outline" size={50} style={styles.logoutIcon} />
                                 </TouchableOpacity>
                             </View>
                         </View>
