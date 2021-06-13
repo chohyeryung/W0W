@@ -145,7 +145,7 @@ export default class Chart extends Component {
               flexDirection:'row',
               justifyContent: 'center',
               paddingTop: 30,
-              paddingLeft: 10,
+              paddingLeft: 15,
               paddingVertical: 5,
               backgroundColor: '#fff',
             }} 

@@ -25,7 +25,7 @@ const iconsInfo = [
     {
         imageId: 1,
         src: bowlIcon,
-        width: 86, height:85, marginLeft: 60
+        width: 86, height:85, marginLeft: 55
     },
     {
         imageId: 2,
@@ -35,22 +35,22 @@ const iconsInfo = [
     {
         imageId: 3,
         src: trashIcon,
-        width: 92, height:90, marginLeft: 55
+        width: 92, height:90, marginLeft: 50
     },
     {
         imageId: 4,
         src: recycleIcon,
-        width: 85, height: 74, marginLeft: 60
+        width: 85, height: 74, marginLeft: 55
     },
     {
         imageId: 5,
         src: transIcon,
-        width: 82, height:92, marginLeft: 60
+        width: 82, height:92, marginLeft: 55
     },
     {
         imageId: 6,
         src: etcIcon,
-        width:85.8, height:85, marginLeft: 55
+        width:85.8, height:85.5, marginLeft: 55
     },
 ]
 

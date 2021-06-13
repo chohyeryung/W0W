@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
     headerContainer: {
         marginTop:50,
-        paddingHorizontal:70,
+        paddingHorizontal:80,
         flexDirection:'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 
     cateContainer: {
         margin:80,
+        marginTop: 55,
         padding: 50,
         shadowColor: "rgb(50,50,50)",
         shadowOffset: {
