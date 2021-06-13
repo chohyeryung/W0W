@@ -69,9 +69,9 @@ export default class Chart extends Component {
     return (
       <View style={styles.Container}>
         <View style={styles.firCon}>
-            <TouchableOpacity>
+            <TouchableOpacity style={{ flexDirection: 'row' }}>
                 <Ionicons 
-                    name="chevron-back-outline" size={50} style={{ marginLeft: -8, marginBottom: 80, flexDirection: 'row' }}
+                    name="chevron-back-outline" size={50} style={{ marginLeft: -8, marginBottom: 80 }}
                     onPress={() => this.props.navigation.navigate('MainScreen')}/>
             </TouchableOpacity>
             <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30}}>STATISTICS</Text>
