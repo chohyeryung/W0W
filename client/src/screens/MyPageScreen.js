@@ -75,17 +75,20 @@ export class MyPageScreen extends Component {
     }
 
     componentDidMount = async () => {
+        this.setState({settingCModal: false})
+
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
 
-        axios.post('http://feda7978e23e.ngrok.io/mypage/name', {
+        //사용자 이름
+        axios.post('http://563cefae3f78.ngrok.io/mypage/name', {
             user_id: userId
         }).then(res => {
             this.setState({userName: res.data[0].name});
         })
         .catch((err)=>alert(err)) 
 
-        axios.post('http://feda7978e23e.ngrok.io/mypage/cate', {
+        axios.post('http://563cefae3f78.ngrok.io/mypage/cate', {
             user_id: userId
         }).then(res => {
             datas: res.data.map( data => {
@@ -169,9 +172,9 @@ export class MyPageScreen extends Component {
     _fetchCate = async() => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.post('http://feda7978e23e.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
+        axios.post('http://563cefae3f78.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
         .then(res => {
-            axios.post('http://feda7978e23e.ngrok.io/mypage/cate', { user_id: userId })
+            axios.post('http://563cefae3f78.ngrok.io/mypage/cate', { user_id: userId })
             .then(res => {
                 datas: res.data.map( data =>
                     {
@@ -239,6 +242,7 @@ export class MyPageScreen extends Component {
                                             (
                                                 <Image
                                                 source={item.src}
+                                                key={item.imageId}
                                                 style={{
                                                     width: item.width,
                                                     height: item.height,

@@ -29,24 +29,24 @@ export default class Chart extends Component {
     const userId = JSON.parse(userData).userId
     
     // 그래프 data componentDidMount()
-    axios.post('http://feda7978e23e.ngrok.io/mypage/cate', {
-          user_id: userId
-      }).then(res => {
-          datas: res.data.map( data => {
-              const { cates } = this.state;
-              this.setState({
-                  cates: cates.map( cate => 
-                      cate.category == data.category
-                      ? cate = data
-                      : cate
-                  )
-              })
-          })
-      })
-      .catch((err)=>alert(err)) 
+    axios.post('http://563cefae3f78.ngrok.io/mypage/cate', {
+        user_id: userId
+    }).then(res => {
+        datas: res.data.map( data => {
+            const { cates } = this.state;
+            this.setState({
+                cates: cates.map( cate => 
+                    cate.category == data.category
+                    ? cate = data
+                    : cate
+                )
+            })
+        })
+    })
+    .catch((err)=>alert(err)) 
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.post('http://feda7978e23e.ngrok.io/mypage/statistics', { user_id: userId })
+    axios.post('http://563cefae3f78.ngrok.io/mypage/statistics', { user_id: userId })
     .then(res => {
 
       res.data.map( data => {
@@ -65,7 +65,6 @@ export default class Chart extends Component {
 
   render() {
     const { cates, months } = this.state;
-    console.log(months);
 
     return (
       <View style={styles.Container}>
@@ -114,8 +113,8 @@ export default class Chart extends Component {
                 labels: cates.map(cate => cate.category),
                 datasets: [{
                     data: cates.map(cate => cate.cnt),
-                    color: (opacity = 0.8) => `rgba(53, 201, 201, ${opacity})`, // optional
-                    strokeWidth: 2 // optional
+                    color: (opacity = 0.8) => `rgba(53, 201, 201, ${opacity})`, 
+                    strokeWidth: 2 
                 }],
             }}
             
@@ -126,17 +125,16 @@ export default class Chart extends Component {
                 backgroundColor:'#fff',
                 backgroundGradientFrom:"#fff",
                 backgroundGradientTo:"#fff",
-                fillShadowGradient: '#d4fbda',
+                fillShadowGradient: '#35C9C9',
                 fillShadowGradientOpacity: 0.7,
                 decimalPlaces:1,
-                color:(opacity=1) => `rgba(53, 201, 201, ${opacity})`,
-                labelColor:(opacity=1) => `rgba(53, 201, 201, ${opacity})`,
+                color:(opacity=1) => `rgba(0, 0, 0, ${opacity})`,
+                labelColor:(opacity=1) => `rgba(0, 0, 0, ${opacity})`,
                 propsForDots: {
                   r: "4",
                   strokeWidth: "2",
                   stroke: "#35C9C9"
                 },
-                
             }}
 
             bezier
@@ -149,7 +147,7 @@ export default class Chart extends Component {
               paddingTop: 30,
               paddingLeft: 10,
               paddingVertical: 5,
-              backgroundColor: '#fff'
+              backgroundColor: '#fff',
             }} 
             
             />

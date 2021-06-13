@@ -26,9 +26,12 @@ export class MainScreen extends Component {
         this.setMiddleText = this.setMiddleText.bind(this);
         this.setBottomText = this.setBottomText.bind(this);
         this.setImgSrc = this.setImgSrc.bind(this);
-       this._bootstrapAsync();
 
       
+      }
+
+      componentDidMount() {
+        this._bootstrapAsync();
       }
 
 
@@ -54,7 +57,7 @@ export class MainScreen extends Component {
     _bootstrapAsync = async () => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.get(`http://feda7978e23e.ngrok.io/main/main/${userId}`)
+        axios.get(`http://563cefae3f78.ngrok.io/main/main/${userId}`)
         .then(res => {
             if(res.data.length!=0 && res.data.num!=0){
                 this.setMiddleText(res.data.num+"%")
@@ -62,7 +65,7 @@ export class MainScreen extends Component {
                 this.setImgSrc(res.data.src)
             }
         })
-        .catch((err)=>alert(err)) 
+        .catch((err)=>alert(err))
 
     };
 
@@ -75,11 +78,11 @@ export class MainScreen extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <View style={styles.headerContainer}>                   */}
+                <View style={styles.headerContainer}>                  
                     <Text style={styles.topText}>WITH</Text>
                     <Text style={styles.middleText}>{this.state.middleText}</Text>
                     <Text style={styles.bottomText}>{this.state.bottomText}</Text>
-                {/* </View> */}
+                </View>
                 <View style={styles.footerContainer}>
                     <View style={styles.icon}>
                         <TouchableOpacity onPress={() =>   this.props.navigation.navigate('MyPage')}>
@@ -106,7 +109,7 @@ export class MainScreen extends Component {
                         ref={this._handleVideoRef}
                         style={styles.video}
                         source={{
-                        uri: `http://feda7978e23e.ngrok.io/uploads/${this.state.imgSrc}.mp4`,
+                        uri: `http://563cefae3f78.ngrok.io/uploads/${this.state.imgSrc}.mp4`,
                         }}
                         resizeMode="contain"
                         isLooping
