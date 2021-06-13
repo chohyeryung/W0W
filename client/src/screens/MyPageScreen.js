@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     ImageBackground,
     Image,
-    ScrollView,
     AsyncStorage
 } from 'react-native';
 import axios from 'axios';
@@ -59,16 +58,17 @@ export class MyPageScreen extends Component {
     constructor(props) {
         super(props);
         this.state = { cates: [
-            { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
-            { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
-            { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
-            { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
-            { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
-            { _id: { category: '기타' }, category: '기타', cnt: 0 }
-        ],
-        settingModal: false,
-        settingCModal: false,
-        curCate: '',
+                { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
+                { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
+                { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
+                { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
+                { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
+                { _id: { category: '기타' }, category: '기타', cnt: 0 }
+            ],
+            settingModal: false,
+            settingCModal: false,
+            curCate: '',
+            userName: ''
         };
 
         // this._bootstrapAsync();
@@ -77,7 +77,25 @@ export class MyPageScreen extends Component {
     componentDidMount = async () => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.post('http://e1b32a057e61.ngrok.io/mypage/cate', {
+
+        axios.post('https://3f731e88140a.ngrok.io/mypage/name', {
+            user_id: userId
+        }).then(res => {
+            this.setState({userName: res.data.name});
+            // datas: res.data.map( data => {
+            //     const { cates } = this.state;
+            //     this.setState({
+            //         cates: cates.map( cate => 
+            //             cate.category == data.category
+            //             ? cate = data
+            //             : cate
+            //         )
+            //     })
+            // })
+        })
+        .catch((err)=>alert(err)) 
+
+        axios.post('https://3f731e88140a.ngrok.io/mypage/cate', {
             user_id: userId
         }).then(res => {
             datas: res.data.map( data => {
@@ -152,12 +170,18 @@ export class MyPageScreen extends Component {
         this.setState({settingCModal: !this.state.settingCModal})
     }
 
+    handleLogout = async() => {
+        await AsyncStorage.removeItem('userData');
+        
+        this.props.navigation.navigate('SignIn');
+    }
+
     _fetchCate = async() => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.post(' http://e1b32a057e61.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
+        axios.post('https://3f731e88140a.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
         .then(res => {
-            axios.post(' http://e1b32a057e61.ngrok.io/mypage/cate', { user_id: userId })
+            axios.post('https://3f731e88140a.ngrok.io/mypage/cate', { user_id: userId })
             .then(res => {
                 datas: res.data.map( data =>
                     {
@@ -201,7 +225,8 @@ export class MyPageScreen extends Component {
                                 </TouchableOpacity>
                                 <TouchableOpacity>
                                     <Ionicons 
-                                        name="exit-outline" size={50} style={styles.logoutIcon}/>
+                                        name="exit-outline" size={50} style={styles.logoutIcon}
+                                        onPress={() => this.handleLogout()}/>
                                 </TouchableOpacity>
                             </View>
                         </View>

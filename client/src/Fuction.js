@@ -1,7 +1,7 @@
 export const _getLastYYYYMM = () => {
     const now = new Date();
     const yyyy = now.getFullYear();
-    let month = now.getMonth();
+    const month = now.getMonth();
 
     if(month < 10) {
         month = `0${month}`

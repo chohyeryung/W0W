@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, DotContent } from 'react-native';
+import { View, Text, Dimensions, DotContent, AsyncStorage } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { Rect, Text as TextSVG, Svg } from "react-native-svg";
 
@@ -28,7 +28,7 @@ export default class Chart extends Component {
     const userId = JSON.parse(userData).userId
     
     // 그래프 data componentDidMount()
-    axios.post('http://localhost:5000/mypage/cate', { user_id: userId })
+    axios.post('https://3f731e88140a.ngrok.io/mypage/cate', { user_id: userId })
     .then(res => {
         datas: res.data.map( data =>
             {
@@ -46,7 +46,7 @@ export default class Chart extends Component {
     })  
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.get('http://localhost:5000/mypage/statistics', { user_id: userId })
+    axios.get('https://3f731e88140a.ngrok.io/mypage/statistics', { user_id: userId })
     .then(res => {
 
       datas: res.data.map( data =>
@@ -105,7 +105,7 @@ export default class Chart extends Component {
                 labels: cates.map(cate => cate.category),
                 datasets: [{
                     data: cates.map(cate => cate.cnt),
-                    color: (opacity = 0.8) => `rgba(22, 148, 108, ${opacity})`, // optional
+                    color: (opacity = 0.8) => `rgba(53, 201, 201, ${opacity})`, // optional
                     strokeWidth: 2 // optional
                 }],
             }}
@@ -126,7 +126,7 @@ export default class Chart extends Component {
                 propsForDots: {
                   r: "4",
                   strokeWidth: "2",
-                  stroke: "#218838"
+                  stroke: "#35C9C9"
                 },
                 
             }}

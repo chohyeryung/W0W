@@ -2,10 +2,18 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require("body-parser");
 
+const { User }  = require("../models/Category");
 const { Category } = require("../models/Category");
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
+
+// router.post('/name', (req, res) => {
+//     const userId = req.body.user_id;
+//     //name
+//     User.find({ userid: userId }).pretty()
+//     }
+// })
 
 router.post('/cate', (req, res) => {
     let now = new Date();
@@ -71,7 +79,7 @@ router.post('/statistics', (req, res) => {
 
     Category.aggregate([
         { $match: { userid: userId } },
-        { $group: { _id: { created:"$created"} , total: { $sum: "$score" } } }
+        { $group: { _id: { created: "$created"} , total: { $sum: "$score" } } }
     ]).exec(function (err, results) {
         if(err) console.log(err);
         res.send(results);

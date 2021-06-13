@@ -21,7 +21,6 @@ export const cateList = [
     },
     {
         category: '기타',
-        explan: `MY ZERO에 있는 카테고리 외에 
-                 제로 웨이스트 활동을 실천해요`
+        explan: `위 카테고리 외에 제로 웨이스트 활동을 실천해요`
     },
 ]
