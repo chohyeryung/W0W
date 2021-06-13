@@ -18,6 +18,7 @@ router.get('/main/:useridx', (req, res) => {
     if(month < 10) {
         month = `0${month}`
     }
+    
     let ndate = yyyy + '-' + month ;
 
     Category.aggregate([

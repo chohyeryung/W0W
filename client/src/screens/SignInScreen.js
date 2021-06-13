@@ -92,7 +92,7 @@ class SignInScreen extends React.Component {
         const request = axios({
             method: 'post',
             data: body,
-            url: 'https://3f731e88140a.ngrok.io/users/login',
+            url: 'http://feda7978e23e.ngrok.io/users/login',
             changeOrigin: true,
         }).then((response) =>{
             AsyncStorage.setItem(

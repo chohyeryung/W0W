@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, DotContent, AsyncStorage } from 'react-native';
+import { View, Text, Dimensions, AsyncStorage, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { Rect, Text as TextSVG, Svg } from "react-native-svg";
 
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 import { _getLastYYYYMM, _getYYYYMM } from "../Fuction";
 import styles from "../styles/ChartStyle";
 
@@ -28,53 +29,56 @@ export default class Chart extends Component {
     const userId = JSON.parse(userData).userId
     
     // 그래프 data componentDidMount()
-    axios.post('https://3f731e88140a.ngrok.io/mypage/cate', { user_id: userId })
-    .then(res => {
-        datas: res.data.map( data =>
-            {
-                const { cates } = this.state;
-               
-                this.setState({
+    axios.post('http://feda7978e23e.ngrok.io/mypage/cate', {
+          user_id: userId
+      }).then(res => {
+          datas: res.data.map( data => {
+              const { cates } = this.state;
+              this.setState({
                   cates: cates.map( cate => 
-                    cate.category == data.category 
-                    ? cate = data
-                    : cate
+                      cate.category == data.category
+                      ? cate = data
+                      : cate
                   )
-                })
-            }
-        )
-    })  
+              })
+          })
+      })
+      .catch((err)=>alert(err)) 
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.get('https://3f731e88140a.ngrok.io/mypage/statistics', { user_id: userId })
+    axios.post('http://feda7978e23e.ngrok.io/mypage/statistics', { user_id: userId })
     .then(res => {
 
-      datas: res.data.map( data =>
-          {
-            const { months } = this.state;
-            this.setState({
-              months: months.map(month => 
-                month._id.created == data._id.created
-                ? month = data
-                : month
-              )
-            })
-          })
+      res.data.map( data => {
+        const { months } = this.state;
+        this.setState({
+          months: months.map(month => 
+            month._id.created == data._id.created
+            ? month = data
+            : month
+          )
+        })
+      })
     })  
 
   }
 
-
   render() {
     const { cates, months } = this.state;
+    console.log(months);
 
     return (
       <View style={styles.Container}>
         <View style={styles.firCon}>
-            <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30}}>STATISTICS A</Text>
+            <TouchableOpacity>
+                <Ionicons 
+                    name="chevron-back-outline" size={50} style={{ marginLeft: -8, marginBottom: 80, flexDirection: 'row' }}
+                    onPress={() => this.props.navigation.navigate('MainScreen')}/>
+            </TouchableOpacity>
+            <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30}}>STATISTICS</Text>
             <View style={styles.staContainer}>
-              {months.map((month) => (
-                  <View style={styles.contentCon}>
+              {months.map((month, index) => (
+                  <View style={styles.contentCon} key={index}>
                     <View style={styles.totalCon}>
                       <Text style={styles.text_total}>+{month.total}</Text>
                       <Text style={styles.text_created}>
@@ -98,7 +102,12 @@ export default class Chart extends Component {
         </View>
 
         <View style={styles.lineBox}>
-            <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30}}>STATISTICS B</Text>
+            <Text style={{ marginBottom: 30 }}>
+              <Text style={{fontSize: 32, fontWeight: 'bold'}}>CATEGORY  </Text>
+              <Text style={{ color: '#fff', fontSize: 35, fontWeight: 'bold', textShadowColor:'#000',
+              textShadowOffset:{width: 0, height: 0},
+              textShadowRadius:1, }}>GRAPH</Text>
+            </Text>
             <LineChart
             // style={styles.lineChart}
             data = {{
@@ -110,19 +119,18 @@ export default class Chart extends Component {
                 }],
             }}
             
-            width={Dimensions.get('window').width-20}
-            height={320}
+            width={Dimensions.get('window').width-120}
+            height={400}
             yAxisInterval={1}
             chartConfig={{
-                padding: 10,
                 backgroundColor:'#fff',
                 backgroundGradientFrom:"#fff",
                 backgroundGradientTo:"#fff",
                 fillShadowGradient: '#d4fbda',
                 fillShadowGradientOpacity: 0.7,
                 decimalPlaces:1,
-                color:(opacity=1) => `rgba(255,0,0, ${opacity}})`,
-                labelColor:(opacity=1) => `rgba(0,0,0, ${opacity}})`,
+                color:(opacity=1) => `rgba(53, 201, 201, ${opacity})`,
+                labelColor:(opacity=1) => `rgba(53, 201, 201, ${opacity})`,
                 propsForDots: {
                   r: "4",
                   strokeWidth: "2",
@@ -138,7 +146,9 @@ export default class Chart extends Component {
               borderColor: '#000',
               flexDirection:'row',
               justifyContent: 'center',
-              paddingTop: 20,
+              paddingTop: 30,
+              paddingLeft: 10,
+              paddingVertical: 5,
               backgroundColor: '#fff'
             }} 
             

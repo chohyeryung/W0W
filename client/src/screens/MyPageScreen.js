@@ -78,24 +78,14 @@ export class MyPageScreen extends Component {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
 
-        axios.post('https://3f731e88140a.ngrok.io/mypage/name', {
+        axios.post('http://feda7978e23e.ngrok.io/mypage/name', {
             user_id: userId
         }).then(res => {
-            this.setState({userName: res.data.name});
-            // datas: res.data.map( data => {
-            //     const { cates } = this.state;
-            //     this.setState({
-            //         cates: cates.map( cate => 
-            //             cate.category == data.category
-            //             ? cate = data
-            //             : cate
-            //         )
-            //     })
-            // })
+            this.setState({userName: res.data[0].name});
         })
         .catch((err)=>alert(err)) 
 
-        axios.post('https://3f731e88140a.ngrok.io/mypage/cate', {
+        axios.post('http://feda7978e23e.ngrok.io/mypage/cate', {
             user_id: userId
         }).then(res => {
             datas: res.data.map( data => {
@@ -179,9 +169,9 @@ export class MyPageScreen extends Component {
     _fetchCate = async() => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.post('https://3f731e88140a.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
+        axios.post('http://feda7978e23e.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
         .then(res => {
-            axios.post('https://3f731e88140a.ngrok.io/mypage/cate', { user_id: userId })
+            axios.post('http://feda7978e23e.ngrok.io/mypage/cate', { user_id: userId })
             .then(res => {
                 datas: res.data.map( data =>
                     {
@@ -203,20 +193,20 @@ export class MyPageScreen extends Component {
 
 
     render(){
-        const { cates } = this.state;
-
+        const { cates, userName } = this.state;
+        
         return(
             <ImageBackground
             style={{width: '100%', height: '100%'}}>
                 <View style={styles.container}>
                     <View style={styles.headerContainer}>
-                        {/* <TouchableOpacity>
+                        <TouchableOpacity>
                             <Ionicons 
-                                name="chevron-back-sharp" size={50} style={styles.backIcon}
-                                onPress={() => props.navigation.navigate('SignIn')}/>
-                        </TouchableOpacity> */}
+                                name="chevron-back-outline" size={50} style={{marginLeft: -8, marginBottom: 10}}
+                                onPress={() => this.props.navigation.navigate('MainScreen')}/>
+                        </TouchableOpacity>
                         <View style={styles.headThCon}>
-                            <Text style={styles.topTitle}>쬬이오셩님</Text>
+                            <Text style={styles.topTitle}>{userName}님의</Text>
                             <View style={styles.iconCon}>
                                 <TouchableOpacity>
                                     <Ionicons 
