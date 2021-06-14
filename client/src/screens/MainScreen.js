@@ -21,11 +21,20 @@ export class MainScreen extends Component {
             middleText: 'ZERO',
             bottomText: 'WASTE',
             imgSrc : '',
+            sea_OY : false,
+            sea_GB : false,
+            sea_BN : false,
+            sea_YG :  false
         };
 
         this.setMiddleText = this.setMiddleText.bind(this);
         this.setBottomText = this.setBottomText.bind(this);
         this.setImgSrc = this.setImgSrc.bind(this);
+        this.sea_YG = this.setSea_YG.bind(this);
+        this.sea_OY = this.setSea_OY.bind(this);
+        this.sea_BN = this.setSea_BN.bind(this);
+        this.sea_GB = this.setSea_GB.bind(this);
+        this._bootstrapAsync();
 
       
       }
@@ -52,6 +61,30 @@ export class MainScreen extends Component {
             imgSrc: src
         }))
     }
+
+    setSea_GB(bool) {
+        this.setState(state => ({
+            sea_GB: bool
+        }))
+    }
+
+    setSea_BN(bool) {
+        this.setState(state => ({
+            sea_BN: bool
+        }))
+    }
+
+    setSea_OY(bool) {
+        this.setState(state => ({
+            sea_OY: bool
+        }))
+    }
+
+    setSea_YG(bool) {
+        this.setState(state => ({
+            sea_YG: bool
+        }))
+    }
         
 
     _bootstrapAsync = async () => {
@@ -62,13 +95,22 @@ export class MainScreen extends Component {
             if(res.data.length!=0 && res.data.num!=0){
                 this.setMiddleText(res.data.num+"%")
                 this.setBottomText("SAVING")
+
                 this.setImgSrc(res.data.src)
+                if(res.data.src=="sea_BN") this.setSea_BN(true)
+                else if(res.data.src=="sea_OY") this.setSea_OY(true)
+                else if(res.data.src == "sea_YG") this.setSea_YG(true)
+                else this.setSea_GB(true)
+                
+            }else{
+                this.setSea_OY(true)
             }
         })
         .catch((err)=>alert(err))
 
     };
 
+   
     _handleVideoRef = component => {
         const playbackObject = component;
         playbackObject.setStatusAsync({ shouldPlay: true });
@@ -105,15 +147,42 @@ export class MainScreen extends Component {
                         </TouchableOpacity>
                     </View>
                     <View styles={styles.mov}>
-                    <Video
-                        ref={this._handleVideoRef}
-                        style={styles.video}
-                        source={{
-                        uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com//uploads/${this.state.imgSrc}.mp4`,
-                        }}
-                        resizeMode="contain"
-                        isLooping
-                    />
+                        {this.state.sea_BN && <Video
+                            ref={this._handleVideoRef}
+                            style={styles.video_BN}
+                            source={{
+                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_BN.mp4`,
+                            }}
+                            resizeMode="contain"
+                            isLooping
+                        />}
+                        {this.state.sea_GB && <Video
+                            ref={this._handleVideoRef}
+                            style={styles.video_GB}
+                            source={{
+                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_GB.mp4`,
+                            }}
+                            resizeMode="contain"
+                            isLooping
+                        />}
+                        {this.state.sea_OY && <Video
+                            ref={this._handleVideoRef}
+                            style={styles.video_OY}
+                            source={{
+                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_OY.mp4`,
+                            }}
+                            resizeMode="contain"
+                            isLooping
+                        />}
+                        { this.state.seaYG  && <Video
+                            ref={this._handleVideoRef}
+                            style={styles.video_YG}
+                            source={{
+                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_YG.mp4`,
+                            }}
+                            resizeMode="contain"
+                            isLooping
+                        />}
                     </View>
                 </View>
             </View>

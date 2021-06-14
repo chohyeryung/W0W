@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
 
     headerContainer:{
-        margin :50,
+        margin :0,
     },
     container:{
         flex: 1,
@@ -25,12 +25,33 @@ const styles = StyleSheet.create({
         marginLeft:70,
         fontSize:100,
         fontWeight: 'bold',
+        
        
     },
-    video: {
+    video_BN: {
         marginTop:45,
-        width: 500,
+        width: 600,
         height: 624,
+        position: 'absolute'
+        
+    },
+    video_GN: {
+        marginTop:45,
+        width: 600,
+        height: 624,
+        position: 'absolute'
+    },
+    video_OY: {
+        marginTop:45,
+        width: 600,
+        height: 624,
+        position: 'absolute'
+    },
+    video_YG: {
+        marginTop:45,
+        width: 600,
+        height: 624,
+        position: 'absolute'
     },
     footerContainer:{
         flexDirection: 'row'

@@ -79,15 +79,6 @@ export class MyPageScreen extends Component {
 
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-
-        //사용자 이름
-        axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/name', {
-            user_id: userId
-        }).then(res => {
-            this.setState({userName: res.data[0].name});
-        })
-        .catch((err)=>alert(err)) 
-
         axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
             user_id: userId
         }).then(res => {
