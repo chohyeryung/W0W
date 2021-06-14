@@ -31,7 +31,7 @@ app.use('/main', require('./routes/main'));
 
 app.use('/uploads', express.static('uploads'));
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3000
 
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`)

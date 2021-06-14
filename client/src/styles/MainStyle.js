@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     video_OY: {
         marginTop:45,
-        width: 600,
+        width: 560,
         height: 624,
         position: 'absolute'
     },
@@ -72,23 +72,24 @@ const styles = StyleSheet.create({
     category_icon :{
         width:140,
         height:140,
-        margin:16
+        marginTop:16
+        
 
     },
     map_icon :{
         width:140,
         height:140,
-        margin:16
+        marginTop:32
     },
     qr_icon :{
         width:140,
         height:140,
-        margin:16
+        marginTop:32
     },
     statistics_icon :{
         width:140,
         height:140,
-        margin:16
+        marginTop:32
     }
 });
 

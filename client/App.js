@@ -11,6 +11,7 @@ import RegisterScreen from './src/screens/RegisterScreen';
 import MyPageScreen from './src/screens/MyPageScreen';
 import ChartScreen from './src/screens/ChartScreen';
 import MainScreen from './src/screens/MainScreen';
+import MapScreen from './src/screens/MapScreen'
 import AuthLoadingScreen from './src/screens/AuthLoadingScreen'
 import rootReducer from './src/_reducers/index';
 import { Provider } from 'react-redux';
@@ -107,6 +108,13 @@ export default class App extends Component {
                 options={{
                   headerShown: false, 
                   title: '',
+                }}/>
+              <Stack.Screen
+                name="MapScreen"
+                component={MapScreen}
+                options={{
+                headerShown: false, 
+                title: '',
                 }}/>
           </Stack.Navigator>
         </NavigationContainer>

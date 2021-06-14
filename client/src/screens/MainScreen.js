@@ -101,7 +101,6 @@ export class MainScreen extends Component {
                 else if(res.data.src=="sea_OY") this.setSea_OY(true)
                 else if(res.data.src == "sea_YG") this.setSea_YG(true)
                 else this.setSea_GB(true)
-                
             }else{
                 this.setSea_OY(true)
             }
@@ -137,9 +136,12 @@ export class MainScreen extends Component {
                             style={styles.statistics_icon}
                             source={require('../image/main/statistics_icon.png')} />
                         </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('MapScreen')}>
+
                         <Image
                         style={styles.map_icon}
                         source={require('../image/main/map_icon.png')} />
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('QrcodeScreen')}>
                             <Image
                             style={styles.qr_icon}
