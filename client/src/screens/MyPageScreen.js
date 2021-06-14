@@ -212,14 +212,18 @@ export class MyPageScreen extends Component {
                             <Text style={styles.topTitle}>{userName}님의</Text>
                             <View style={styles.iconCon}>
                                 <TouchableOpacity>
-                                    <Ionicons 
+                                    {/* <Ionicons 
                                         name="help-circle-outline" size={50} style={styles.helpIcon}
-                                        onPress={() => this.toggleSettingCModal()}/>
+                                        onPress={() => this.toggleSettingCModal()}/> */}
+                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 50, height: 50 }}
+                                            onPress={() => this.toggleSettingCModal()}/>
                                 </TouchableOpacity>
                                 <TouchableOpacity>
-                                    <Ionicons 
+                                    {/* <Ionicons 
                                         name="exit-outline" size={50} style={styles.logoutIcon}
-                                        onPress={() => this.handleLogout()}/>
+                                        onPress={() => this.handleLogout()}/> */}
+                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 50, height: 50 }}
+                                            onPress={() => this.handleLogout()}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
