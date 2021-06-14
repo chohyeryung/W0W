@@ -57,7 +57,7 @@ export class MainScreen extends Component {
     _bootstrapAsync = async () => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.get(`http://563cefae3f78.ngrok.io/main/main/${userId}`)
+        axios.get(`http://ec2-34-227-38-106.compute-1.amazonaws.com/main/main/${userId}`)
         .then(res => {
             if(res.data.length!=0 && res.data.num!=0){
                 this.setMiddleText(res.data.num+"%")
@@ -109,7 +109,7 @@ export class MainScreen extends Component {
                         ref={this._handleVideoRef}
                         style={styles.video}
                         source={{
-                        uri: `http://563cefae3f78.ngrok.io/uploads/${this.state.imgSrc}.mp4`,
+                        uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com//uploads/${this.state.imgSrc}.mp4`,
                         }}
                         resizeMode="contain"
                         isLooping
