@@ -39,6 +39,10 @@ export class MainScreen extends Component {
       
       }
 
+      componentDidMount() {
+        this._bootstrapAsync();
+      }
+
 
     setMiddleText(MiddleText) {
         this.setState(state => ({
@@ -102,7 +106,7 @@ export class MainScreen extends Component {
                 this.setSea_OY(true)
             }
         })
-        .catch((err)=>alert(err)) 
+        .catch((err)=>alert(err))
 
     };
 

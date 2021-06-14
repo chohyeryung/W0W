@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, DotContent } from 'react-native';
+import { View, Text, Dimensions, DotContent, AsyncStorage } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { Rect, Text as TextSVG, Svg } from "react-native-svg";
 
@@ -28,7 +28,7 @@ export default class Chart extends Component {
     const userId = JSON.parse(userData).userId
     
     // 그래프 data componentDidMount()
-    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate')
+    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', { user_id: userId })
     .then(response => {
         datas: response.data.map( data =>
             {
