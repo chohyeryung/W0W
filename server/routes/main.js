@@ -26,7 +26,13 @@ router.get('/main/:useridx', (req, res) => {
     ]).exec( (err, results) =>{
         if(err) console.log(err);
         let src;
-        let total = results[0].total ? results[0].total : 0
+        let total;
+        if(results.length==0){
+            total = 0
+        }else{
+            total = results[0].total;
+        }
+        // let total = results ? results[0].total : 0
         let num =  Math.round(100/140*total);
         if(num>=100){
             src = image[0]
