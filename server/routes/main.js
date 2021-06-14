@@ -22,7 +22,7 @@ router.get('/main/:useridx', (req, res) => {
 
     Category.aggregate([
         {$match: { userid : useridx , created : ndate}},
-        { $group: { _id: { created: { $substr: ["$created", 0, 7] }, userid:"$userid" }, total: { $sum: "$score" } } }
+        { $group: { _id: { created: "$created", userid:"$userid" }, total: { $sum: "$score" } } }
     ]).exec( (err, results) =>{
         if(err) console.log(err);
         let src;
@@ -32,7 +32,6 @@ router.get('/main/:useridx', (req, res) => {
         }else{
             total = results[0].total;
         }
-        // let total = results ? results[0].total : 0
         let num =  Math.round(100/140*total);
         if(num>=100){
             src = image[0]
