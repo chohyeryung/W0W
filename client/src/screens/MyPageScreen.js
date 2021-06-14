@@ -206,7 +206,7 @@ export class MyPageScreen extends Component {
                         <TouchableOpacity>
                             <Ionicons 
                                 name="chevron-back-outline" size={50} style={{marginLeft: -8, marginBottom: 10}}
-                                onPress={() => this.props.navigation.navigate('MainScreen')}/>
+                                onPress={() => AsyncStorage.removeItem('userData')}/>
                         </TouchableOpacity>
                         <View style={styles.headThCon}>
                             <Text style={styles.topTitle}>{userName}님의</Text>

@@ -6,10 +6,9 @@ import {
     TextInput,
     ScrollView
 } from 'react-native';
-import styles from '../styles/SignInStyles';
+import styles from '../styles/ForgotPassStyles';
 import 'react-native-gesture-handler';
 import axios from 'axios';
-import * as MailComposer from 'expo-mail-composer';
 
 export default class ForgotPasswordScreen extends React.Component {
 
@@ -52,20 +51,13 @@ export default class ForgotPasswordScreen extends React.Component {
         const request = axios({
             method: 'post',
             data: body,
-            url: 'https://c03b8fa24254.ngrok.io/users/forgot_password',
+            url: 'http://ec2-34-227-38-106.compute-1.amazonaws.com/users/forgot_password',
             changeOrigin: true,
         }).then((response) =>{
             return [response.data.sendSuccess, response.data.message];
         })
         request.then(res=> {
             if(res[0]){
-                MailComposer.composeAsync({
-                    subject: 'W0W - 비밀번호 알려드립니다',
-                    body: '123456',
-                    recipients: [this.state.userEmail],
-                    isHtml: true,
-                })
-                alert('이메일로 비밀번호를 보내드렸습니다!')
                 this.props.navigation.navigate('SignIn')
             }else{
                 this.setErrorText(res[1]);
@@ -83,8 +75,10 @@ export default class ForgotPasswordScreen extends React.Component {
                     <ScrollView>
                         {/* header */}
                 <View style={styles.header}>
-                    <Text style={styles.sub_text}>Forgot</Text>
-                    <Text style={styles.main_text}>Password</Text>
+                    <Text style={styles.sub_text}>비밀번호를</Text>
+                    <Text style={styles.main_text}>잊어버리셨나요?</Text>
+                    <Text style={styles.info_text}>와우에 가입했던 이메일을 입력해주세요.</Text>
+                    <Text style={{ fontSize: 20 }}>비밀번호 재설정 메일을 보내드립니다.</Text>
                 </View>
                 {/* footer */}
                 <View style={{ flex: 2, marginTop: 100 }}>
@@ -110,7 +104,7 @@ export default class ForgotPasswordScreen extends React.Component {
                     <View style={{ flex: 3, justifyContent: 'flex-end' }}>
                         {/* sign in button */}
                         <TouchableOpacity style={[styles.login_btn]} onPress={this.handleSubmitPress}>
-                            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold', marginTop: 18, }}>Log In</Text>
+                            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold', marginTop: 18, }}>Submit</Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
