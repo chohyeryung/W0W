@@ -7,10 +7,11 @@ import {
     ScrollView
 } from 'react-native';
 import styles from '../styles/ForgotPassStyles';
+import { FancyAlert } from 'react-native-expo-fancy-alerts';
 import 'react-native-gesture-handler';
 import axios from 'axios';
 
-export default class ForgotPasswordScreen extends React.Component {
+class ForgotPasswordScreen extends React.Component {
 
     constructor(props) {
         super(props);
@@ -18,9 +19,12 @@ export default class ForgotPasswordScreen extends React.Component {
             userEmail: '',
             result: {},
             errorText: '',
+            success: false,
         };
         this.setUserEmail = this.setUserEmail.bind(this);
         this.setErrorText = this.setErrorText.bind(this);
+        this.handleSubmitPress = this.handleSubmitPress.bind(this);
+        this.setSuccess = this.setSuccess.bind(this);
 
     }
 
@@ -33,6 +37,12 @@ export default class ForgotPasswordScreen extends React.Component {
     setErrorText(text) {
         this.setState(state => ({
             errorText: text
+        }))
+    }
+
+    setSuccess(value) {
+        this.setState(state => ({
+            success: value
         }))
     }
 
@@ -58,7 +68,16 @@ export default class ForgotPasswordScreen extends React.Component {
         })
         request.then(res=> {
             if(res[0]){
-                this.props.navigation.navigate('SignIn')
+                axios({
+                    method: 'post',
+                    data: body,
+                    url: 'https://wow-mail.herokuapp.com/send_email',
+                    changeOrigin: true,
+                }).then((response) => {
+                    if(response.data.sendSuccess) {
+                        this.setSuccess(true);
+                    }
+                })
             }else{
                 this.setErrorText(res[1]);
             }
@@ -108,7 +127,26 @@ export default class ForgotPasswordScreen extends React.Component {
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
+                <FancyAlert
+                    visible={this.state.success}
+                    icon={<View style={{
+                        flex: 1,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#35C9C9',
+                        borderRadius: 50,
+                        width: '100%',
+                    }}><Text>👌</Text></View>}
+                    style={{ backgroundColor: 'white' }}
+                    >
+                    <Text style={{ marginTop: -16, marginBottom: 32, textAlign: 'center' }}>이메일을 보내는데 성공하였습니다! {"\n"}이메일을 확인해주세요!</Text>
+                    <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, color: '#fff', backgroundColor: '#35C9C9', borderRadius: 50, width: '100%' }} onPress={() => this.props.navigation.navigate('SignIn')}>
+                        <Text style={{ color: '#ffffff', textAlign: 'center' }}>OK</Text>
+                    </TouchableOpacity>
+                </FancyAlert>
             </View>
         )
     }
 }
+export default ForgotPasswordScreen;
