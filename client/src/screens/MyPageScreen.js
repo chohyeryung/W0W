@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     ImageBackground,
     Image,
-    ScrollView,
     AsyncStorage
 } from 'react-native';
 import axios from 'axios';
@@ -26,7 +25,7 @@ const iconsInfo = [
     {
         imageId: 1,
         src: bowlIcon,
-        width: 86, height:85, marginLeft: 60
+        width: 86, height:85, marginLeft: 55
     },
     {
         imageId: 2,
@@ -36,22 +35,22 @@ const iconsInfo = [
     {
         imageId: 3,
         src: trashIcon,
-        width: 92, height:90, marginLeft: 55
+        width: 92, height:90, marginLeft: 50
     },
     {
         imageId: 4,
         src: recycleIcon,
-        width: 85, height: 74, marginLeft: 60
+        width: 85, height: 74, marginLeft: 55
     },
     {
         imageId: 5,
         src: transIcon,
-        width: 82, height:92, marginLeft: 60
+        width: 82, height:92, marginLeft: 55
     },
     {
         imageId: 6,
         src: etcIcon,
-        width:85.8, height:85, marginLeft: 55
+        width:85.8, height:85.5, marginLeft: 55
     },
 ]
 
@@ -59,24 +58,36 @@ export class MyPageScreen extends Component {
     constructor(props) {
         super(props);
         this.state = { cates: [
-            { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
-            { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
-            { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
-            { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
-            { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
-            { _id: { category: '기타' }, category: '기타', cnt: 0 }
-        ],
-        settingModal: false,
-        settingCModal: false,
-        curCate: '',
+                { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
+                { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
+                { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
+                { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
+                { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
+                { _id: { category: '기타' }, category: '기타', cnt: 0 }
+            ],
+            settingModal: false,
+            settingCModal: false,
+            curCate: '',
+            userName: ''
         };
 
         // this._bootstrapAsync();
     }
 
     componentDidMount = async () => {
+        this.setState({settingCModal: false})
+
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
+
+        //사용자 이름
+        axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/name', {
+            user_id: userId
+        }).then(res => {
+            this.setState({userName: res.data[0].name});
+        })
+        .catch((err)=>alert(err)) 
+
         axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
             user_id: userId
         }).then(res => {
@@ -152,12 +163,18 @@ export class MyPageScreen extends Component {
         this.setState({settingCModal: !this.state.settingCModal})
     }
 
+    handleLogout = async() => {
+        await AsyncStorage.removeItem('userData');
+        
+        this.props.navigation.navigate('SignIn');
+    }
+
     _fetchCate = async() => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.post(' https://8ce38439b644.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
+        axios.post('http://563cefae3f78.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
         .then(res => {
-            axios.post(' https://8ce38439b644.ngrok.io/mypage/cate', { user_id: userId })
+            axios.post('http://563cefae3f78.ngrok.io/mypage/cate', { user_id: userId })
             .then(res => {
                 datas: res.data.map( data =>
                     {
@@ -179,29 +196,34 @@ export class MyPageScreen extends Component {
 
 
     render(){
-        const { cates } = this.state;
-
+        const { cates, userName } = this.state;
+        
         return(
             <ImageBackground
             style={{width: '100%', height: '100%'}}>
                 <View style={styles.container}>
                     <View style={styles.headerContainer}>
-                        {/* <TouchableOpacity>
+                        <TouchableOpacity>
                             <Ionicons 
-                                name="chevron-back-sharp" size={50} style={styles.backIcon}
-                                onPress={() => props.navigation.navigate('SignIn')}/>
-                        </TouchableOpacity> */}
+                                name="chevron-back-outline" size={50} style={{marginLeft: -8, marginBottom: 10}}
+                                onPress={() => this.props.navigation.navigate('MainScreen')}/>
+                        </TouchableOpacity>
                         <View style={styles.headThCon}>
-                            <Text style={styles.topTitle}>쬬이오셩님</Text>
+                            <Text style={styles.topTitle}>{userName}님의</Text>
                             <View style={styles.iconCon}>
                                 <TouchableOpacity>
-                                    <Ionicons 
+                                    {/* <Ionicons 
                                         name="help-circle-outline" size={50} style={styles.helpIcon}
-                                        onPress={() => this.toggleSettingCModal()}/>
+                                        onPress={() => this.toggleSettingCModal()}/> */}
+                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 50, height: 50 }}
+                                            onPress={() => this.toggleSettingCModal()}/>
                                 </TouchableOpacity>
                                 <TouchableOpacity>
-                                    <Ionicons 
-                                        name="exit-outline" size={50} style={styles.logoutIcon}/>
+                                    {/* <Ionicons 
+                                        name="exit-outline" size={50} style={styles.logoutIcon}
+                                        onPress={() => this.handleLogout()}/> */}
+                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 50, height: 50 }}
+                                            onPress={() => this.handleLogout()}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -224,6 +246,7 @@ export class MyPageScreen extends Component {
                                             (
                                                 <Image
                                                 source={item.src}
+                                                key={item.imageId}
                                                 style={{
                                                     width: item.width,
                                                     height: item.height,

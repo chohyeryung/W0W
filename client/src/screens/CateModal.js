@@ -16,32 +16,32 @@ const iconsInfo = [
     {
         imageId: 1,
         src: bowlIcon,
-        width: 105, height:105, marginLeft: 20
+        width: 86, height:85, marginLeft: 35
     },
     {
         imageId: 2,
         src: courIcon,
-        width: 138, height:74, marginLeft: 10
+        width: 108, height:57.5, marginLeft: 25
     },
     {
         imageId: 3,
         src: trashIcon,
-        width: 110, height:110, marginLeft: 20
+        width: 92, height:90, marginLeft: 35
     },
     {
         imageId: 4,
         src: recycleIcon,
-        width: 100, height: 90, marginLeft: 20
+        width: 85, height: 74, marginLeft: 35
     },
     {
         imageId: 5,
         src: transIcon,
-        width: 100, height:110, marginLeft: 20
+        width: 82, height:92, marginLeft: 35
     },
     {
         imageId: 6,
         src: etcIcon,
-        width:100, height:100, marginLeft: 20
+        width:85.8, height:86, marginLeft: 35
     },
 ]
 
@@ -95,7 +95,7 @@ export default class Setting extends React.Component {
                                             width: item.width,
                                             height: item.height,
                                             marginLeft: item.marginLeft,
-                                            marginRight: 20
+                                            marginRight: 45
                                         }}/>
                                     ) : <></>
                                     ]))}

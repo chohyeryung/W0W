@@ -16,26 +16,26 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: '100%',
         width: '100%',
-        backgroundColor: 'rgba(0,0,0,0.5)'
+        backgroundColor: 'rgba(0,0,0,0.5)',
       },
 
       modal: {
-        marginHorizontal: 60,
+        marginHorizontal: 80,
         borderRadius: 20,
         borderWidth: 1,
         borderColor: '#000',
-        alignItems: 'center',
+        justifyContent: 'center',
         marginTop: '20%',
         backgroundColor: 'white',
         height: '80%',
-        padding: 10
       },
 
       headContainer: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         width: '100%',
-        padding: 20
+        padding: 20,
+        paddingLeft: 80
       },
 
       headCon: {
@@ -45,28 +45,21 @@ const styles = StyleSheet.create({
       },  
 
       cateContainer: {
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        marginTop: 15
+        width: '100%',
+        paddingLeft: 50,
+        marginTop: 20
       },
 
       cateCon: {
-        paddingTop: 30,
-        paddingBottom: 30,
-        flex: 1,
         flexDirection: 'row',
-        alignItems: 'center'
-    },
-
-    cateImage: {
-        marginLeft: 50,
-        marginRight: 50
+        alignItems: 'center',
+        paddingTop: 25,
+        paddingBottom: 25,
     },
 
     cateTextView: {
-        flex:1,
         flexDirection:'column',
-        alignItems: 'center'
+        alignItems: 'flex-start'
     },
 
     text_explan: {

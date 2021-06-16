@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     },
 
     headerContainer: {
-        marginTop:80,
-        paddingHorizontal:70,
+        marginTop:50,
+        paddingHorizontal:80,
         flexDirection:'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
     subTitle: {
         fontSize: 30,
         fontWeight: 'bold',
-        color:'#FFFFFF',
-        textShadowColor:'#000000',
-        textShadowOffset:{width: 1, height: 1},
-        textShadowRadius:5,
+        color:'#fff',
+        textShadowColor:'#000',
+        textShadowOffset:{width: 0, height: 0},
+        textShadowRadius:1
     },
 
     conCon: {
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 
     cateContainer: {
         margin:80,
+        marginTop: 55,
         padding: 50,
         shadowColor: "rgb(50,50,50)",
         shadowOffset: {
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
 
         elevation: 25,
         borderRadius: 20,
-        height: 950,
+        height: 900,
         flexDirection: 'column',
         justifyContent: 'space-around',
         backgroundColor: '#fff'

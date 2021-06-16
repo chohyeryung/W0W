@@ -41,7 +41,7 @@ export default class QrcodeScannerScreen extends Component {
   };
 
   _handleBarCodeRead = result => {
-    if (result.data === 'https://8ce38439b644.ngrok.io/qrcode/pointing') {
+    if (result.data === 'http://563cefae3f78.ngrok.io/qrcode/pointing') {
       if (result.data !== this.state.lastScannedUrl) {
         this.setState({ lastScannedUrl: result.data });
   
