@@ -89,7 +89,8 @@ router.post("/forgot_password", (req, res) => {
             });
         } else {
             return res.status(200).send({
-                sendSuccess: true
+                sendSuccess: true,
+                name: user.name
             })
         }
     })
@@ -102,7 +103,16 @@ router.post("/change_password", (req, res) => {
                 changeSuccess: false
             });
         } else {
-            User.findOneAndUpdate({ email: req.body.email }, { password: req.body.password }, (err, doc) => {
+            let password = req.body.new_pw;
+            bcrypt.genSalt(saltRounds, (err, salt)=>{
+                if(err) return next(err);
+        
+                bcrypt.hash(password, salt, (err, hash)=>{
+                    if(err) return next(err);
+                    password = hash
+                })
+            })
+            User.findOneAndUpdate({ email: req.body.email }, { password: password }, (err, doc) => {
                 if (err) return res.json({ changeSuccess: false, err });
                 return res.status(200).send({
                     changeSuccess: true
