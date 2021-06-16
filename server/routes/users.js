@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
+const saltRounds = 10;
+const bcrypt = require('bcrypt');
 
 router.get("/auth", auth, (req, res) => {
     res.status(200).json({
@@ -105,18 +107,19 @@ router.post("/change_password", (req, res) => {
         } else {
             let password = req.body.new_pw;
             bcrypt.genSalt(saltRounds, (err, salt)=>{
-                if(err) return next(err);
-        
+                if(err) return console.log(err);
+                
                 bcrypt.hash(password, salt, (err, hash)=>{
-                    if(err) return next(err);
+                    if(err) return console.log(err);
                     password = hash
+
+                    User.findOneAndUpdate({ email: req.body.email }, { password: password }, (err, doc) => {
+                        if (err) return res.json({ changeSuccess: false, err });
+                        return res.status(200).send({
+                            changeSuccess: true
+                        });
+                    })
                 })
-            })
-            User.findOneAndUpdate({ email: req.body.email }, { password: password }, (err, doc) => {
-                if (err) return res.json({ changeSuccess: false, err });
-                return res.status(200).send({
-                    changeSuccess: true
-                });
             })
         }
     })
