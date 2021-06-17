@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Noto Sans KR',
     },
     topText:{
+    
         fontSize:100,
         marginTop:40,
         marginLeft:70,

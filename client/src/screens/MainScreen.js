@@ -21,7 +21,7 @@ export class MainScreen extends Component {
             middleText: 'ZERO',
             bottomText: 'WASTE',
             imgSrc : '',
-            sea_OY : false,
+            sea_OY : true,
             sea_GB : false,
             sea_BN : false,
             sea_YG :  false
@@ -97,16 +97,29 @@ export class MainScreen extends Component {
                 this.setBottomText("SAVING")
 
                 this.setImgSrc(res.data.src)
-                if(res.data.src=="sea_BN") this.setSea_BN(true)
-                else if(res.data.src=="sea_OY") this.setSea_OY(true)
-                else if(res.data.src == "sea_YG") this.setSea_YG(true)
-                else if(res.data.src == "sea_GB") this.setSea_GB(true) 
+                if(res.data.src=="sea_BN"){
+                    this.setSea_BN(true)
+                    this.setSea_OY(false)
+                }else if(res.data.src=="sea_OY"){
+                    this.setSea_OY(true)
+                }
+                else if(res.data.src == "sea_YG"){
+                    this.setSea_YG(true)
+                    this.setSea_OY(false)
+
+                } 
+                else {
+                    this.setSea_GB(true) 
+                    this.setSea_OY(false)
+
+                }
             }else{
                 this.setSea_OY(true)
             }
         })
         .catch((err)=>alert(err))
 
+        
     };
 
    
