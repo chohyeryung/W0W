@@ -1,4 +1,4 @@
-/* global kakao */
+ad/* global kakao */
 import React from "react";
 import "react-native-gesture-handler";
 
