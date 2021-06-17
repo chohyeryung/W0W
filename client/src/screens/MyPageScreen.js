@@ -14,12 +14,12 @@ import Modal from './PointModal';
 import CModal from './CateModal';
 import styles from "../styles/MyPageStyles";
 
-import bowlIcon from '../../assets/1.png';
-import courIcon from '../../assets/2.png';
-import trashIcon from '../../assets/3.png';
-import recycleIcon from '../../assets/4.png';
-import transIcon from '../../assets/5.png';
-import etcIcon from '../../assets/6.png';
+import bowlIcon from '../image/mypage/1.png';
+import courIcon from '../image/mypage/2.png';
+import trashIcon from '../image/mypage/3.png';
+import recycleIcon from '../image/mypage/4.png';
+import transIcon from '../image/mypage/5.png';
+import etcIcon from '../image/mypage/6.png';
 
 const iconsInfo = [
     {
@@ -158,16 +158,16 @@ export class MyPageScreen extends Component {
                         <TouchableOpacity>
                             <Ionicons 
                                 name="chevron-back-outline" size={60} style={{marginLeft: -8, marginBottom: 10}}
-                                onPress={() => this.handleLogout()}/>
+                                onPress={() => this.props.navigation.navigate('MainScreen')}/>
                         </TouchableOpacity>
                         <View style={styles.headThCon}>
                             <Text style={styles.topTitle}>{userName}님의</Text>
                             <View style={styles.iconCon}>
                                 <TouchableOpacity onPress={() => this.toggleSettingCModal()}>
-                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 70, height: 70 }}/>
+                                    <Image source={require('../image/mypage/c_help_icon.png')} style={{ width: 70, height: 70 }}/>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.handleLogout()}>
-                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 47, height: 45 }}/>
+                                    <Image source={require('../image/mypage/logout_icon.png')} style={{ width: 47, height: 45 }}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -181,9 +181,9 @@ export class MyPageScreen extends Component {
                             {cates.map((cate, index) => {
                                 return (
                                     <TouchableOpacity
-                                        key={cate.category}
+                                        key={cate.index}
                                         onPress={(e) => this.toggleSettingModal(cate.category)}>
-                                        <View key={index}
+                                        <View key={cate.id}
                                             style={[ index+1!==6 ? styles.cateCon : 
                                         [styles.cateCon, {borderBottomWidth: 1, borderStyle: 'solid', borderBottomColor: '#fff',  paddingBottom: 20,}]]} onClick={this.handleClick}>
                                             {iconsInfo.map((item) => ([
