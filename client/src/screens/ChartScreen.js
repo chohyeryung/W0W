@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 import { _getLastYYYYMM, _getYYYYMM } from "../Fuction";
 import styles from "../styles/ChartStyle";
+import Loader from './Loader';
 
 export default class Chart extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class Chart extends Component {
           { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
           { _id: { category: '기타' }, category: '기타', cnt: 0 }
         ],
+        loading: false,
         months: [{_id: {created: _getLastYYYYMM()}, total: 0}, {_id: {created: _getYYYYMM()}, total: 0}],
     }
   }
@@ -28,8 +30,9 @@ export default class Chart extends Component {
     const userData = await AsyncStorage.getItem('userData');
     const userId = JSON.parse(userData).userId
     
+    this.setState({ loading: true });
     // 그래프 data componentDidMount()
-    axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
+    await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
         user_id: userId
     }).then(res => {
         datas: res.data.map( data => {
@@ -46,7 +49,7 @@ export default class Chart extends Component {
     .catch((err)=>alert(err)) 
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics', { user_id: userId })
+    await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics', { user_id: userId })
     .then(res => {
 
       res.data.map( data => {
@@ -59,15 +62,23 @@ export default class Chart extends Component {
           )
         })
       })
-    })  
+    })
+    .catch((err)=>alert(err)) 
+
+    this.setState({ loading: false });
 
   }
 
+
+
   render() {
-    const { cates, months } = this.state;
+    const { cates, loading, months } = this.state;
 
     return (
-      <View style={styles.Container}>
+      loading ?
+      ( <Loader type="spin" color="#f6dba5" /> )
+      : (
+        <View style={styles.Container}>
         <View style={styles.firCon}>
             <TouchableOpacity style={{ flexDirection: 'row' }}>
                 <Ionicons 
@@ -153,6 +164,9 @@ export default class Chart extends Component {
         </View>
 
       </View>
+      )
+
+      
     )
   }
 }
