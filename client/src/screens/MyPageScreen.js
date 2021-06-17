@@ -183,7 +183,7 @@ export class MyPageScreen extends Component {
                                     <TouchableOpacity
                                         key={cate.index}
                                         onPress={(e) => this.toggleSettingModal(cate.category)}>
-                                        <View key={cate.id}
+                                        <View key={cate.index}
                                             style={[ index+1!==6 ? styles.cateCon : 
                                         [styles.cateCon, {borderBottomWidth: 1, borderStyle: 'solid', borderBottomColor: '#fff',  paddingBottom: 20,}]]} onClick={this.handleClick}>
                                             {iconsInfo.map((item) => ([
