@@ -58,12 +58,12 @@ export class MyPageScreen extends Component {
     constructor(props) {
         super(props);
         this.state = { cates: [
-                { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
-                { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
-                { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
-                { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
-                { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
-                { _id: { category: '기타' }, category: '기타', cnt: 0 }
+                { id:1, _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
+                { id:2, _id: { category: '용기내' }, category: '용기내', cnt: 0 },
+                { id:3, _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
+                { id:4, _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
+                { id:5, _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
+                { id:6, _id: { category: '기타' }, category: '기타', cnt: 0 }
             ],
             settingModal: false,
             settingCModal: false,
@@ -157,17 +157,17 @@ export class MyPageScreen extends Component {
                     <View style={styles.headerContainer}>
                         <TouchableOpacity>
                             <Ionicons 
-                                name="chevron-back-outline" size={50} style={{marginLeft: -8, marginBottom: 10}}
-                                onPress={() => AsyncStorage.removeItem('userData')}/>
+                                name="chevron-back-outline" size={60} style={{marginLeft: -8, marginBottom: 10}}
+                                onPress={() => this.handleLogout()}/>
                         </TouchableOpacity>
                         <View style={styles.headThCon}>
                             <Text style={styles.topTitle}>{userName}님의</Text>
                             <View style={styles.iconCon}>
                                 <TouchableOpacity onPress={() => this.toggleSettingCModal()}>
-                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 50, height: 50 }}/>
+                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 70, height: 70 }}/>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.handleLogout()}>
-                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 50, height: 50 }}/>
+                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 47, height: 45 }}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -183,7 +183,8 @@ export class MyPageScreen extends Component {
                                     <TouchableOpacity
                                         key={cate.category}
                                         onPress={(e) => this.toggleSettingModal(cate.category)}>
-                                        <View style={[ index+1!==6 ? styles.cateCon : 
+                                        <View key={index}
+                                            style={[ index+1!==6 ? styles.cateCon : 
                                         [styles.cateCon, {borderBottomWidth: 1, borderStyle: 'solid', borderBottomColor: '#fff',  paddingBottom: 20,}]]} onClick={this.handleClick}>
                                             {iconsInfo.map((item) => ([
                                             item.imageId === (index+1) ?

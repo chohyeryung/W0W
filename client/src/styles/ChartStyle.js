@@ -44,20 +44,19 @@ const styles = StyleSheet.create({
 
     totalCon: {
         flexDirection: 'column',
-        paddingLeft: 30,
+        paddingLeft: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
 
     text_total: {
-        fontSize: 42,
+        fontSize: 55,
         fontWeight: 'bold',
-        margin:20
+        margin:10
     },
 
     text_created: {
-        fontSize: 28,
-        textAlign: 'right'
+        fontSize: 28
     },
 
     line: {

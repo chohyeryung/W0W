@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     iconCon: {
         width: 115,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
 
     backIcon: {
@@ -38,16 +39,16 @@ const styles = StyleSheet.create({
         color:'#000',
     },
     topTitle: {
-        fontSize: 38,
+        fontSize: 45,
         fontWeight: 'bold',
     },
     subTitle: {
-        fontSize: 30,
+        fontSize: 40,
         fontWeight: 'bold',
         color:'#fff',
         textShadowColor:'#000',
         textShadowOffset:{width: 0, height: 0},
-        textShadowRadius:1
+        textShadowRadius:2
     },
 
     conCon: {

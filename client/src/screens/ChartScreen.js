@@ -74,7 +74,7 @@ export default class Chart extends Component {
                     name="chevron-back-outline" size={50} style={{ marginLeft: -8, marginBottom: 80 }}
                     onPress={() => this.props.navigation.navigate('MainScreen')}/>
             </TouchableOpacity>
-            <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30}}>STATISTICS</Text>
+            <Text style={{ fontSize: 38, fontWeight: 'bold', marginBottom: 30}}>STATISTICS</Text>
             <View style={styles.staContainer}>
               {months.map((month, index) => (
                   <View style={styles.contentCon} key={index}>
@@ -84,15 +84,15 @@ export default class Chart extends Component {
                         {[
                           month._id.created == _getYYYYMM() ?
                           '이번달'
-                          : '저번달'
+                          : '지난달'
                         ]}
                       </Text>
                     </View>
                     <View style={[
                       styles.line,
                       month._id.created == _getYYYYMM() ?
-                      { backgroundColor: '#FFE071' }
-                      : {backgroundColor: '#FF6060'}
+                      { backgroundColor: '#FFE071', width: 10 }
+                      : {backgroundColor: '#FF6060', width: 10 }
                     ]}/>
                   </View>
               ))}
@@ -102,10 +102,10 @@ export default class Chart extends Component {
 
         <View style={styles.lineBox}>
             <Text style={{ marginBottom: 30 }}>
-              <Text style={{fontSize: 32, fontWeight: 'bold'}}>CATEGORY  </Text>
-              <Text style={{ color: '#fff', fontSize: 35, fontWeight: 'bold', textShadowColor:'#000',
+              <Text style={{fontSize: 38, fontWeight: 'bold'}}>CATEGORY </Text>
+              <Text style={{ color: '#fff', fontSize: 40, fontWeight: 'bold', textShadowColor:'#000',
               textShadowOffset:{width: 0, height: 0},
-              textShadowRadius:1, }}>GRAPH</Text>
+              textShadowRadius:2, }}>GRAPH</Text>
             </Text>
             <LineChart
             data = {{

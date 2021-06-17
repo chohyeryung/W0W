@@ -69,7 +69,8 @@ export default class Setting extends React.Component {
                     <View style={styles.cateContainer}>
                         {cateList.map((cate, index) => {
                             return (
-                                <View style={styles.cateCon}>
+                                <View key={index}
+                                    style={styles.cateCon}>
                                     {/* <Image
                                     source={require(`../../assets/1.png`)}
                                     style={[styles.cateImage,
