@@ -172,9 +172,9 @@ export class MyPageScreen extends Component {
     _fetchCate = async() => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.post('http://563cefae3f78.ngrok.io/mypage/pointing', {ca : this.state.curCate, user_id: userId})
+        axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/pointing', {ca : this.state.curCate, user_id: userId})
         .then(res => {
-            axios.post('http://563cefae3f78.ngrok.io/mypage/cate', { user_id: userId })
+            axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', { user_id: userId })
             .then(res => {
                 datas: res.data.map( data =>
                     {
@@ -211,19 +211,11 @@ export class MyPageScreen extends Component {
                         <View style={styles.headThCon}>
                             <Text style={styles.topTitle}>{userName}님의</Text>
                             <View style={styles.iconCon}>
-                                <TouchableOpacity>
-                                    {/* <Ionicons 
-                                        name="help-circle-outline" size={50} style={styles.helpIcon}
-                                        onPress={() => this.toggleSettingCModal()}/> */}
-                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 50, height: 50 }}
-                                            onPress={() => this.toggleSettingCModal()}/>
+                                <TouchableOpacity onPress={() => this.toggleSettingCModal()}>
+                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 50, height: 50 }}/>
                                 </TouchableOpacity>
-                                <TouchableOpacity>
-                                    {/* <Ionicons 
-                                        name="exit-outline" size={50} style={styles.logoutIcon}
-                                        onPress={() => this.handleLogout()}/> */}
-                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 50, height: 50 }}
-                                            onPress={() => this.handleLogout()}/>
+                                <TouchableOpacity onPress={() => this.handleLogout()}>
+                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 50, height: 50 }}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
