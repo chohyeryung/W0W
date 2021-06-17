@@ -95,4 +95,21 @@ router.post("/forgot_password", (req, res) => {
     })
 })
 
+router.post("/change_password", (req, res) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
+        if(!user) {
+            return res.json({
+                changeSuccess: false
+            });
+        } else {
+            User.findOneAndUpdate({ email: req.body.email }, { password: req.body.password }, (err, doc) => {
+                if (err) return res.json({ changeSuccess: false, err });
+                return res.status(200).send({
+                    changeSuccess: true
+                });
+            })
+        }
+    })
+})
+
 module.exports = router;

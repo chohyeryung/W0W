@@ -13,7 +13,8 @@ import 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
-import PrivacyModal from './PrivacyModal';
+import { FancyAlert } from 'react-native-expo-fancy-alerts'
+import config from '../data/privacy';
 
 class RegisterScreen extends React.Component {
 
@@ -31,6 +32,7 @@ class RegisterScreen extends React.Component {
         this.passwordInputRef = createRef();
 
         this.onChecked = this.onChecked.bind(this);
+        this.onModalChecked = this.onModalChecked.bind(this);
         this.setUserName = this.setUserName.bind(this);
         this.setUserEmail = this.setUserEmail.bind(this);
         this.setUserPassword = this.setUserPassword.bind(this);
@@ -103,7 +105,7 @@ class RegisterScreen extends React.Component {
         const request = axios({
             method: 'post',
             data: body,
-            url: 'http://563cefae3f78.ngrok.io/users/register',
+            url: 'http://ec2-34-227-38-106.compute-1.amazonaws.com/users/register',
             changeOrigin: true,
         }).then((response) =>{
             return [response.data.registerSuccess, response.data.message];
@@ -228,13 +230,28 @@ class RegisterScreen extends React.Component {
                             </View>
                         </View>
                     </ScrollView>
-                    {this.state.modal_clicked ? (
-                        <PrivacyModal />
-                        ) :
-                        (
-                        <></>
-                        )
-                    }
+                    <FancyAlert
+                        visible={this.state.modal_clicked}
+                        icon={<View style={{
+                            flex: 1,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: '#35C9C9',
+                            borderRadius: 50,
+                            width: '100%',
+                        }}><Text>🔔</Text></View>}
+                        style={{ backgroundColor: 'white' }}
+                        >
+                        <ScrollView style={{ height: 700 }}>
+                            <Text style={{ marginBottom: 16 }}>
+                              {config.TEXT}
+                            </Text>
+                        </ScrollView>
+                        <TouchableOpacity style={{ padding: 15, marginTop: 40, marginBottom: 10, color: '#fff', backgroundColor: '#35C9C9', borderRadius: 50, width: '100%' }} onPress={() => this.onModalChecked() }>
+                            <Text style={{ textAlign: 'center', color: 'white' }}>OK</Text>
+                        </TouchableOpacity>
+                    </FancyAlert>
                 </View>
         )
     }

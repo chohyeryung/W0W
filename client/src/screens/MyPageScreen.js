@@ -71,7 +71,6 @@ export class MyPageScreen extends Component {
             userName: ''
         };
 
-        // this._bootstrapAsync();
     }
 
     componentDidMount = async () => {
@@ -103,53 +102,6 @@ export class MyPageScreen extends Component {
             })
         })
         .catch((err)=>alert(err)) 
-
-
-        // axios({
-        //     method: 'post',
-        //     data: body,
-        //     url: ' https://c7af7e6e7a28.ngrok.io/mypage/cate',
-        //     changeOrigin: true,
-        // }).then((response) => {
-        //     AsyncStorage.getItem(
-        //         'userData', 
-        //         JSON.stringify({
-        //             userId: response.data.userId
-        //     }))
-        // })
-        // const userData = await AsyncStorage.getItem('userData');
-    //   alert(userData)
-
-        // axios.post(' https://c7af7e6e7a28.ngrok.io/mypage/cate', {userId: userData.userId})
-        //     .then(response => {
-        //         datas: response.data.map( data => {
-        //             const { cates } = this.state;
-        //             this.setState({
-        //                 cates: cates.map( cate => 
-        //                     cate.category == data.category
-        //                     ? cate = data
-        //                     : cate
-        //                 )
-        //             })
-        //         }
-        //     )
-        // })
-        
-        // axios.get('http://e1b32a057e61.ngrok.io/mypage/cate')
-        //     .then(response => {
-        //         datas: response.data.map( data => {
-        //             const { cates } = this.state;
-        //             this.setState({
-        //                 cates: cates.map( cate => 
-        //                     cate.category == data.category
-        //                     ? cate = data
-        //                     : cate
-        //                 )
-        //             })
-        //         }
-        //     )
-              
-        // })
     }
     
     toggleSettingModal = (cate) => {
@@ -206,7 +158,7 @@ export class MyPageScreen extends Component {
                         <TouchableOpacity>
                             <Ionicons 
                                 name="chevron-back-outline" size={50} style={{marginLeft: -8, marginBottom: 10}}
-                                onPress={() => this.props.navigation.navigate('MainScreen')}/>
+                                onPress={() => AsyncStorage.removeItem('userData')}/>
                         </TouchableOpacity>
                         <View style={styles.headThCon}>
                             <Text style={styles.topTitle}>{userName}님의</Text>

@@ -108,7 +108,6 @@ export default class Chart extends Component {
               textShadowRadius:1, }}>GRAPH</Text>
             </Text>
             <LineChart
-            // style={styles.lineChart}
             data = {{
                 labels: cates.map(cate => cate.category),
                 datasets: [{
