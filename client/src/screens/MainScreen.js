@@ -100,7 +100,7 @@ export class MainScreen extends Component {
                 if(res.data.src=="sea_BN") this.setSea_BN(true)
                 else if(res.data.src=="sea_OY") this.setSea_OY(true)
                 else if(res.data.src == "sea_YG") this.setSea_YG(true)
-                else this.setSea_GB(true)
+                else if(res.data.src == "sea_GB") this.setSea_GB(true) 
             }else{
                 this.setSea_OY(true)
             }
@@ -160,7 +160,7 @@ export class MainScreen extends Component {
                         />}
                         {this.state.sea_GB && <Video
                             ref={this._handleVideoRef}
-                            style={styles.video_GB}
+                            style={styles.video_OY}
                             source={{
                             uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_GB.mp4`,
                             }}
