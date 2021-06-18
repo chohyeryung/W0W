@@ -124,8 +124,13 @@ export class MainScreen extends Component {
 
    
     _handleVideoRef = component => {
-        const playbackObject = component;
-        playbackObject.setStatusAsync({ shouldPlay: true });
+        try{
+            const playbackObject = component;
+            playbackObject.setStatusAsync({ shouldPlay: true });
+        }catch(e){
+            console.log(e)
+        }
+       
     }
 
     render(){
