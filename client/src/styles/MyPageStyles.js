@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
         width: 115,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 10
     },
 
     backIcon: {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     subTitle: {
-        fontSize: 40,
+        fontSize: 45,
         fontWeight: 'bold',
         color:'#fff',
         textShadowColor:'#000',
