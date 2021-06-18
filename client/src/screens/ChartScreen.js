@@ -148,6 +148,7 @@ export default class Chart extends Component {
             }}
 
             bezier
+            fromZero
             style={{
               borderRadius: 20,
               borderWidth: 1,
