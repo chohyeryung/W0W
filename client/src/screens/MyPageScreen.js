@@ -121,6 +121,10 @@ export class MyPageScreen extends Component {
         this.setState({settingCModal: !this.state.settingCModal})
     }
 
+    toggleCancelModal = () => {
+        this.setState({settingModal: !this.state.settingModal})
+    }
+
     handleLogout = async() => {
         await AsyncStorage.removeItem('userData');
         
@@ -174,7 +178,7 @@ export class MyPageScreen extends Component {
                                 <Text style={styles.topTitle}>{userName}님의</Text>
                                 <View style={styles.iconCon}>
                                     <TouchableOpacity onPress={() => this.toggleSettingCModal()}>
-                                        <Image source={require('../image/mypage/c_help_icon.png')} style={{ width: 70, height: 70 }}/>
+                                        <Image source={require('../image/mypage/help_icon.png')} style={{ width: 55, height: 55 }}/>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => this.handleLogout()}>
                                         <Image source={require('../image/mypage/logout_icon.png')} style={{ width: 47, height: 45 }}/>
@@ -225,7 +229,7 @@ export class MyPageScreen extends Component {
                     </View>
                     { this.state.settingModal ? 
                     <Modal modalHandler = {() => this.toggleSettingModal()} 
-                            modalCancelHandler = {() => this.toggleSettingCModal()}
+                            modalCancelHandler = {() => this.toggleCancelModal()}
                             cate = {this.state.curCate} 
                             settingHandler = {() => this._fetchCate()}/> : <></> }
     
