@@ -8,7 +8,7 @@ import {
     Image,
     Text, 
     TouchableOpacity,
-    StyleSheet
+    BackHandler
 } from 'react-native';
 
 import styles from '../styles/MainStyle';
@@ -37,6 +37,12 @@ export class MainScreen extends Component {
         this._bootstrapAsync();
 
       
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            ()=>{
+                BackHandler.exitApp()
+            }
+        )
       }
 
       componentDidMount() {

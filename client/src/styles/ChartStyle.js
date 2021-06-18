@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
         height: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        shadowColor: "rgb(50,50,50)",
         shadowOffset: {
             width: 0,
             height: 0,
