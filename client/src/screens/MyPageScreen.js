@@ -225,6 +225,7 @@ export class MyPageScreen extends Component {
                     </View>
                     { this.state.settingModal ? 
                     <Modal modalHandler = {() => this.toggleSettingModal()} 
+                            modalCancelHandler = {() => this.toggleSettingCModal()}
                             cate = {this.state.curCate} 
                             settingHandler = {() => this._fetchCate()}/> : <></> }
     
