@@ -28,11 +28,10 @@ const styles = StyleSheet.create({
     },
 
     iconCon: {
-        width: 115,
+        width: 130,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 10
     },
 
     backIcon: {
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     subTitle: {
-        fontSize: 45,
+        fontSize: 50,
         fontWeight: 'bold',
         color:'#fff',
         textShadowColor:'#000',
@@ -61,15 +60,15 @@ const styles = StyleSheet.create({
         margin:80,
         marginTop: 55,
         padding: 50,
-        shadowColor: "rgb(50,50,50)",
+        shadowColor: "#e3e7e8",
         shadowOffset: {
             width: 0,
             height: 0,
         },
-        shadowOpacity: 0.55,
-        shadowRadius: 16,
-
-        elevation: 25,
+        shadowOpacity: 0.1,
+        shadowRadius: 5.00,
+        
+        elevation: 24,
         borderRadius: 20,
         height: 900,
         flexDirection: 'column',

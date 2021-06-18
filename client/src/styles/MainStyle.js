@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     },
     statistics_icon :{
         width:140,
-        height:140,
+        height:140.5,
         marginTop:32
     }
 });
