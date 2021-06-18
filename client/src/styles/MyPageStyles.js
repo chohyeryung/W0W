@@ -60,15 +60,11 @@ const styles = StyleSheet.create({
         margin:80,
         marginTop: 55,
         padding: 50,
-        shadowColor: "#e3e7e8",
-        shadowOffset: {
-            width: 0,
-            height: 0,
-        },
+        shadowColor: "#fafafa",
         shadowOpacity: 0.1,
-        shadowRadius: 5.00,
+        shadowRadius: 10.00,
         
-        elevation: 24,
+        elevation: 5,
         borderRadius: 20,
         height: 900,
         flexDirection: 'column',
