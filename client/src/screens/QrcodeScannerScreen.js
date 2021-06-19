@@ -147,7 +147,7 @@ export default class QrcodeScannerScreen extends Component {
           style={{ backgroundColor: 'white' }}
         >
           <Text style={{ marginTop: -16, marginBottom: 32 }}>5포인트 적립했습니다!</Text>
-          <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, color: '#fff', backgroundColor: 'green', borderRadius: 50, width: '100%' }} onPress={() => this.props.navigation.navigate('MainScreen')}>
+          <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, color: '#fff', backgroundColor: 'green', borderRadius: 50, width: '100%' }} onPress={() => this.props.navigation.replace('MainScreen')}>
             <Text>OK</Text>
           </TouchableOpacity>
         </FancyAlert>
