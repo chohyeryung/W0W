@@ -8,7 +8,7 @@ import {
     Image,
     Text, 
     TouchableOpacity,
-    StyleSheet
+    BackHandler
 } from 'react-native';
 
 import styles from '../styles/MainStyle';
@@ -37,6 +37,7 @@ export class MainScreen extends Component {
         this._bootstrapAsync();
 
       
+       
       }
 
       componentDidMount() {
@@ -128,15 +129,22 @@ export class MainScreen extends Component {
             const playbackObject = component;
             playbackObject.setStatusAsync({ shouldPlay: true });
         }catch(e){
-            console.log(e)
+            const playbackObject = component;
+
+            // alert(e)   
         }
        
     }
 
+
+    _handleLoadMore = () => {
+        this._bootstrapAsync();
+      }
+
     render(){
 
         return (
-            <View style={styles.container}>
+            <View style={styles.container} onEndReached={this._handleLoadMore}>
                 <View style={styles.headerContainer}>                  
                     <Text style={styles.topText}>WITH</Text>
                     <Text style={styles.middleText}>{this.state.middleText}</Text>

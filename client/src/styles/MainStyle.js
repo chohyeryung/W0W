@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     
         fontSize:100,
         marginTop:40,
-        marginLeft:70,
+        marginLeft:90,
         fontWeight: 'bold',
         color:'#FFFFFF',
         textShadowColor:'#000000',
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         textShadowRadius:5,
     },
     middleText:{
-        marginLeft:70,
+        marginLeft:90,
         fontSize:100,
         fontWeight: 'bold',
         
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     },
     video_OY: {
         marginTop:45,
-        width: 560,
-        height: 624,
+        width: 590,
+        height: 654,
         position: 'absolute'
     },
     video_YG: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     bottomText:{
-        marginLeft:70,
+        marginLeft:90,
         fontSize:100,
         fontWeight: 'bold',
         color:'#FFFFFF',
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
         textShadowRadius:5,
     },
     icon:{
-        marginTop:20,
-        marginLeft:70
+        marginTop:30,
+        marginLeft:90
     },
     category_icon :{
         width:140,
