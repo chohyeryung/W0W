@@ -57,10 +57,10 @@ export class MainScreen extends Component {
 
 
             }
+            this.setState({ loading: false });
 
         })
         .catch((err)=>alert("데이터를 불러오는데 실패했습니다."))
-        this.setState({ loading: false });
 
     }
 
@@ -89,6 +89,7 @@ export class MainScreen extends Component {
                     <Text style={styles.middleText}>{middleText}</Text>
                     <Text style={styles.bottomText}>{bottomText}</Text>
                 </View>
+                
                 <View style={styles.footerContainer}>
                     <View style={styles.icon}>
                         <TouchableOpacity onPress={() =>   this.props.navigation.navigate('MyPage')}>
