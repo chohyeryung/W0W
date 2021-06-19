@@ -99,7 +99,16 @@ class SignInScreen extends React.Component {
                 AsyncStorage.setItem(
                     'userData',
                     JSON.stringify({
-                      userId: response.data.userId
+                      userId: response.data.userId,
+                      login : true
+                    })
+                  );
+            }else{
+                AsyncStorage.setItem(
+                    'userData',
+                    JSON.stringify({
+                      userId: response.data.userId,
+                      login : false
                     })
                   );
             }
