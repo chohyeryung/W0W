@@ -21,7 +21,7 @@ export class MainScreen extends Component {
             middleText: 'ZERO',
             bottomText: 'WASTE',
             imgSrc : '',
-            sea_OY : false,
+            sea_OY : true,
             sea_GB : false,
             sea_BN : false,
             sea_YG :  false,
@@ -72,7 +72,7 @@ export class MainScreen extends Component {
             playbackObject.setStatusAsync({ shouldPlay: true });
 
         }catch(e){
-            console.log(e)
+            console.log("동영상을 불러오는데 실패했습니다.")
         }
        
     }
@@ -81,9 +81,9 @@ export class MainScreen extends Component {
         const { middleText,bottomText,sea_BN,sea_YG,sea_GB,sea_OY,loading } = this.state;
 
         return (
-            loading ?
-            ( <Loader type="spin" color="#f6dba5" /> )
-            : <View style={styles.container}>
+            // loading ?
+            // ( <Loader type="spin" color="#f6dba5" /> )
+             <View style={styles.container}>
                 <View style={styles.headerContainer}>                  
                     <Text style={styles.topText}>WITH</Text>
                     <Text style={styles.middleText}>{middleText}</Text>

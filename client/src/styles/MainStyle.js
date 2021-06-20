@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet ,Dimensions} from "react-native";
 
 
 const styles = StyleSheet.create({
@@ -12,11 +12,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         fontFamily: 'Noto Sans KR',
     },
-    topText:{
-    
-        fontSize:100,
-        marginTop:40,
-        marginLeft:90,
+    topText:{    
+        fontSize:Dimensions.get('window').width * 0.13,
+        marginTop:Dimensions.get('window').height * 0.04,
+        marginLeft:Dimensions.get('window').width * 0.1,
         fontWeight: 'bold',
         color:'#FFFFFF',
         textShadowColor:'#000000',
@@ -24,75 +23,76 @@ const styles = StyleSheet.create({
         textShadowRadius:5,
     },
     middleText:{
-        marginLeft:90,
-        fontSize:100,
+        marginLeft:Dimensions.get('window').width * 0.1,
+        fontSize:Dimensions.get('window').width * 0.13,
         fontWeight: 'bold',
-        
-       
-    },
-    video_BN: {
-        marginTop:45,
-        width: 600,
-        height: 624,
-        position: 'absolute'
-        
-    },
-    video_GN: {
-        marginTop:45,
-        width: 600,
-        height: 624,
-        position: 'absolute'
-    },
-    video_OY: {
-        marginTop:45,
-        width: 590,
-        height: 654,
-        position: 'absolute'
-    },
-    video_YG: {
-        marginTop:45,
-        width: 600,
-        height: 624,
-        position: 'absolute'
     },
     footerContainer:{
         flexDirection: 'row',
-        flex : 0.8
+        flex : 0.8,
+        marginTop : Dimensions.get('window').width * 0.01,
     },
     bottomText:{
-        marginLeft:90,
-        fontSize:100,
+        marginLeft:Dimensions.get('window').width * 0.1,
+        fontSize:Dimensions.get('window').width * 0.13,
         fontWeight: 'bold',
         color:'#FFFFFF',
         textShadowColor:'#000000',
         textShadowOffset:{width: 1, height: 1},
         textShadowRadius:5,
     },
+
+    video_BN: {
+        marginTop : Dimensions.get('window').width * 0.06,
+        width: Dimensions.get('window').width * 0.7,
+        height:  Dimensions.get('window').width * 0.85,
+        position: 'absolute'
+        
+    },
+    video_GN: {
+        marginTop : Dimensions.get('window').width * 0.06,
+        width: Dimensions.get('window').width * 0.7,
+        height:  Dimensions.get('window').width * 0.85,
+        position: 'absolute'
+    },
+    video_OY: {
+        marginTop : Dimensions.get('window').width * 0.06,
+        width: Dimensions.get('window').width * 0.7,
+        height:  Dimensions.get('window').width * 0.85,
+        position: 'absolute'
+    },
+    video_YG: {
+        marginTop : Dimensions.get('window').width * 0.06,
+        width: Dimensions.get('window').width * 0.7,
+        height:  Dimensions.get('window').width * 0.85,
+        position: 'absolute'
+    },
+    
     icon:{
-        marginTop:30,
-        marginLeft:90
+        marginTop: Dimensions.get('window').width * 0.03,
+        marginLeft: Dimensions.get('window').width * 0.1,
     },
     category_icon :{
-        width:140,
-        height:140,
+        width: Dimensions.get('window').width * 0.18,
+        height: Dimensions.get('window').width * 0.18,
         marginTop:16
         
 
     },
     map_icon :{
-        width:140,
-        height:140,
-        marginTop:32
+        width: Dimensions.get('window').width * 0.18,
+        height: Dimensions.get('window').width * 0.18,
+        marginTop: Dimensions.get('window').width * 0.05
     },
     qr_icon :{
-        width:140,
-        height:140,
-        marginTop:32
+        width: Dimensions.get('window').width * 0.18,
+        height: Dimensions.get('window').width * 0.18,
+        marginTop: Dimensions.get('window').width * 0.04
     },
     statistics_icon :{
-        width:140,
-        height:140.5,
-        marginTop:32
+        width: Dimensions.get('window').width * 0.182,
+        height: Dimensions.get('window').width * 0.183,
+        marginTop: Dimensions.get('window').width * 0.04
     }
 });
 
