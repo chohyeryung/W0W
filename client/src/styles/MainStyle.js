@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
 
     headerContainer:{
         margin :0,
+        flex : 0.5
     },
     container:{
         flex: 1,
@@ -55,7 +56,8 @@ const styles = StyleSheet.create({
         position: 'absolute'
     },
     footerContainer:{
-        flexDirection: 'row'
+        flexDirection: 'row',
+        flex : 0.8
     },
     bottomText:{
         marginLeft:90,
