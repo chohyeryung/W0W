@@ -7,7 +7,7 @@ const { Category } = require("../models/Category");
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-
+//main 에 데이터를 보내준다. (점수와 동영상 이름)
 router.get('/main/:useridx', (req, res) => {
     const useridx = req.params.useridx;
     const image = ['sea_BN','sea_GB','sea_YG','sea_OY']
@@ -33,7 +33,12 @@ router.get('/main/:useridx', (req, res) => {
         }else{
             total = results[0].total;
         }
+        
+        //140점 기준으로  100%를 환산해준다.
         let num =  Math.round(100/140*total);
+
+
+        //점수에 따른 동영상 이름을 넘겨준다. 
         if(num>=100){
             src = image[0]
         }else if(num>=60){

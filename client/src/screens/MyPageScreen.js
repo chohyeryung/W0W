@@ -79,6 +79,15 @@ export class MyPageScreen extends Component {
 
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
+
+        //사용자 이름
+        axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/name', {
+            user_id: userId
+        }).then(res => {
+            this.setState({userName: res.data[0].name});
+        })
+        .catch((err)=>alert(err)) 
+
         axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
             user_id: userId
         }).then(res => {
@@ -202,15 +211,11 @@ export class MyPageScreen extends Component {
                         <View style={styles.headThCon}>
                             <Text style={styles.topTitle}>{userName}님의</Text>
                             <View style={styles.iconCon}>
-                                <TouchableOpacity>
-                                    <Ionicons 
-                                        name="help-circle-outline" size={50} style={styles.helpIcon}
-                                        onPress={() => this.toggleSettingCModal()}/>
+                                <TouchableOpacity onPress={() => this.toggleSettingCModal()}>
+                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 50, height: 50 }}/>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPressOut={() => AsyncStorage.removeItem('userData') }>
-                                    <Ionicons 
-                                        name="exit-outline" size={50} style={styles.logoutIcon}
-                                        onPress={() => this.handleLogout()}/>
+                                <TouchableOpacity onPress={() => this.handleLogout()}>
+                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 50, height: 50 }}/>
                                 </TouchableOpacity>
                             </View>
                         </View>

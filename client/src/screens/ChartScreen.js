@@ -29,15 +29,14 @@ export default class Chart extends Component {
     const userId = JSON.parse(userData).userId
     
     // 그래프 data componentDidMount()
-    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', { user_id: userId })
-    .then(response => {
-        datas: response.data.map( data =>
-            {
-                const { cates } = this.state;
-               
-                this.setState({
-                  cates: cates.map( cate => 
-                    cate.category == data.category 
+    axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
+        user_id: userId
+    }).then(res => {
+        datas: res.data.map( data => {
+            const { cates } = this.state;
+            this.setState({
+                cates: cates.map( cate => 
+                    cate.category == data.category
                     ? cate = data
                     : cate
                 )
@@ -47,7 +46,7 @@ export default class Chart extends Component {
     .catch((err)=>alert(err)) 
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.get('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics', { user_id: userId })
+    axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics', { user_id: userId })
     .then(res => {
 
       res.data.map( data => {
