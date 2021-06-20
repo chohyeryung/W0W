@@ -92,7 +92,7 @@ class SignInScreen extends React.Component {
         const request = axios({
             method: 'post',
             data: body,
-            url: 'http://ec2-34-227-38-106.compute-1.amazonaws.com/users/login',
+            url: 'https://wow.emirim.kr/users/login',
             changeOrigin: true,
         }).then((response) =>{
             if(this.state.checked){

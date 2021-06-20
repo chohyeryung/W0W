@@ -35,7 +35,7 @@ export class MainScreen extends Component {
         this.setState({ loading: true });
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
-        axios.get(`http://ec2-34-227-38-106.compute-1.amazonaws.com/main/main/${userId}`)
+        axios.get(`https://wow.emirim.kr/main/main/${userId}`)
         .then(res => {
             if(res.data.length!=0 && res.data.num!=0){
                 this.setState({ middleText : res.data.num+"%" });
@@ -119,7 +119,7 @@ export class MainScreen extends Component {
                             ref={this._handleVideoRef}
                             style={styles.video_BN}
                             source={{
-                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_BN.mp4`,
+                            uri: `https://wow.emirim.kr/uploads/sea_BN.mp4`,
                             }}
                             resizeMode="contain"
                             isLooping
@@ -128,7 +128,7 @@ export class MainScreen extends Component {
                             ref={this._handleVideoRef}
                             style={styles.video_OY}
                             source={{
-                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_GB.mp4`,
+                            uri: `https://wow.emirim.kr/uploads/sea_GB.mp4`,
                             }}
                             resizeMode="contain"
                             isLooping
@@ -137,7 +137,7 @@ export class MainScreen extends Component {
                             ref={this._handleVideoRef}
                             style={styles.video_OY}
                             source={{
-                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_OY.mp4`,
+                            uri: `https://wow.emirim.kr/uploads/sea_OY.mp4`,
                             }}
                             resizeMode="contain"
                             isLooping
@@ -146,7 +146,7 @@ export class MainScreen extends Component {
                             ref={this._handleVideoRef}
                             style={styles.video_YG}
                             source={{
-                            uri: `http://ec2-34-227-38-106.compute-1.amazonaws.com/uploads/sea_YG.mp4`,
+                            uri: `https://wow.emirim.kr/uploads/sea_YG.mp4`,
                             }}
                             resizeMode="contain"
                             isLooping

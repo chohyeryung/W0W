@@ -42,7 +42,7 @@ export default class QrcodeScannerScreen extends Component {
   };
 
   _handleBarCodeRead = result => {
-    if (result.data === 'http://ec2-34-227-38-106.compute-1.amazonaws.com/qrcode/pointing') {
+    if (result.data === 'https://wow.emirim.kr/qrcode/pointing') {
       if (result.data !== this.state.lastScannedUrl) {
         this.setState({ lastScannedUrl: result.data });
         this.setState({ showAlert: true });
