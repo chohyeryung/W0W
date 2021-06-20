@@ -17,11 +17,10 @@ class AuthLoadingScreen extends React.Component {
       if(userData){
         const login=JSON.parse(userData).login
         this.props.navigation.navigate(login ? 'MainScreen' : 'SignIn');
-
       }else{
-        this.props.navigation.navigate(userData ? 'MainScreen' : 'SignIn');
-
+        this.props.navigation.navigate('SignIn');
       }
+
     };
     render() {
       return (
