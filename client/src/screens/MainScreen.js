@@ -8,7 +8,6 @@ import {
     Image,
     Text, 
     TouchableOpacity,
-    BackHandler
 } from 'react-native';
 
 import styles from '../styles/MainStyle';
@@ -78,18 +77,13 @@ export class MainScreen extends Component {
        
     }
 
-
-    _handleLoadMore = () => {
-        this._bootstrapAsync();
-      }
-
     render(){
         const { middleText,bottomText,sea_BN,sea_YG,sea_GB,sea_OY,loading } = this.state;
 
         return (
             loading ?
             ( <Loader type="spin" color="#f6dba5" /> )
-            : ( <View style={styles.container}>
+            : <View style={styles.container}>
                 <View style={styles.headerContainer}>                  
                     <Text style={styles.topText}>WITH</Text>
                     <Text style={styles.middleText}>{middleText}</Text>
@@ -159,7 +153,7 @@ export class MainScreen extends Component {
                         />}
                     </View>
                 </View>
-            </View> )
+            </View>
         )
     }
     
