@@ -42,7 +42,7 @@ export default class QrcodeScannerScreen extends Component {
   };
 
   _handleBarCodeRead = result => {
-    if (result.data === 'http://ec2-34-227-38-106.compute-1.amazonaws.com/qrcode/pointing') {
+    if (result.data === 'https://wow.emirim.kr/qrcode/pointing') {
       if (result.data !== this.state.lastScannedUrl) {
         this.setState({ lastScannedUrl: result.data });
         this.setState({ showAlert: true });
@@ -54,6 +54,7 @@ export default class QrcodeScannerScreen extends Component {
       axios.post(endpoint, {userId : this.state.userId}).then(() => {
         this.setState({ pointed: true })
       })
+      .catch((err) => {console.log(err)})
   };
 
   render() {
@@ -122,7 +123,7 @@ export default class QrcodeScannerScreen extends Component {
           }}><Text>❔</Text></View>}
           style={{ backgroundColor: 'white' }}
         >
-          <Text style={{ marginTop: -16, marginBottom: 20 }}>5포인트 적립하시겠습니까?</Text>
+          <Text style={{ marginTop: -16, marginBottom: 20 }}>3포인트 적립하시겠습니까?</Text>
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10,  width: '50%' }} onPress={() => this._handlePressCancel() }>
               <Text style={{ textAlign: 'center', color: '#0008ff' }}>Cancel</Text>
@@ -146,7 +147,7 @@ export default class QrcodeScannerScreen extends Component {
           }}><Text>👌</Text></View>}
           style={{ backgroundColor: 'white' }}
         >
-          <Text style={{ marginTop: -16, marginBottom: 32 }}>5포인트 적립했습니다!</Text>
+          <Text style={{ marginTop: -16, marginBottom: 32 }}>3포인트 적립했습니다!</Text>
           <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, color: '#fff', backgroundColor: 'green', borderRadius: 50, width: '100%' }} onPress={() => this.props.navigation.replace('MainScreen')}>
             <Text>OK</Text>
           </TouchableOpacity>

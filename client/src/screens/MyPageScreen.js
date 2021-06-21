@@ -84,14 +84,14 @@ export class MyPageScreen extends Component {
         this.setState({ loading: true });
 
         //사용자 이름
-        await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/name', {
+        await axios.post('https://wow.emirim.kr/mypage/name', {
             user_id: userId
         }).then(res => {
             this.setState({userName: res.data[0].name});
         })
         .catch((err)=>alert(err)) 
 
-        await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
+        await axios.post('https://wow.emirim.kr/mypage/cate', {
             user_id: userId
         }).then(res => {
             datas: res.data.map( data => {
@@ -135,9 +135,9 @@ export class MyPageScreen extends Component {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
 
-        axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/pointing', {ca : this.state.curCate, user_id: userId})
+        axios.post('https://wow.emirim.kr/mypage/pointing', {ca : this.state.curCate, user_id: userId})
         .then(res => {
-            axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', { user_id: userId })
+            axios.post('https://wow.emirim.kr/mypage/cate', { user_id: userId })
             .then(res => {
                 datas: res.data.map( data =>
                     {

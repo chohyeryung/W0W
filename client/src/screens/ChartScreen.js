@@ -32,7 +32,7 @@ export default class Chart extends Component {
     
     this.setState({ loading: true });
     // 그래프 data componentDidMount()
-    await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
+    await axios.post('https://wow.emirim.kr/mypage/cate', {
         user_id: userId
     }).then(res => {
         datas: res.data.map( data => {
@@ -49,7 +49,7 @@ export default class Chart extends Component {
     .catch((err)=>alert(err)) 
     
     // 지난 달, 이번 달 data componentDidMount()
-    await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics', { user_id: userId })
+    await axios.post('https://wow.emirim.kr/mypage/statistics', { user_id: userId })
     .then(res => {
 
       res.data.map( data => {
