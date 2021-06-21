@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
         height: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        shadowColor: "rgb(50,50,50)",
         shadowOffset: {
             width: 0,
             height: 0,
@@ -44,20 +43,19 @@ const styles = StyleSheet.create({
 
     totalCon: {
         flexDirection: 'column',
-        paddingLeft: 30,
+        paddingLeft: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
 
     text_total: {
-        fontSize: 42,
+        fontSize: 55,
         fontWeight: 'bold',
-        margin:20
+        margin:10
     },
 
     text_created: {
-        fontSize: 28,
-        textAlign: 'right'
+        fontSize: 28
     },
 
     line: {

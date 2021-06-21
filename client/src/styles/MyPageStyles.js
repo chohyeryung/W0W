@@ -28,9 +28,10 @@ const styles = StyleSheet.create({
     },
 
     iconCon: {
-        width: 115,
+        width: 130,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 
     backIcon: {
@@ -38,16 +39,16 @@ const styles = StyleSheet.create({
         color:'#000',
     },
     topTitle: {
-        fontSize: 38,
+        fontSize: 45,
         fontWeight: 'bold',
     },
     subTitle: {
-        fontSize: 30,
+        fontSize: 50,
         fontWeight: 'bold',
         color:'#fff',
         textShadowColor:'#000',
         textShadowOffset:{width: 0, height: 0},
-        textShadowRadius:1
+        textShadowRadius:2
     },
 
     conCon: {
@@ -59,15 +60,15 @@ const styles = StyleSheet.create({
         margin:80,
         marginTop: 55,
         padding: 50,
-        shadowColor: "rgb(50,50,50)",
+        shadowColor: "#e3e7e8",
         shadowOffset: {
             width: 0,
-            height: 0,
+            height: 2,
         },
-        shadowOpacity: 0.55,
-        shadowRadius: 16,
-
-        elevation: 25,
+        shadowOpacity: 0.1,
+        shadowRadius: 5.00,
+        
+        elevation: 24,
         borderRadius: 20,
         height: 900,
         flexDirection: 'column',

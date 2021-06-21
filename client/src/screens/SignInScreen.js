@@ -95,12 +95,24 @@ class SignInScreen extends React.Component {
             url: 'http://ec2-34-227-38-106.compute-1.amazonaws.com/users/login',
             changeOrigin: true,
         }).then((response) =>{
-            AsyncStorage.setItem(
-                'userData',
-                JSON.stringify({
-                  userId: response.data.userId
-                })
-              );
+            if(this.state.checked){
+                AsyncStorage.setItem(
+                    'userData',
+                    JSON.stringify({
+                      userId: response.data.userId,
+                      login : true
+                    })
+                  );
+            }else{
+                AsyncStorage.setItem(
+                    'userData',
+                    JSON.stringify({
+                      userId: response.data.userId,
+                      login : false
+                    })
+                  );
+            }
+           
             return [response.data.loginSuccess, response.data.message];
         })
         request.then(res=> {

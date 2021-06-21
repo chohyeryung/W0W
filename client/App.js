@@ -29,15 +29,6 @@ const Stack = createStackNavigator();
 
 const store = createStore(rootReducer, applyMiddleware(promiseMiddleware, thunk));
 
-const mainColor = '#E1F0FF'
-
-const MyCustomHeaderBackImage = () => (
-  <Image
-      source={require('./assets/back.png')}
-      style={{marginLeft: 10, width: 22, height: 22}}
-  />
-);
-
 export default class App extends Component {
   render(){
     return (

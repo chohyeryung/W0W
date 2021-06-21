@@ -5,7 +5,6 @@ const cors = require('cors')
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-
 const config = require("./config/key");
 const setting = require('./settings');
 
@@ -31,7 +30,7 @@ app.use('/main', require('./routes/main'));
 
 app.use('/uploads', express.static('uploads'));
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 80
 
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`)

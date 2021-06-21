@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 import { _getLastYYYYMM, _getYYYYMM } from "../Fuction";
 import styles from "../styles/ChartStyle";
+import Loader from './Loader';
 
 export default class Chart extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class Chart extends Component {
           { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
           { _id: { category: '기타' }, category: '기타', cnt: 0 }
         ],
+        loading: false,
         months: [{_id: {created: _getLastYYYYMM()}, total: 0}, {_id: {created: _getYYYYMM()}, total: 0}],
     }
   }
@@ -28,8 +30,9 @@ export default class Chart extends Component {
     const userData = await AsyncStorage.getItem('userData');
     const userId = JSON.parse(userData).userId
     
+    this.setState({ loading: true });
     // 그래프 data componentDidMount()
-    axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
+    await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
         user_id: userId
     }).then(res => {
         datas: res.data.map( data => {
@@ -46,7 +49,7 @@ export default class Chart extends Component {
     .catch((err)=>alert(err)) 
     
     // 지난 달, 이번 달 data componentDidMount()
-    axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics', { user_id: userId })
+    await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/statistics', { user_id: userId })
     .then(res => {
 
       res.data.map( data => {
@@ -59,22 +62,30 @@ export default class Chart extends Component {
           )
         })
       })
-    })  
+    })
+    .catch((err)=>alert(err)) 
+
+    this.setState({ loading: false });
 
   }
 
+
+
   render() {
-    const { cates, months } = this.state;
+    const { cates, loading, months } = this.state;
 
     return (
-      <View style={styles.Container}>
+      loading ?
+      ( <Loader type="spin" color="#f6dba5" /> )
+      : (
+        <View style={styles.Container}>
         <View style={styles.firCon}>
             <TouchableOpacity style={{ flexDirection: 'row' }}>
                 <Ionicons 
                     name="chevron-back-outline" size={50} style={{ marginLeft: -8, marginBottom: 80 }}
                     onPress={() => this.props.navigation.navigate('MainScreen')}/>
             </TouchableOpacity>
-            <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30}}>STATISTICS</Text>
+            <Text style={{ fontSize: 38, fontWeight: 'bold', marginBottom: 30}}>STATISTICS</Text>
             <View style={styles.staContainer}>
               {months.map((month, index) => (
                   <View style={styles.contentCon} key={index}>
@@ -84,15 +95,15 @@ export default class Chart extends Component {
                         {[
                           month._id.created == _getYYYYMM() ?
                           '이번달'
-                          : '저번달'
+                          : '지난달'
                         ]}
                       </Text>
                     </View>
                     <View style={[
                       styles.line,
                       month._id.created == _getYYYYMM() ?
-                      { backgroundColor: '#FFE071' }
-                      : {backgroundColor: '#FF6060'}
+                      { backgroundColor: '#FFE071', width: 10 }
+                      : {backgroundColor: '#FF6060', width: 10 }
                     ]}/>
                   </View>
               ))}
@@ -102,13 +113,12 @@ export default class Chart extends Component {
 
         <View style={styles.lineBox}>
             <Text style={{ marginBottom: 30 }}>
-              <Text style={{fontSize: 32, fontWeight: 'bold'}}>CATEGORY  </Text>
-              <Text style={{ color: '#fff', fontSize: 35, fontWeight: 'bold', textShadowColor:'#000',
+              <Text style={{fontSize: 38, fontWeight: 'bold'}}>CATEGORY </Text>
+              <Text style={{ color: '#fff', fontSize: 40, fontWeight: 'bold', textShadowColor:'#000',
               textShadowOffset:{width: 0, height: 0},
-              textShadowRadius:1, }}>GRAPH</Text>
+              textShadowRadius:2, }}>GRAPH</Text>
             </Text>
             <LineChart
-            // style={styles.lineChart}
             data = {{
                 labels: cates.map(cate => cate.category),
                 datasets: [{
@@ -154,6 +164,9 @@ export default class Chart extends Component {
         </View>
 
       </View>
+      )
+
+      
     )
   }
 }

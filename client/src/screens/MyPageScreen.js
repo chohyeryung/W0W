@@ -13,13 +13,14 @@ import { Ionicons } from '@expo/vector-icons';
 import Modal from './PointModal';
 import CModal from './CateModal';
 import styles from "../styles/MyPageStyles";
+import Loader from './Loader';
 
-import bowlIcon from '../../assets/1.png';
-import courIcon from '../../assets/2.png';
-import trashIcon from '../../assets/3.png';
-import recycleIcon from '../../assets/4.png';
-import transIcon from '../../assets/5.png';
-import etcIcon from '../../assets/6.png';
+import bowlIcon from '../image/mypage/1.png';
+import courIcon from '../image/mypage/2.png';
+import trashIcon from '../image/mypage/3.png';
+import recycleIcon from '../image/mypage/4.png';
+import transIcon from '../image/mypage/5.png';
+import etcIcon from '../image/mypage/6.png';
 
 const iconsInfo = [
     {
@@ -58,20 +59,20 @@ export class MyPageScreen extends Component {
     constructor(props) {
         super(props);
         this.state = { cates: [
-                { _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
-                { _id: { category: '용기내' }, category: '용기내', cnt: 0 },
-                { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
-                { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
-                { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
-                { _id: { category: '기타' }, category: '기타', cnt: 0 }
+                { id:1, _id: { category: '장바구니 이용' }, category: '장바구니 이용', cnt: 0 },
+                { id:2, _id: { category: '용기내' }, category: '용기내', cnt: 0 },
+                { id:3, _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
+                { id:4, _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
+                { id:5, _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
+                { id:6, _id: { category: '기타' }, category: '기타', cnt: 0 }
             ],
+            loading: false,
             settingModal: false,
             settingCModal: false,
             curCate: '',
             userName: ''
         };
 
-        // this._bootstrapAsync();
     }
 
     componentDidMount = async () => {
@@ -80,15 +81,17 @@ export class MyPageScreen extends Component {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
 
+        this.setState({ loading: true });
+
         //사용자 이름
-        axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/name', {
+        await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/name', {
             user_id: userId
         }).then(res => {
             this.setState({userName: res.data[0].name});
         })
         .catch((err)=>alert(err)) 
 
-        axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
+        await axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', {
             user_id: userId
         }).then(res => {
             datas: res.data.map( data => {
@@ -104,52 +107,7 @@ export class MyPageScreen extends Component {
         })
         .catch((err)=>alert(err)) 
 
-
-        // axios({
-        //     method: 'post',
-        //     data: body,
-        //     url: ' https://c7af7e6e7a28.ngrok.io/mypage/cate',
-        //     changeOrigin: true,
-        // }).then((response) => {
-        //     AsyncStorage.getItem(
-        //         'userData', 
-        //         JSON.stringify({
-        //             userId: response.data.userId
-        //     }))
-        // })
-        // const userData = await AsyncStorage.getItem('userData');
-    //   alert(userData)
-
-        // axios.post(' https://c7af7e6e7a28.ngrok.io/mypage/cate', {userId: userData.userId})
-        //     .then(response => {
-        //         datas: response.data.map( data => {
-        //             const { cates } = this.state;
-        //             this.setState({
-        //                 cates: cates.map( cate => 
-        //                     cate.category == data.category
-        //                     ? cate = data
-        //                     : cate
-        //                 )
-        //             })
-        //         }
-        //     )
-        // })
-        
-        // axios.get('http://e1b32a057e61.ngrok.io/mypage/cate')
-        //     .then(response => {
-        //         datas: response.data.map( data => {
-        //             const { cates } = this.state;
-        //             this.setState({
-        //                 cates: cates.map( cate => 
-        //                     cate.category == data.category
-        //                     ? cate = data
-        //                     : cate
-        //                 )
-        //             })
-        //         }
-        //     )
-              
-        // })
+        this.setState({ loading: false });
     }
     
     toggleSettingModal = (cate) => {
@@ -172,6 +130,7 @@ export class MyPageScreen extends Component {
     _fetchCate = async() => {
         const userData = await AsyncStorage.getItem('userData');
         const userId = JSON.parse(userData).userId
+
         axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/pointing', {ca : this.state.curCate, user_id: userId})
         .then(res => {
             axios.post('http://ec2-34-227-38-106.compute-1.amazonaws.com/mypage/cate', { user_id: userId })
@@ -196,81 +155,86 @@ export class MyPageScreen extends Component {
 
 
     render(){
-        const { cates, userName } = this.state;
+        const { cates, loading, userName } = this.state;
         
         return(
-            <ImageBackground
-            style={{width: '100%', height: '100%'}}>
-                <View style={styles.container}>
-                    <View style={styles.headerContainer}>
-                        <TouchableOpacity>
-                            <Ionicons 
-                                name="chevron-back-outline" size={50} style={{marginLeft: -8, marginBottom: 10}}
-                                onPress={() => AsyncStorage.removeItem('userData')}/>
-                        </TouchableOpacity>
-                        <View style={styles.headThCon}>
-                            <Text style={styles.topTitle}>{userName}님의</Text>
-                            <View style={styles.iconCon}>
-                                <TouchableOpacity onPress={() => this.toggleSettingCModal()}>
-                                    <Image source={require('../../assets/c_help_icon.png')} style={{ width: 50, height: 50 }}/>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.handleLogout()}>
-                                    <Image source={require('../../assets/logout_icon.png')} style={{ width: 50, height: 50 }}/>
-                                </TouchableOpacity>
+            loading ?
+            ( <Loader type="spin" color="#f6dba5" /> )
+            : (
+                <ImageBackground
+                style={{width: '100%', height: '100%'}}>
+                    <View style={styles.container}>
+                        <View style={styles.headerContainer}>
+                            <TouchableOpacity>
+                                <Ionicons 
+                                    name="chevron-back-outline" size={60} style={{marginLeft: -8, marginBottom: 10}}
+                                    onPress={() => this.props.navigation.replace('MainScreen')}/>
+                            </TouchableOpacity>
+                            <View style={styles.headThCon}>
+                                <Text style={styles.topTitle}>{userName}님의</Text>
+                                <View style={styles.iconCon}>
+                                    <TouchableOpacity onPress={() => this.toggleSettingCModal()}>
+                                        <Image source={require('../image/mypage/c_help_icon.png')} style={{ width: 70, height: 70 }}/>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.handleLogout()}>
+                                        <Image source={require('../image/mypage/logout_icon.png')} style={{ width: 47, height: 45 }}/>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            
+                            <Text style={styles.subTitle}>MY ZERO</Text>
+                        </View>
+                    
+                        <View stlye={styles.conCon}>
+                            <View style={styles.cateContainer}>
+                                <Text style={{ fontSize: 28, marginBottom: 20, }}>카테고리</Text>
+                                {cates.map((cate, index) => {
+                                    return (
+                                        <TouchableOpacity
+                                            key={cate.index}
+                                            onPress={(e) => this.toggleSettingModal(cate.category)}>
+                                            <View key={cate.index}
+                                                style={[ index+1!==6 ? styles.cateCon : 
+                                            [styles.cateCon, {borderBottomWidth: 1, borderStyle: 'solid', borderBottomColor: '#fff',  paddingBottom: 20,}]]} onClick={this.handleClick}>
+                                                {iconsInfo.map((item) => ([
+                                                item.imageId === (index+1) ?
+                                                (
+                                                    <Image
+                                                    source={item.src}
+                                                    key={item.imageId}
+                                                    style={{
+                                                        width: item.width,
+                                                        height: item.height,
+                                                        marginLeft: item.marginLeft,
+                                                        marginRight: 0
+                                                    }}/>
+                                                ) : <></>
+                                                ]))}
+                                                <View style={styles.cateTextView}>
+                                                    <Text style={styles.text_title}>{cate.category}</Text>
+                                                    <Text style={styles.text_count}>실천 횟수 : {cate.cnt}</Text>
+                                                </View>
+                                            </View> 
+                                        </TouchableOpacity>
+                                    ) 
+                                })}
                             </View>
                         </View>
                         
-                        <Text style={styles.subTitle}>MY ZERO</Text>
-                    </View>
-                
-                    <View stlye={styles.conCon}>
-                        <View style={styles.cateContainer}>
-                            <Text style={{ fontSize: 28, marginBottom: 20, }}>카테고리</Text>
-                            {cates.map((cate, index) => {
-                                return (
-                                    <TouchableOpacity
-                                        key={cate.category}
-                                        onPress={(e) => this.toggleSettingModal(cate.category)}>
-                                        <View style={[ index+1!==6 ? styles.cateCon : 
-                                        [styles.cateCon, {borderBottomWidth: 1, borderStyle: 'solid', borderBottomColor: '#fff',  paddingBottom: 20,}]]} onClick={this.handleClick}>
-                                            {iconsInfo.map((item) => ([
-                                            item.imageId === (index+1) ?
-                                            (
-                                                <Image
-                                                source={item.src}
-                                                key={item.imageId}
-                                                style={{
-                                                    width: item.width,
-                                                    height: item.height,
-                                                    marginLeft: item.marginLeft,
-                                                    marginRight: 0
-                                                }}/>
-                                            ) : <></>
-                                            ]))}
-                                            <View style={styles.cateTextView}>
-                                                <Text style={styles.text_title}>{cate.category}</Text>
-                                                <Text style={styles.text_count}>실천 횟수 : {cate.cnt}</Text>
-                                            </View>
-                                        </View> 
-                                    </TouchableOpacity>
-                                ) 
-                            })}
-                        </View>
-                    </View>
                     
-                
-                </View>
-                { this.state.settingModal ? 
-                <Modal modalHandler = {() => this.toggleSettingModal()} 
-                        cate = {this.state.curCate} 
-                        settingHandler = {() => this._fetchCate()}/> : <></> }
-
-                { this.state.settingCModal ? 
-                <CModal modalHandler = {() => this.toggleSettingCModal()} /> : <></> }
-            </ImageBackground>
+                    </View>
+                    { this.state.settingModal ? 
+                    <Modal modalHandler = {() => this.toggleSettingModal()} 
+                            modalCancelHandler = {() => this.toggleSettingCModal()}
+                            cate = {this.state.curCate} 
+                            settingHandler = {() => this._fetchCate()}/> : <></> }
+    
+                    { this.state.settingCModal ? 
+                    <CModal modalHandler = {() => this.toggleSettingCModal()} /> : <></> }
+                </ImageBackground>
+            )
         )
     }
-
     
 }
 
