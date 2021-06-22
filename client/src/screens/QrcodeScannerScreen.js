@@ -50,8 +50,9 @@ export default class QrcodeScannerScreen extends Component {
     }
   }
 
-  _handleSavePoint = endpoint => {
-      axios.post(endpoint, {userId : this.state.userId}).then(() => {
+  _handleSavePoint = () => {
+    console.log('oo')
+      axios.post('https://wow.emirim.kr/qrcode/pointing', {userId : this.state.userId}).then(() => {
         this.setState({ pointed: true })
       })
       .catch((err) => {console.log(err)})
