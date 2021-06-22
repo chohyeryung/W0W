@@ -59,12 +59,11 @@ router.post('/scate', (req, res) => {
 
     Category.aggregate([
         { $match: { 
-            $and: [ 
-                { userid: userId },
-                { created: ndate }
-            ] } },
-        { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
-        { $sort: { category: -1 } }
+            $and: [
+               { userid: userId },
+               { created: ndate } 
+             ] } },
+        { $group: { _id: { category: "$category" } , category: { $first: "$category" }, cnt: { $sum: 1 } } }
     ]).exec(function (err, results) {
         if(err) console.log(err);
         res.send(results);
