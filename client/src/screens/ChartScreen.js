@@ -19,7 +19,8 @@ export default class Chart extends Component {
           { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
           { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
           { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
-          { _id: { category: '기타' }, category: '기타', cnt: 0 }
+          { _id: { category: '기타' }, category: '기타', cnt: 0 },
+          { _id: { category: '제로웨이스트샵 방문' }, category: '제로웨이스트샵 방문', cnt: 0 }
         ],
         loading: false,
         months: [{_id: {created: _getLastYYYYMM()}, total: 0}, {_id: {created: _getYYYYMM()}, total: 0}],
@@ -32,10 +33,11 @@ export default class Chart extends Component {
     
     this.setState({ loading: true });
     // 그래프 data componentDidMount()
-    await axios.post('https://wow.emirim.kr/mypage/cate', {
+    await axios.post('https://wow.emirim.kr/mypage/scate', {
         user_id: userId
     }).then(res => {
         datas: res.data.map( data => {
+          console.log(data)
             const { cates } = this.state;
             this.setState({
                 cates: cates.map( cate => 
@@ -47,6 +49,7 @@ export default class Chart extends Component {
         })
     })
     .catch((err)=>alert(err)) 
+
     
     // 지난 달, 이번 달 data componentDidMount()
     await axios.post('https://wow.emirim.kr/mypage/statistics', { user_id: userId })
@@ -73,6 +76,7 @@ export default class Chart extends Component {
 
   render() {
     const { cates, loading, months } = this.state;
+    // console.log(cates);
 
     return (
       loading ?
@@ -148,6 +152,7 @@ export default class Chart extends Component {
             }}
 
             bezier
+            fromZero
             style={{
               borderRadius: 20,
               borderWidth: 1,

@@ -45,6 +45,47 @@ router.post('/cate', (req, res) => {
         })
 });
 
+router.post('/scate', (req, res) => {
+    let now = new Date();
+    let yyyy = now.getFullYear();
+    let month = now.getMonth()+1;
+    const userId = req.body.user_id;
+    
+    if(month < 10) {
+        month = `0${month}`
+    }
+
+    let ndate = yyyy + '-' + month;
+
+    Category.aggregate([
+        { $match: { 
+            $and: [ 
+                { userid: userId },
+                { created: ndate }
+            ] } },
+        { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
+        { $sort: { category: -1 } }
+    ]).exec(function (err, results) {
+        if(err) console.log(err);
+        res.send(results);
+    })
+
+    // Category.aggregate(
+    //     [
+    //         { $match: { 
+    //             $and: [ 
+    //                 { userid: userId },
+    //                 { $or: [{ category: "장바구니 이용" }, { category: "용기내" }, { category: "쓰레기 줍기" }, { category: "분리수거" }, { category: "대중교통 이용" }, { category: "기타" }, { category: "제로웨이스트샵 방문" } ] },
+    //                 { created: ndate }
+    //             ] } },
+    //         { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
+    //         { $sort: { category: -1 } }
+    //     ]).exec(function (err, results) {
+    //         if(err) console.log(err);
+    //         res.send(results);
+    //     })
+});
+
 router.post('/pointing', (req, res) => {
     let category = req.body.ca;
     const userId = req.body.user_id;

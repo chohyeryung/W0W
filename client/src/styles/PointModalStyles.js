@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: '100%',
         width: '100%',
-        backgroundColor: 'rgba(0,0,0,0.5)'
+        backgroundColor: 'rgba(0,0,0,0.5)',
       },
 
       modal: {
@@ -26,30 +26,33 @@ const styles = StyleSheet.create({
         marginTop: '70%',
         backgroundColor: 'white',
         borderColor: '#000',
-        borderWidth: 1
+        borderWidth: 1,
+        padding: 30,
+        marginHorizontal: 80
       },
 
       selectTextCon: {
         display: 'flex',
         flexDirection: 'row',
+        width: 200,
         justifyContent: 'space-around'
       },
 
       titleText: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: 'bold',
         margin: 20
       },
 
       doneText: {
-        fontSize: 15,
+        fontSize: 20,
         margin: 15,
         marginBottom: 20,
         color: '#35C9C9'
       },
 
       cancelText: {
-        fontSize: 15,
+        fontSize: 20,
         margin: 15,
         marginBottom: 20
       }
