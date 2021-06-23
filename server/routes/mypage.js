@@ -68,21 +68,6 @@ router.post('/scate', (req, res) => {
         if(err) console.log(err);
         res.send(results);
     })
-
-    // Category.aggregate(
-    //     [
-    //         { $match: { 
-    //             $and: [ 
-    //                 { userid: userId },
-    //                 { $or: [{ category: "장바구니 이용" }, { category: "용기내" }, { category: "쓰레기 줍기" }, { category: "분리수거" }, { category: "대중교통 이용" }, { category: "기타" }, { category: "제로웨이스트샵 방문" } ] },
-    //                 { created: ndate }
-    //             ] } },
-    //         { $group: { _id: { category: "$category" }, category: { $first: "$category" }, cnt: { $sum: 1 } } },
-    //         { $sort: { category: -1 } }
-    //     ]).exec(function (err, results) {
-    //         if(err) console.log(err);
-    //         res.send(results);
-    //     })
 });
 
 router.post('/pointing', (req, res) => {
