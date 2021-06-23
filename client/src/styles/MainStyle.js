@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
         marginTop: Dimensions.get('window').width * 0.04
     },
     statistics_icon :{
-        width: Dimensions.get('window').width * 0.182,
-        height: Dimensions.get('window').width * 0.183,
+        width: Dimensions.get('window').width * 0.183,
+        height: Dimensions.get('window').width * 0.1838,
         marginTop: Dimensions.get('window').width * 0.04
     }
 });
