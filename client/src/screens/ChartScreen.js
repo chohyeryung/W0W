@@ -19,7 +19,9 @@ export default class Chart extends Component {
           { _id: { category: '쓰레기 줍기' }, category: '쓰레기 줍기', cnt: 0 },
           { _id: { category: '분리수거' }, category: '분리수거', cnt: 0 },
           { _id: { category: '대중교통 이용' }, category: '대중교통 이용', cnt: 0 },
-          { _id: { category: '기타' }, category: '기타', cnt: 0 }
+          { _id: { category: '기타' }, category: '기타', cnt: 0 },
+          { _id: { category: '제로웨이스트샵 방문' }, category: '제로웨이스트샵 방문', cnt: 0 }
+
         ],
         loading: false,
         months: [{_id: {created: _getLastYYYYMM()}, total: 0}, {_id: {created: _getYYYYMM()}, total: 0}],
@@ -43,7 +45,10 @@ export default class Chart extends Component {
                     ? cate = data
                     : cate
                 )
+      
             })
+            // console.log(cates)
+
         })
     })
     .catch((err)=>alert(err)) 

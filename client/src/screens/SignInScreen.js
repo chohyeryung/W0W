@@ -72,8 +72,8 @@ class SignInScreen extends React.Component {
 
 
     handleSubmitPress() {
-        const { loginUser, loginSuccess, message } = this.props;
-
+        // const { loginUser, loginSuccess, message } = this.props;
+// 
         this.setErrorText('');
         if (!this.state.userEmail) {
             this.setErrorText('아이디를 입력해주세요');

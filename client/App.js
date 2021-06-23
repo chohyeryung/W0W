@@ -36,6 +36,15 @@ export default class App extends Component {
         <NavigationContainer>
           <Stack.Navigator>
             
+          <Stack.Screen
+                name="MainScreen"
+                component={MainScreen}
+                options={{
+                  headerShown: false, 
+                  title: '',
+                }}/>
+  
+  
               <Stack.Screen
                 name="AuthLoadingScreen"
                 component={AuthLoadingScreen}
@@ -45,14 +54,7 @@ export default class App extends Component {
                 }}
               /> 
 
-              <Stack.Screen
-                name="MainScreen"
-                component={MainScreen}
-                options={{
-                  headerShown: false, 
-                  title: '',
-                }}/>
-  
+           
               <Stack.Screen
               name="Register"
               component={RegisterScreen}

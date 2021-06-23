@@ -21,7 +21,7 @@ export class MainScreen extends Component {
             middleText: 'ZERO',
             bottomText: 'WASTE',
             imgSrc : '',
-            sea_OY : true,
+            sea_OY : false,
             sea_GB : false,
             sea_BN : false,
             sea_YG :  false,
