@@ -117,7 +117,7 @@ class SignInScreen extends React.Component {
         })
         request.then(res=> {
             if(res[0]){
-                this.props.navigation.navigate('MainScreen')
+                this.props.navigation.replace('MainScreen')
             }else{
                 this.setErrorText(res[1]);
             }

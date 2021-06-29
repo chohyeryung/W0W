@@ -24,7 +24,7 @@ router.post('/pointing', (req, res) => {
     let data = {
         "userid": userId,
         "category": '제로웨이스트샵 방문',
-        "score": 5,
+        "score": 3,
         "created": ndate
     }
 

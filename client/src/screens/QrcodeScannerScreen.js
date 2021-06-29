@@ -51,7 +51,6 @@ export default class QrcodeScannerScreen extends Component {
   }
 
   _handleSavePoint = () => {
-    console.log('oo')
       axios.post('https://wow.emirim.kr/qrcode/pointing', {userId : this.state.userId}).then(() => {
         this.setState({ pointed: true })
       })
@@ -118,7 +117,7 @@ export default class QrcodeScannerScreen extends Component {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'blue',
+            backgroundColor: '#35C9C9',
             borderRadius: 50,
             width: '100%',
           }}><Text>❔</Text></View>}
@@ -127,10 +126,10 @@ export default class QrcodeScannerScreen extends Component {
           <Text style={{ marginTop: -16, marginBottom: 20 }}>3 포인트 적립하시겠습니까?</Text>
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10,  width: '50%' }} onPress={() => this._handlePressCancel() }>
-              <Text style={{ textAlign: 'center', color: '#0008ff' }}>Cancel</Text>
+              <Text style={{ textAlign: 'center', color: '#35C9C9' }}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, width: '50%' }} onPress={() => this._handleSavePoint() }>
-              <Text style={{ textAlign: 'center', color: '#0008ff' }}>OK</Text>
+              <Text style={{ textAlign: 'center', color: '#35C9C9' }}>OK</Text>
             </TouchableOpacity>
           </View>
         </FancyAlert>
@@ -142,14 +141,14 @@ export default class QrcodeScannerScreen extends Component {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '35C9C9',
+            backgroundColor: '#35C9C9',
             borderRadius: 50,
             width: '100%',
           }}><Text>👌</Text></View>}
           style={{ backgroundColor: 'white' }}
         >
           <Text style={{ marginTop: -16, marginBottom: 32 }}>3 포인트 적립했습니다!</Text>
-          <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, color: '#fff', backgroundColor: '35C9C9', borderRadius: 50, width: '100%' }} onPress={() => this.props.navigation.replace('MainScreen')}>
+          <TouchableOpacity style={{ padding: 15, marginTop: 10, marginBottom: 10, color: '#fff', backgroundColor: '#35C9C9', borderRadius: 50, width: '100%' }} onPress={() => this.props.navigation.replace('MainScreen')}>
             <Text style={{ textAlign: 'center', color: '#fff' }}>OK</Text>
           </TouchableOpacity>
         </FancyAlert>
